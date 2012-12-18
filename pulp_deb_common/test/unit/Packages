@@ -1,0 +1,4031 @@
+Package: python-crypto
+Priority: optional
+Section: python
+Installed-Size: 1500
+Maintainer: Sebastian Ramacher <s.ramacher@gmx.at>
+Architecture: amd64
+Version: 2.6-2build3~ubuntu12.04.1~grizzly0
+Replaces: python2.3-crypto, python2.4-crypto
+Suggests: python-crypto-dbg, python-crypto-doc
+Provides: python2.7-crypto
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), libc6 (>= 2.14), libgmp10
+Conflicts: python2.3-crypto, python2.4-crypto
+Filename: pool/main/p/python-crypto/python-crypto_2.6-2build3~ubuntu12.04.1~grizzly0_amd64.deb
+Size: 362600
+MD5sum: e9242f4b733d993da0b096bea5809d42
+SHA1: d40743e0d669b0f6b6499da1892a7a39dbca5f8a
+Description: cryptographic algorithms and protocols for Python
+ A collection of cryptographic algorithms and protocols, implemented
+ for use from Python. Among the contents of the package:
+ .
+ * Hash functions: HMAC, MD2, MD4, MD5, RIPEMD160, SHA, SHA256.
+ * Block encryption algorithms: AES, ARC2, Blowfish, CAST, DES, Triple-DES.
+ * Stream encryption algorithms: ARC4, simple XOR.
+ * Public-key algorithms: RSA, DSA, ElGamal.
+ * Protocols: All-or-nothing transforms, chaffing/winnowing.
+ * Miscellaneous: RFC1751 module for converting 128-key keys
+ into a set of English words, primality testing, random number gereration.
+
+Package: python-sqlalchemy
+Source: sqlalchemy
+Priority: optional
+Section: python
+Installed-Size: 2922
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Architecture: all
+Version: 0.7.8-1ubuntu1~cloud0
+Recommends: python-sqlalchemy-ext
+Suggests: python-sqlalchemy-doc, python-psycopg2, python-mysqldb (>= 1.2.1-p2-2), python-kinterbasdb (>= 3.1.2-0.3), python-pymssql
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/s/sqlalchemy/python-sqlalchemy_0.7.8-1ubuntu1~cloud0_all.deb
+Size: 475434
+MD5sum: f8a934eb59a21db3c7fff1475a2b070f
+SHA1: 405bd5fb0311c3025f03bbcc8887f61654682d64
+Description: SQL toolkit and Object Relational Mapper for Python
+ SQLAlchemy is an SQL database abstraction library for Python.
+ Its strengths are:
+ * full power and flexibility of SQL. SQLAlchemy provides a full suite
+ of well known enterprise-level persistence patterns, designed for
+ efficient and high-performing database access, adapted into a simple
+ and Pythonic domain language.
+ * extremely easy to use for all the basic tasks, such as: accessing pooled
+ connections, constructing SQL from Python expressions, finding object
+ instances, and committing object modifications back to the database.
+ * powerful enough for complicated tasks, such as: eager load a graph of
+ objects and their dependencies via joins; map recursive adjacency
+ structures automatically; map objects to not just tables but to any
+ arbitrary join or select statement; combine multiple tables together to
+ load whole sets of otherwise unrelated objects from a single result set;
+ commit entire graphs of object changes in one step.
+ * built to conform to what DBAs demand, including the ability to swap out
+ generated SQL with hand-optimized statements, full usage of bind parameters
+ for all literal values, fully transactionalized and consistent updates
+ using Unit of Work.
+ * modular. Different parts of SQLAlchemy can be used independently of the
+ rest, including the connection pool, SQL construction, and ORM. SQLAlchemy
+ is constructed in an open style that allows plenty of customization, with
+ an architecture that supports custom datatypes, custom SQL extensions, and
+ ORM plugins which can augment or extend mapping functionality.
+Original-Maintainer: Piotr Ożarowski <piotr@debian.org>
+
+Package: libvirt-bin
+Source: libvirt
+Priority: optional
+Section: admin
+Installed-Size: 9725
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.9.13-0ubuntu12~cloud0
+Recommends: libxml2-utils, gawk, ebtables, dmidecode, iproute, parted
+Suggests: policykit-1, apparmor, pm-utils, qemu-kvm | qemu (>= 0.9.1), radvd
+Depends: libapparmor1 (>= 2.6~devel), libblkid1 (>= 2.17.2), libc6 (>= 2.15), libcap-ng0, libdbus-1-3 (>= 1.1.1), libdevmapper1.02.1 (>= 2:1.02.20), libgnutls26 (>= 2.12.6.1-0), libnetcf1, libnl-3-200 (>= 3.2.3), libnuma1 (>= 2.0.8~rc3), libparted0debian1 (>= 2.2-1), libpcap0.8 (>= 1.0.0), libpciaccess0, libreadline6 (>= 6.0), libudev0 (>= 147), libvirt0 (= 0.9.13-0ubuntu12~cloud0), libxenstore3.0 (>= 3.2.0), libxml2 (>= 2.7.4), libyajl1 (>= 1.0.5), upstart-job, adduser, bridge-utils, cgroup-lite | cgroup-bin, dnsmasq-base (>= 2.46-1), dbus, gettext-base, iptables (>= 1.4.10), logrotate, netcat-openbsd
+Enhances: qemu, qemu-kvm, xen
+Filename: pool/main/libv/libvirt/libvirt-bin_0.9.13-0ubuntu12~cloud0_amd64.deb
+Size: 2836058
+MD5sum: 2248986ca983ce460352bb4a187408cc
+SHA1: 9b1fd201a388df211f98c2378e75a294ade586c3
+Description: programs for the libvirt library
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the supporting binaries to use with libvirt
+Original-Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+
+Package: libvirt0
+Source: libvirt
+Priority: optional
+Section: libs
+Installed-Size: 3085
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.9.13-0ubuntu12~cloud0
+Suggests: lvm2
+Depends: libapparmor1 (>= 2.6~devel), libavahi-client3 (>= 0.6.16), libavahi-common3 (>= 0.6.16), libc6 (>= 2.15), libcap-ng0, libdbus-1-3 (>= 1.1.1), libdevmapper1.02.1 (>= 2:1.02.20), libgcrypt11 (>= 1.4.5), libgnutls26 (>= 2.12.6.1-0), libnl-3-200 (>= 3.2.3), libnuma1 (>= 2.0.8~rc3), libsasl2-2 (>= 2.1.24), libxml2 (>= 2.7.4), libyajl1 (>= 1.0.5)
+Filename: pool/main/libv/libvirt/libvirt0_0.9.13-0ubuntu12~cloud0_amd64.deb
+Size: 880672
+MD5sum: d029612252ec06e59c6c5e12b52608f1
+SHA1: 60ea065f8426dc54032eb78a310c9a5898a8bca3
+Description: library for interfacing with different virtualization systems
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+Original-Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+
+Package: libvirt-dev
+Source: libvirt
+Priority: optional
+Section: libdevel
+Installed-Size: 5083
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.9.13-0ubuntu12~cloud0
+Recommends: pkg-config
+Depends: libvirt0 (= 0.9.13-0ubuntu12~cloud0), libxen-dev
+Filename: pool/main/libv/libvirt/libvirt-dev_0.9.13-0ubuntu12~cloud0_amd64.deb
+Size: 987638
+MD5sum: 2615aee98b38b432ac627a42d5b914ed
+SHA1: ac3a1feca1233006ebd1433d90e0b61426c3fe60
+Description: development files for the libvirt library
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the header files and static libraries which are
+ needed for developing the applications with libvirt.
+Original-Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+
+Package: python-libvirt
+Source: libvirt
+Priority: optional
+Section: python
+Installed-Size: 1713
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.9.13-0ubuntu12~cloud0
+Recommends: libvirt-bin
+Provides: python2.7-libvirt
+Depends: libc6 (>= 2.14), libvirt0 (>= 0.9.13-0ubuntu12~cloud0), python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/libv/libvirt/python-libvirt_0.9.13-0ubuntu12~cloud0_amd64.deb
+Size: 150710
+MD5sum: b95250670b8bdb42f8a3e27591168e7f
+SHA1: 4c51f65c8c4e491c1b5a79d66aeacd7b3ed8e9fc
+Description: libvirt Python bindings
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains Python bindings for the libvirt library
+Original-Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+
+Package: python-django
+Priority: optional
+Section: python
+Installed-Size: 41255
+Maintainer: Chris Lamb <lamby@debian.org>
+Architecture: all
+Version: 1.4.1-2~cloud0
+Recommends: libjs-jquery
+Suggests: python-psycopg2, python-psycopg, python-mysqldb, python-flup, python-sqlite, python-yaml, geoip-database-contrib
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/p/python-django/python-django_1.4.1-2~cloud0_all.deb
+Size: 5282614
+MD5sum: 99b154678bbd550621a0a163258b72d0
+SHA1: 60182e78e0403260f7b9b022ecf147a5583ddd00
+Description: High-level Python web development framework
+ Django is a high-level web application framework that loosely follows the
+ model-view-controller design pattern.
+ .
+ Python's equivalent to Ruby on Rails, Django lets you build complex
+ data-driven websites quickly and easily - Django focuses on automating as much
+ as possible and adhering to the "Don't Repeat Yourself" (DRY) principle.
+ .
+ Django additionally emphasizes reusability and "pluggability" of components;
+ many generic third-party "applications" are available to enhance projects or
+ to simply to reduce development time even further.
+ .
+ Notable features include:
+ * An object-relational mapper (ORM)
+ * Automatic admin interface
+ * Elegant URL dispatcher
+ * Form serialization and validation system
+ * Templating system
+ * Lightweight, standalone web server for development and testing
+ * Internationalization support
+ * Testing framework and client
+Original-Maintainer: Chris Lamb <lamby@debian.org>
+
+Package: python-sqlalchemy-doc
+Source: sqlalchemy
+Priority: extra
+Section: doc
+Installed-Size: 5768
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Architecture: all
+Version: 0.7.8-1ubuntu1~cloud0
+Recommends: python-sqlalchemy
+Depends: libjs-jquery, libjs-underscore
+Conflicts: python-sqlalchemy (<= 0.3.0-1)
+Filename: pool/main/s/sqlalchemy/python-sqlalchemy-doc_0.7.8-1ubuntu1~cloud0_all.deb
+Size: 711724
+MD5sum: 3fc8d3bfc094a1e8b75a4ca9d029e664
+SHA1: 315b038cda12e4942c0ae0f3eee05fcc88d9a3b1
+Description: documentation for the SQLAlchemy Python library
+ SQLAlchemy is an SQL database abstraction library for Python.
+ .
+ This package contains the documentation for SQLAlchemy in HTML format.
+ It's usable as a comprehensive reference, a user guide and a tutorial
+ all-in-one.
+Original-Maintainer: Piotr Ożarowski <piotr@debian.org>
+
+Package: python-crypto-dbg
+Source: python-crypto
+Priority: extra
+Section: debug
+Installed-Size: 1281
+Maintainer: Sebastian Ramacher <s.ramacher@gmx.at>
+Architecture: amd64
+Version: 2.6-2build3~ubuntu12.04.1~grizzly0
+Provides: python2.7-crypto-dbg
+Depends: python-crypto (= 2.6-2build3~ubuntu12.04.1~grizzly0), libc6 (>= 2.14), libgmp10, python2.7-dbg, python-dbg (>= 2.7), python-dbg (<< 2.8)
+Filename: pool/main/p/python-crypto/python-crypto-dbg_2.6-2build3~ubuntu12.04.1~grizzly0_amd64.deb
+Size: 592492
+MD5sum: 7ca2f6128fd8d2ff8e481ec1ca6b6128
+SHA1: 2107a2702a2aaacadda08fbf3b219848a8ed1d00
+Description: cryptographic algorithms and protocols for Python (debug extension)
+ A collection of cryptographic algorithms and protocols, implemented
+ for use from Python.
+ .
+ This package contains the extensions built for the Python debug interpreter.
+
+Package: libvirt-doc
+Source: libvirt
+Priority: optional
+Section: doc
+Installed-Size: 5227
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.9.13-0ubuntu12~cloud0
+Suggests: devhelp
+Filename: pool/main/libv/libvirt/libvirt-doc_0.9.13-0ubuntu12~cloud0_all.deb
+Size: 1238294
+MD5sum: bf885d915d17e2e1023c62f304724455
+SHA1: 4760d11cf444dfe377d98287dc3e4eb51db66728
+Description: documentation for the libvirt library
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the documentation.
+Original-Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+
+Package: libvirt0-dbg
+Source: libvirt
+Priority: extra
+Section: debug
+Installed-Size: 17110
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.9.13-0ubuntu12~cloud0
+Depends: libvirt0 (= 0.9.13-0ubuntu12~cloud0)
+Filename: pool/main/libv/libvirt/libvirt0-dbg_0.9.13-0ubuntu12~cloud0_amd64.deb
+Size: 5557868
+MD5sum: 28c06bed1f3d18d0c933eadbb0c6205a
+SHA1: 88c3cc42024fecc2c3a81942095164a29981baf1
+Description: library for interfacing with different virtualization systems
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the debugging symbols.
+Original-Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+
+Package: libs3-dev
+Source: libs3
+Priority: extra
+Section: libdevel
+Installed-Size: 222
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+Architecture: amd64
+Version: 2.0-2~cloud0
+Depends: libs3-2 (= 2.0-2~cloud0)
+Filename: pool/main/libs/libs3/libs3-dev_2.0-2~cloud0_amd64.deb
+Size: 55404
+MD5sum: ac05fc3eb9233b5daae6de78c991404e
+SHA1: 0b6b6390370d3e0907f2bc644d69dc5e523b246e
+Description: C Development Library for Amazon S3 Access
+ This package includes the libs3 header, needed to compile applications
+ against libs3.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python-django-doc
+Source: python-django
+Priority: optional
+Section: doc
+Installed-Size: 11026
+Maintainer: Chris Lamb <lamby@debian.org>
+Architecture: all
+Version: 1.4.1-2~cloud0
+Depends: libjs-sphinxdoc (>= 1.0)
+Filename: pool/main/p/python-django/python-django-doc_1.4.1-2~cloud0_all.deb
+Size: 2351114
+MD5sum: 534b645667d9528a1a4e25317ae50539
+SHA1: c8cc091fc73383d806716e8b97a1767906ba5089
+Description: High-level Python web development framework (documentation)
+ Django is a high-level web application framework that loosely follows the
+ model-view-controller design pattern.
+ .
+ Python's equivalent to Ruby on Rails, Django lets you build complex
+ data-driven websites quickly and easily - Django focuses on automating as much
+ as possible and adhering to the "Don't Repeat Yourself" (DRY) principle.
+ .
+ Django additionally emphasizes reusability and "pluggability" of components;
+ many generic third-party "applications" are available to enhance projects or
+ to simply to reduce development time even further.
+ .
+ This package contains the HTML documentation and example projects.
+Original-Maintainer: Chris Lamb <lamby@debian.org>
+
+Package: python-prettytable
+Source: prettytable
+Priority: optional
+Section: python
+Installed-Size: 95
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.6-1ubuntu1~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/p/prettytable/python-prettytable_0.6-1ubuntu1~cloud0_all.deb
+Size: 12628
+MD5sum: cef3526c831f756eb09a20909085e340
+SHA1: e164be819d383930220daac5d5d5726f8818e239
+Description: library to represent tabular data in visually appealing ASCII tables
+ PrettyTable is a simple Python library designed to make it quick and
+ easy to represent tabular data in visually appealing ASCII tables. It
+ was inspired by the ASCII tables used in the PostgreSQL shell
+ psql. PrettyTable allows for selection of which columns are to be
+ printed, independent alignment of columns (left or right justified or
+ centred) and printing of "sub-tables" by specifying a row range.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: python-eventlet
+Priority: optional
+Section: python
+Installed-Size: 1219
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.9.17-0ubuntu1~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-greenlet, libjs-sphinxdoc (>= 1.0)
+Filename: pool/main/p/python-eventlet/python-eventlet_0.9.17-0ubuntu1~cloud0_all.deb
+Size: 270516
+MD5sum: ad6ac435a094d049e7fe4353d1d07bed
+SHA1: 971766490c992c67a06ed562c5514419317d14fa
+Description: concurrent networking library for Python
+ Eventlet allows you to change how you run your code, not how you write it.
+ .
+ It uses epoll or libevent for highly scalable non-blocking I/O.
+ Coroutines ensure that the developer uses a blocking style of programming
+ that is similar to threading, but provide the benefits of non-blocking I/O.
+ The event dispatch is implicit, which means you can easily use Eventlet from
+ the Python interpreter, or as a small part of a larger application.
+ .
+ It's easy to get started using Eventlet, and easy to convert existing
+ applications to use it. Start off by looking at examples, common design
+ patterns, and the list of the basic API primitives.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: python-greenlet
+Priority: extra
+Section: python
+Installed-Size: 93
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.3.3-1ubuntu2~cloud0
+Suggests: python-greenlet-dbg, python-greenlet-dev, python-greenlet-doc
+Depends: python2.7, python (>= 2.7), python (<< 2.8), libc6 (>= 2.14)
+Conflicts: python-codespeak-lib (<< 1.0)
+Filename: pool/main/p/python-greenlet/python-greenlet_0.3.3-1ubuntu2~cloud0_amd64.deb
+Size: 17572
+MD5sum: 1fe079930c71c19ea53821f6e52ed32d
+SHA1: 3158998e188ec175cacb1211cf82d82604e5646b
+Description: Lightweight in-process concurrent programming
+ The greenlet package is a spin-off of Stackless, a version of CPython that
+ supports micro-threads called "tasklets". Tasklets run pseudo-concurrently
+ (typically in a single or a few OS-level threads) and are synchronized with
+ data exchanges on "channels".
+ .
+ greenlet is the standalone package derived from the py lib, and is used by
+ several non-blocking IO packages as a more flexible alternative to Python's
+ built in coroutines.
+Original-Maintainer: Örjan Persson <orange@fobie.net>
+
+Package: euca2ools
+Priority: optional
+Section: utils
+Installed-Size: 835
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2.0.2-1ubuntu2~cloud0
+Recommends: cloud-utils
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-m2crypto (>= 0.20.2), python-boto (>= 2.0~)
+Filename: pool/main/e/euca2ools/euca2ools_2.0.2-1ubuntu2~cloud0_all.deb
+Size: 151976
+MD5sum: 260f9a415e381d9826d4ed1fe199f6f0
+SHA1: 1fd2fb16c06314e05c63373563c6eb591f951307
+Description: managing cloud instances for Eucalyptus
+ EUCALYPTUS is an open source service overlay that implements elastic
+ computing using existing resources. The goal of EUCALYPTUS is to allow
+ sites with existing clusters and server infrastructure to co-host an
+ elastic computing service that is interface-compatible with Amazon's EC2.
+ .
+ Elastic Utility Computing Architecture for Linking Your Programs
+ To Useful Systems - is an open-source software infrastructure for
+ implementing "cloud computing" on clusters.  Eucalyptus Systems is the
+ pioneer in open source cloud computing technology that delivers hybrid
+ cloud deployments for enterprise data centers. Leveraging Linux and web
+ service technologies that commonly exist in today's IT infrastructure,
+ Eucalyptus enables customers to quickly and easily create elastic clouds
+ in minutes. This "no lock-in" approach provides users with ultimate
+ flexibility when delivering their SLAs.
+ .
+ Eucalyptus is more than just virtualization. Along with building virtual
+ machines, the technology supports the network and storage infrastructure
+ within the cloud environment. Eucalyptus works with multiple flavors
+ of Linux including Ubuntu, OpenSuse, Debian, and CentOS. Eucalyptus
+ currently supports Xen and KVM hypervisors.  These tools are meant to
+ be CLI compatible with the ec2-api-tools.
+Original-Maintainer: Debian Eucalyptus Maintainers <pkg-eucalyptus-maintainers@lists.alioth.debian.org>
+
+Package: pep8
+Priority: optional
+Section: python
+Installed-Size: 147
+Maintainer: David Watson <dwatson@debian.org>
+Architecture: all
+Version: 1.2-1~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-pkg-resources, python-setuptools
+Filename: pool/main/p/pep8/pep8_1.2-1~cloud0_all.deb
+Size: 28520
+MD5sum: 2859dd6fc41dd0496aa6b0e32331358a
+SHA1: cb2b1ac0e72529fb1c03788a1a6929ec50d13300
+Description: Python PEP 8 code style checker
+ Features a plugin architecture allowing for adding new checks is easily.
+ Parseable output listing line numbers of the error location.  Consists of
+ just one Python file, and requires only stdlib.
+Original-Maintainer: David Watson <dwatson@debian.org>
+
+Package: python-mock
+Priority: extra
+Section: python
+Installed-Size: 141
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Architecture: all
+Version: 0.8.0-2ubuntu1~cloud0
+Suggests: python-mock-doc
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/p/python-mock/python-mock_0.8.0-2ubuntu1~cloud0_all.deb
+Size: 25734
+MD5sum: 7a3e3d602453af20f47f9970fa71b380
+SHA1: e34b6be6275630d283014a23dd2bcd5ef08a2b33
+Description: Mocking and Testing Library
+ mock provides a core mock.Mock class that is intended to reduce the
+ need to create a host of trivial stubs throughout your test suite.
+ After performing an action, you can make assertions about which methods
+ / attributes were used and arguments they were called with. You can
+ also specify return values and set specific attributes in the normal
+ way.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: ceph
+Priority: optional
+Section: admin
+Installed-Size: 15773
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Recommends: libcephfs1, librados2, librbd1
+Replaces: gceph, librgw-dev, librgw1, librgw1-dbg
+Suggests: gdisk
+Depends: libaio1 (>= 0.3.93), libc6 (>= 2.15), libgcc1 (>= 1:4.1.1), libgoogle-perftools0, libleveldb1, libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), libstdc++6 (>= 4.6), libuuid1 (>= 2.16), hdparm | sdparm, binutils, ceph-common, uuid-runtime, python
+Conflicts: gceph, librgw-dev, librgw1, librgw1-dbg
+Filename: pool/main/c/ceph/ceph_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 5065580
+MD5sum: 9079b3cbc220af45def927622dc78939
+SHA1: 4c3a516aeb9cb7c104fc45196cce44c2a92d5b04
+Description: distributed storage and file system
+ Ceph is a distributed storage and network file system designed to provide
+ excellent performance, reliability, and scalability.
+ .
+ This package contains all server daemons and management tools for creating,
+ running, and administering a Ceph storage cluster. This does not include
+ the POSIX filesystem server, as that has been split into the ceph-mds
+ package.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: ceph-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 124366
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: gceph-dbg
+Depends: ceph (= 0.48.2-0ubuntu2~cloud0)
+Conflicts: gceph-dbg
+Filename: pool/main/c/ceph/ceph-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 35804294
+MD5sum: 96d8ffe7a32e976d7fb7fbdb80d2cd5d
+SHA1: c793a5f6f78fb1591fa3631ecaf3dc9b96517f07
+Description: debugging symbols for ceph
+ Ceph is a distributed storage and network file system designed to provide
+ excellent performance, reliability, and scalability.
+ .
+ This package contains the debugging symbols for ceph.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: radosgw
+Source: ceph
+Priority: optional
+Section: admin
+Installed-Size: 2269
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: libc6 (>= 2.15), libcurl3-gnutls (>= 7.16.2-1), libexpat1 (>= 1.95.8), libfcgi0ldbl, libgcc1 (>= 1:4.1.1), libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), librados2 (= 0.48.2-0ubuntu2~cloud0), libstdc++6 (>= 4.6), libuuid1 (>= 2.16), ceph-common
+Filename: pool/main/c/ceph/radosgw_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 921158
+MD5sum: 6f1b37e50982eb73dc45920f5386f7a5
+SHA1: e5af80c8c47096883cb84fc7eed4f54a0ff5af46
+Description: REST gateway for RADOS distributed object store
+ RADOS is a distributed object store used by the Ceph distributed
+ storage system.  This package provides a REST gateway to the
+ object store that aims to implement a superset of Amazon's S3
+ service.
+ .
+ This package contains the proxy daemon and related tools only.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: radosgw-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 25111
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: radosgw (= 0.48.2-0ubuntu2~cloud0)
+Filename: pool/main/c/ceph/radosgw-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 7817964
+MD5sum: da3611071fe92ce6e39d0944e97c32d7
+SHA1: c35c8a4fd196db784c0049ede058b0649d133dae
+Description: debugging symbols for radosgw
+ RADOS is a distributed object store used by the Ceph distributed
+ storage system.  This package provides a REST gateway to the
+ object store that aims to implement a superset of Amazon's S3
+ service.
+ .
+ This package contains debugging symbols for radosgw.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python-sqlalchemy-ext
+Source: sqlalchemy
+Priority: optional
+Section: python
+Installed-Size: 96
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Architecture: amd64
+Version: 0.7.8-1ubuntu1~cloud0
+Provides: python2.7-sqlalchemy-ext
+Depends: python-sqlalchemy (= 0.7.8-1ubuntu1~cloud0), python2.7, python (>= 2.7), python (<< 2.8), libc6 (>= 2.2.5)
+Filename: pool/main/s/sqlalchemy/python-sqlalchemy-ext_0.7.8-1ubuntu1~cloud0_amd64.deb
+Size: 14340
+MD5sum: 1cd7edf8d86bb42bc23205c56d183a51
+SHA1: 10b523f52e938b9dee4c9c8b6531762c8761ac8a
+Description: SQL toolkit and Object Relational Mapper for Python - C extension
+ SQLAlchemy is an SQL database abstraction library for Python.
+ .
+ This package contains C coded extension accelerator for SQLAlchemy.
+Original-Maintainer: Piotr Ożarowski <piotr@debian.org>
+
+Package: python3-sqlalchemy
+Source: sqlalchemy
+Priority: optional
+Section: python
+Installed-Size: 2824
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Architecture: all
+Version: 0.7.8-1ubuntu1~cloud0
+Suggests: python-sqlalchemy-doc
+Depends: python3 (>= 3.1.3-13~)
+Filename: pool/main/s/sqlalchemy/python3-sqlalchemy_0.7.8-1ubuntu1~cloud0_all.deb
+Size: 473114
+MD5sum: 4be5b7462deb2a473b250b6bf9e40c2c
+SHA1: b2c8c68627ed8713e2116babe2268790db873b3b
+Description: SQL toolkit and Object Relational Mapper for Python 3
+ SQLAlchemy is an SQL database abstraction library for Python.
+ Its strengths are:
+ * full power and flexibility of SQL. SQLAlchemy provides a full suite
+ of well known enterprise-level persistence patterns, designed for
+ efficient and high-performing database access, adapted into a simple
+ and Pythonic domain language.
+ * extremely easy to use for all the basic tasks, such as: accessing pooled
+ connections, constructing SQL from Python expressions, finding object
+ instances, and committing object modifications back to the database.
+ * powerful enough for complicated tasks, such as: eager load a graph of
+ objects and their dependencies via joins; map recursive adjacency
+ structures automatically; map objects to not just tables but to any
+ arbitrary join or select statement; combine multiple tables together to
+ load whole sets of otherwise unrelated objects from a single result set;
+ commit entire graphs of object changes in one step.
+ * built to conform to what DBAs demand, including the ability to swap out
+ generated SQL with hand-optimized statements, full usage of bind parameters
+ for all literal values, fully transactionalized and consistent updates
+ using Unit of Work.
+ * modular. Different parts of SQLAlchemy can be used independently of the
+ rest, including the connection pool, SQL construction, and ORM. SQLAlchemy
+ is constructed in an open style that allows plenty of customization, with
+ an architecture that supports custom datatypes, custom SQL extensions, and
+ ORM plugins which can augment or extend mapping functionality.
+Original-Maintainer: Piotr Ożarowski <piotr@debian.org>
+
+Package: nova-common
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2188
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Recommends: python-glanceclient, python-keystone
+Depends: adduser, python-amqplib, python-nova (= 2013.1+git201212141401~precise-0ubuntu1), python
+Filename: pool/main/n/nova/nova-common_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2071964
+MD5sum: 9a03ecef55e2b83e2bdc65039dd38f61
+SHA1: 234e0ae00a931204e061adbdc0e431fda57dfd17
+Description: OpenStack Compute - common files
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package contains things that are needed by all parts of Nova.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-compute
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2073
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Suggests: guestmount
+Depends: curl, ebtables, gawk, iptables, kpartx, lsb-base (>= 3.0.6), nova-common (= 2013.1+git201212141401~precise-0ubuntu1), nova-compute-kvm | nova-compute-hypervisor, open-iscsi, parted, qemu-utils, genisoimage, vlan, upstart-job, python, adduser
+Filename: pool/main/n/nova/nova-compute_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2055924
+MD5sum: fa803dca9cd60d995213226822db04ee
+SHA1: f696aba2b703c4d73c000c7edc430ae687f9ae52
+Description: OpenStack Compute - compute node
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This is the package you will install on the nodes that will run your
+ virtual machines.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-volume
+Source: nova
+Priority: extra
+Section: oldlibs
+Installed-Size: 2026
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: cinder-volume, cinder-api, cinder-scheduler
+Filename: pool/main/n/nova/nova-volume_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050472
+MD5sum: ca30dc928b081273ad455bd13fb1b9c6
+SHA1: ee5bb645ec3b3e2fe0128709198cf97c9ca53221
+Description: OpenStack Compute - storage
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This is a dummy transitional package that can be removed after upgrade.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-api
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2066
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/n/nova/nova-api_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053986
+MD5sum: b21fd0625bfbb6e10dbece010b64beda
+SHA1: 8568200703d49e0c8b18d0060c8f9cdd40dd544c
+Description: OpenStack Compute - API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the API frontend.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-objectstore
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2058
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/n/nova/nova-objectstore_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053814
+MD5sum: 6ba817109bd5260856dd1f688afdeda7
+SHA1: 6a62e42ee5d499a59c2572cbcb39a365106a872f
+Description: OpenStack Compute - object store
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This is the package contains a very simple S3-like object store.
+ For production use, you should use OpenStack Storage, aka. Swift.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: python-greenlet-dbg
+Source: python-greenlet
+Priority: extra
+Section: debug
+Installed-Size: 61
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.3.3-1ubuntu2~cloud0
+Recommends: python-dbg
+Depends: python-greenlet (= 0.3.3-1ubuntu2~cloud0), libc6 (>= 2.14)
+Filename: pool/main/p/python-greenlet/python-greenlet-dbg_0.3.3-1ubuntu2~cloud0_amd64.deb
+Size: 12420
+MD5sum: 44e7f09de3dd35be0afb2518d11614ba
+SHA1: a3b8bd4667d7087299bc90a1ed04e5d719c3fda7
+Description: Lightweight in-process concurrent programming - debugging symbols
+ The greenlet package is a spin-off of Stackless, a version of CPython that
+ supports micro-threads called "tasklets". Tasklets run pseudo-concurrently
+ (typically in a single or a few OS-level threads) and are synchronized with
+ data exchanges on "channels".
+ .
+ greenlet is the standalone package derived from the py lib, and is used by
+ several non-blocking IO packages as a more flexible alternative to Python's
+ built in coroutines.
+ .
+ This is the debugging symbols for greenlet.
+Original-Maintainer: Örjan Persson <orange@fobie.net>
+
+Package: python-greenlet-doc
+Source: python-greenlet
+Priority: extra
+Section: doc
+Installed-Size: 496
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.3.3-1ubuntu2~cloud0
+Suggests: python-greenlet, python-greenlet-dev
+Depends: libjs-jquery, libjs-underscore
+Filename: pool/main/p/python-greenlet/python-greenlet-doc_0.3.3-1ubuntu2~cloud0_all.deb
+Size: 135042
+MD5sum: fb1c08fcc2d12b594f20b181a0757ba3
+SHA1: f1e55e91509da1845437e439e34c1e456bf4dd27
+Description: Lightweight in-process concurrent programming - documentation
+ The greenlet package is a spin-off of Stackless, a version of CPython that
+ supports micro-threads called "tasklets". Tasklets run pseudo-concurrently
+ (typically in a single or a few OS-level threads) and are synchronized with
+ data exchanges on "channels".
+ .
+ greenlet is the standalone package derived from the py lib, and is used by
+ several non-blocking IO packages as a more flexible alternative to Python's
+ built in coroutines.
+ .
+ This is the documentation for greenlet.
+Original-Maintainer: Örjan Persson <orange@fobie.net>
+
+Package: python-greenlet-dev
+Source: python-greenlet
+Priority: extra
+Section: python
+Installed-Size: 36
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.3.3-1ubuntu2~cloud0
+Depends: python-greenlet (= 0.3.3-1ubuntu2~cloud0)
+Filename: pool/main/p/python-greenlet/python-greenlet-dev_0.3.3-1ubuntu2~cloud0_amd64.deb
+Size: 2418
+MD5sum: e1e4f217da1058c0cbcb5c5a8f17870e
+SHA1: 686a8c66be060bdc9de1e18f90f9dee0b9b1d5e4
+Description: Lightweight in-process concurrent programming - development files
+ The greenlet package is a spin-off of Stackless, a version of CPython that
+ supports micro-threads called "tasklets". Tasklets run pseudo-concurrently
+ (typically in a single or a few OS-level threads) and are synchronized with
+ data exchanges on "channels".
+ .
+ greenlet is the standalone package derived from the py lib, and is used by
+ several non-blocking IO packages as a more flexible alternative to Python's
+ built in coroutines.
+ .
+ This is the development package for greenlet.
+Original-Maintainer: Örjan Persson <orange@fobie.net>
+
+Package: swift
+Priority: optional
+Section: net
+Installed-Size: 208
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.7.6+git201212180131~precise-0ubuntu1
+Replaces: swift (<< 1.6.0-0ubuntu1)
+Depends: python-swift (= 1.7.6+git201212180131~precise-0ubuntu1), python
+Breaks: swift (<< 1.6.0-0ubuntu1)
+Filename: pool/main/s/swift/swift_1.7.6+git201212180131~precise-0ubuntu1_all.deb
+Size: 91296
+MD5sum: ff797be219392a89170cff2454649e64
+SHA1: 4300540273d931be63926849d248c587ee05b19f
+Description: distributed virtual object store - common files
+ OpenStack Object Storage (code-named Swift) is open source software for
+ creating redundant, scalable object storage using clusters of standardized
+ servers to store petabytes of accessible data. It is not a file system or
+ real-time data storage system, but rather a long-term storage system for a
+ more permanent type of static data that can be retrieved, leveraged, and then
+ updated if necessary. Primary examples of data that best fit this type of
+ storage model are virtual machine images, photo storage, email storage and
+ backup archiving. Having no central "brain" or master point of control
+ provides greater scalability, redundancy and permanence.
+ .
+ Objects are written to multiple hardware devices in the data center, with
+ the OpenStack software responsible for ensuring data replication and
+ integrity across the cluster. Storage clusters can scale horizontally by
+ adding new nodes. Should a node fail, OpenStack works to replicate its
+ content from other active nodes. Because OpenStack uses software logic to
+ ensure data replication and distribution across different devices,
+ inexpensive commodity hard drives and servers can be used in lieu of more
+ expensive equipment.
+ .
+ .
+ This package provides some core binaries and clients to control swift.
+Original-Maintainer: Soren Hansen <soren@ubuntu.com>
+
+Package: swift-proxy
+Source: swift
+Priority: optional
+Section: net
+Installed-Size: 58
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.7.6+git201212180131~precise-0ubuntu1
+Depends: python-swift (= 1.7.6+git201212180131~precise-0ubuntu1), python, upstart-job
+Filename: pool/main/s/swift/swift-proxy_1.7.6+git201212180131~precise-0ubuntu1_all.deb
+Size: 18554
+MD5sum: 20838949822b96388504d89809f83d5a
+SHA1: 0bd6253e27e917b8848a322005e5c2a2e06423ad
+Description: distributed virtual object store - proxy server
+ OpenStack Object Storage (code-named Swift) is open source software for
+ creating redundant, scalable object storage using clusters of standardized
+ servers to store petabytes of accessible data. It is not a file system or
+ real-time data storage system, but rather a long-term storage system for a
+ more permanent type of static data that can be retrieved, leveraged, and then
+ updated if necessary. Primary examples of data that best fit this type of
+ storage model are virtual machine images, photo storage, email storage and
+ backup archiving. Having no central "brain" or master point of control
+ provides greater scalability, redundancy and permanence.
+ .
+ Objects are written to multiple hardware devices in the data center, with
+ the OpenStack software responsible for ensuring data replication and
+ integrity across the cluster. Storage clusters can scale horizontally by
+ adding new nodes. Should a node fail, OpenStack works to replicate its
+ content from other active nodes. Because OpenStack uses software logic to
+ ensure data replication and distribution across different devices,
+ inexpensive commodity hard drives and servers can be used in lieu of more
+ expensive equipment.
+ .
+ This package provides a proxy server on which clients can connect to store
+ object into Swift.
+Original-Maintainer: Soren Hansen <soren@ubuntu.com>
+
+Package: swift-object
+Source: swift
+Priority: optional
+Section: net
+Installed-Size: 73
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.7.6+git201212180131~precise-0ubuntu1
+Depends: python-swift (= 1.7.6+git201212180131~precise-0ubuntu1), rsync, python, upstart-job
+Filename: pool/main/s/swift/swift-object_1.7.6+git201212180131~precise-0ubuntu1_all.deb
+Size: 17196
+MD5sum: 2ca79451b40f82ba1ff92dd582dda41a
+SHA1: 99f9467427f88699464f6abb922a6c05bc2df3a9
+Description: distributed virtual object store - object server
+ OpenStack Object Storage (code-named Swift) is open source software for
+ creating redundant, scalable object storage using clusters of standardized
+ servers to store petabytes of accessible data. It is not a file system or
+ real-time data storage system, but rather a long-term storage system for a
+ more permanent type of static data that can be retrieved, leveraged, and then
+ updated if necessary. Primary examples of data that best fit this type of
+ storage model are virtual machine images, photo storage, email storage and
+ backup archiving. Having no central "brain" or master point of control
+ provides greater scalability, redundancy and permanence.
+ .
+ Objects are written to multiple hardware devices in the data center, with
+ the OpenStack software responsible for ensuring data replication and
+ integrity across the cluster. Storage clusters can scale horizontally by
+ adding new nodes. Should a node fail, OpenStack works to replicate its
+ content from other active nodes. Because OpenStack uses software logic to
+ ensure data replication and distribution across different devices,
+ inexpensive commodity hard drives and servers can be used in lieu of more
+ expensive equipment.
+ .
+ This package provides the swift object server.
+Original-Maintainer: Soren Hansen <soren@ubuntu.com>
+
+Package: swift-container
+Source: swift
+Priority: optional
+Section: net
+Installed-Size: 68
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.7.6+git201212180131~precise-0ubuntu1
+Depends: python-swift (= 1.7.6+git201212180131~precise-0ubuntu1), rsync, python, upstart-job
+Filename: pool/main/s/swift/swift-container_1.7.6+git201212180131~precise-0ubuntu1_all.deb
+Size: 15510
+MD5sum: 38d4fbb38b4278a4bada7c104f86fe55
+SHA1: ca4990af69a97f4e554e0f42b410e231cdae60ed
+Description: distributed virtual object store - container server
+ OpenStack Object Storage (code-named Swift) is open source software for
+ creating redundant, scalable object storage using clusters of standardized
+ servers to store petabytes of accessible data. It is not a file system or
+ real-time data storage system, but rather a long-term storage system for a
+ more permanent type of static data that can be retrieved, leveraged, and then
+ updated if necessary. Primary examples of data that best fit this type of
+ storage model are virtual machine images, photo storage, email storage and
+ backup archiving. Having no central "brain" or master point of control
+ provides greater scalability, redundancy and permanence.
+ .
+ Objects are written to multiple hardware devices in the data center, with
+ the OpenStack software responsible for ensuring data replication and
+ integrity across the cluster. Storage clusters can scale horizontally by
+ adding new nodes. Should a node fail, OpenStack works to replicate its
+ content from other active nodes. Because OpenStack uses software logic to
+ ensure data replication and distribution across different devices,
+ inexpensive commodity hard drives and servers can be used in lieu of more
+ expensive equipment.
+ .
+ This package provides the swift container server.
+Original-Maintainer: Soren Hansen <soren@ubuntu.com>
+
+Package: swift-account
+Source: swift
+Priority: optional
+Section: net
+Installed-Size: 82
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.7.6+git201212180131~precise-0ubuntu1
+Depends: python-swift (= 1.7.6+git201212180131~precise-0ubuntu1), rsync, python, upstart-job
+Filename: pool/main/s/swift/swift-account_1.7.6+git201212180131~precise-0ubuntu1_all.deb
+Size: 18808
+MD5sum: 8b9d7ceafe2f6899a754217c8e4a5c4e
+SHA1: 3341d19cfc5bf2dda61f3c6dc1449973ae594964
+Description: distributed virtual object store - account server
+ OpenStack Object Storage (code-named Swift) is open source software for
+ creating redundant, scalable object storage using clusters of standardized
+ servers to store petabytes of accessible data. It is not a file system or
+ real-time data storage system, but rather a long-term storage system for a
+ more permanent type of static data that can be retrieved, leveraged, and then
+ updated if necessary. Primary examples of data that best fit this type of
+ storage model are virtual machine images, photo storage, email storage and
+ backup archiving. Having no central "brain" or master point of control
+ provides greater scalability, redundancy and permanence.
+ .
+ Objects are written to multiple hardware devices in the data center, with
+ the OpenStack software responsible for ensuring data replication and
+ integrity across the cluster. Storage clusters can scale horizontally by
+ adding new nodes. Should a node fail, OpenStack works to replicate its
+ content from other active nodes. Because OpenStack uses software logic to
+ ensure data replication and distribution across different devices,
+ inexpensive commodity hard drives and servers can be used in lieu of more
+ expensive equipment.
+ .
+ This package provides the swift account server.
+Original-Maintainer: Soren Hansen <soren@ubuntu.com>
+
+Package: swift-doc
+Source: swift
+Priority: optional
+Section: doc
+Installed-Size: 1409
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.7.6+git201212180131~precise-0ubuntu1
+Depends: libjs-jquery
+Filename: pool/main/s/swift/swift-doc_1.7.6+git201212180131~precise-0ubuntu1_all.deb
+Size: 300652
+MD5sum: 4c0c49c05193d5256af6e62cf1717f09
+SHA1: 6734fc7debc86e0c55f4cce05ce8e0118e483f73
+Description: distributed virtual object store - documentation
+ OpenStack Object Storage (code-named Swift) is open source software for
+ creating redundant, scalable object storage using clusters of standardized
+ servers to store petabytes of accessible data. It is not a file system or
+ real-time data storage system, but rather a long-term storage system for a
+ more permanent type of static data that can be retrieved, leveraged, and then
+ updated if necessary. Primary examples of data that best fit this type of
+ storage model are virtual machine images, photo storage, email storage and
+ backup archiving. Having no central "brain" or master point of control
+ provides greater scalability, redundancy and permanence.
+ .
+ Objects are written to multiple hardware devices in the data center, with
+ the OpenStack software responsible for ensuring data replication and
+ integrity across the cluster. Storage clusters can scale horizontally by
+ adding new nodes. Should a node fail, OpenStack works to replicate its
+ content from other active nodes. Because OpenStack uses software logic to
+ ensure data replication and distribution across different devices,
+ inexpensive commodity hard drives and servers can be used in lieu of more
+ expensive equipment.
+ .
+ This package provides the Sphinx generated documentation for Swift.
+Original-Maintainer: Soren Hansen <soren@ubuntu.com>
+
+Package: python-nova
+Source: nova
+Priority: extra
+Section: python
+Installed-Size: 16566
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Recommends: python-mysqldb
+Suggests: python-suds (>= 0.4.0)
+Provides: python2.7-nova
+Depends: openssh-client, openssl, python-boto, python-carrot, python-cheetah, python-cinderclient, python-daemon, python-eventlet, python-feedparser, python-gflags, python-glance, python-glanceclient, python-iso8601, python-keystone, python-kombu, python-ldap, python-libxml2, python-lockfile, python-lxml, python-m2crypto, python-migrate, python-netaddr, python-novaclient (>= 1:2.9.0), python-paste, python-pastedeploy, python-pycurl, python-routes, python-simplejson, python-sqlalchemy-ext (>= 0.7.8-1~) | python-sqlalchemy (<< 0.6.3-2), python-suds, python-tempita, python-webob, python-xattr, sudo, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-sqlalchemy (>= 0.7~), python-sqlalchemy (<< 0.8), python-amqplib, python-anyjson, python-greenlet, python-paramiko, python-httplib2, python-quantumclient, python-keystoneclient, python-stevedore
+Conflicts: python-cjson
+Filename: pool/main/n/nova/python-nova_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 5276014
+MD5sum: cae1981d27b9712b1de02d8892891fd0
+SHA1: 814420bf3264ab30f853536d31f69127cfba9c3c
+Description: OpenStack Compute Python libraries
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package contains the core Python parts of Nova.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Python-Version: 2.7
+
+Package: nova-doc
+Source: nova
+Priority: extra
+Section: doc
+Installed-Size: 15955
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Recommends: libjs-jquery
+Filename: pool/main/n/nova/nova-doc_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 4589130
+MD5sum: f4df52eb88707639bd1f3fa9dff43e62
+SHA1: adf4735b014ce410faa5225b4189965e93072051
+Description: OpenStack Compute - documentation
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package contains the documentation for Nova.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: python-swift
+Source: swift
+Priority: optional
+Section: python
+Installed-Size: 2476
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.7.6+git201212180131~precise-0ubuntu1
+Provides: python2.7-swift
+Depends: adduser, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-openssl, python-setuptools, python-paste, python-pastedeploy, python-simplejson, python-xattr, python-netifaces, python-greenlet (>= 0.3.1), python-eventlet (>= 0.9.8)
+Filename: pool/main/s/swift/python-swift_1.7.6+git201212180131~precise-0ubuntu1_all.deb
+Size: 368472
+MD5sum: b0886721d9daf6c607c08f57705b3acc
+SHA1: 8bb7cfdbea9492f2f425ef9334df7da4ba2ff188
+Description: distributed virtual object store - Python libraries
+ OpenStack Object Storage (code-named Swift) is open source software for
+ creating redundant, scalable object storage using clusters of standardized
+ servers to store petabytes of accessible data. It is not a file system or
+ real-time data storage system, but rather a long-term storage system for a
+ more permanent type of static data that can be retrieved, leveraged, and then
+ updated if necessary. Primary examples of data that best fit this type of
+ storage model are virtual machine images, photo storage, email storage and
+ backup archiving. Having no central "brain" or master point of control
+ provides greater scalability, redundancy and permanence.
+ .
+ Objects are written to multiple hardware devices in the data center, with
+ the OpenStack software responsible for ensuring data replication and
+ integrity across the cluster. Storage clusters can scale horizontally by
+ adding new nodes. Should a node fail, OpenStack works to replicate its
+ content from other active nodes. Because OpenStack uses software logic to
+ ensure data replication and distribution across different devices,
+ inexpensive commodity hard drives and servers can be used in lieu of more
+ expensive equipment.
+ .
+ This package provides the Python libraries that actually implement
+ everything.
+Original-Maintainer: Soren Hansen <soren@ubuntu.com>
+
+Package: nova-network
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2075
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Suggests: radvd
+Depends: bridge-utils, dnsmasq-base, dnsmasq-utils, iptables, iputils-arping, netcat, nova-common (= 2013.1+git201212141401~precise-0ubuntu1), vlan, upstart-job, python
+Filename: pool/main/n/nova/nova-network_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2057166
+MD5sum: 1b687e8b876e31ce765391613f5771d2
+SHA1: 76c444a37120267a2b78d3ff9cb479894c9e2c2b
+Description: OpenStack Compute - Network manager
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This is the package you will install on the network nodes. This service is
+ responsible for managing floating and fixed IPs, DHCP, bridging and VLANs, and
+ in some cases acts as a gateway. Different networking strategies are available
+ to the service by changing the network_manager flag to FlatManager,
+ FlatDHCPManager, or VlanManager (default is VLAN).
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-scheduler
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2064
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/n/nova/nova-scheduler_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2055824
+MD5sum: fe251a1e9af1bafceeaf38c24ce3ab8f
+SHA1: 29dfdfd570d878defffac966e9caf70251158f24
+Description: OpenStack Compute - virtual machine scheduler
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This is the Nova scheduler.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: python-glance
+Source: glance
+Priority: extra
+Section: python
+Installed-Size: 2837
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171831~precise-0ubuntu1
+Provides: python2.7-glance
+Depends: python-argparse, python-crypto, python-dateutil, python-eventlet, python-httplib2, python-iso8601, python-jsonschema, python-keystone, python-kombu, python-migrate, python-pastedeploy, python-requests, python-routes, python-setuptools, python-sqlalchemy-ext | python-sqlalchemy (<< 0.6.3-2), python-swiftclient, python-webob, python-xattr, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-greenlet, python-sqlalchemy (>= 0.7~), python-sqlalchemy (<< 0.8), python-anyjson, python-boto, python-lxml, python-paste, python-passlib, python-keystoneclient
+Filename: pool/main/g/glance/python-glance_2013.1+git201212171831~precise-0ubuntu1_all.deb
+Size: 330886
+MD5sum: 7fc54730a97044c418149b6a212959a7
+SHA1: a682d9332c99abf738d91269603e149e2f1b66c0
+Description: OpenStack Image Registry and Delivery Service - Python library
+ The Glance project provides an image registration and discovery service
+ and an image delivery service. These services are used
+ in conjunction by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package contains the Python libraries.
+Python-Version: 2.7
+
+Package: python-glance-doc
+Source: glance
+Priority: extra
+Section: doc
+Installed-Size: 613
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171831~precise-0ubuntu1
+Depends: libjs-jquery
+Filename: pool/main/g/glance/python-glance-doc_2013.1+git201212171831~precise-0ubuntu1_all.deb
+Size: 149764
+MD5sum: 1df9881889e5d264fdcfefcdc411ba31
+SHA1: 016d9c783f24276e39a1846c09babd0554024e52
+Description: OpenStack Image Registry and Delivery Service - Documentation
+ The Glance project provides an image registration and discovery service
+ (Parallax) and an image delivery service (Teller). These services are used
+ in conjunction by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package contains the documentation.
+
+Package: glance
+Priority: extra
+Section: python
+Installed-Size: 42
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171831~precise-0ubuntu1
+Suggests: python-ceph
+Depends: glance-api (= 2013.1+git201212171831~precise-0ubuntu1), glance-registry (= 2013.1+git201212171831~precise-0ubuntu1)
+Filename: pool/main/g/glance/glance_2013.1+git201212171831~precise-0ubuntu1_all.deb
+Size: 18962
+MD5sum: 4d6755b7f3ba1023a6147ca91af3cc71
+SHA1: 624864c12573ccdcfb658ad08e16a21172713817
+Description: OpenStack Image Registry and Delivery Service - Daemons
+ The Glance project provides an image registration and discovery service
+ and an image delivery service. These services are used
+ in conjunction by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package is a metapackage for all glance daemons.
+
+Package: librbd1
+Source: ceph
+Priority: optional
+Section: libs
+Installed-Size: 368
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), librados2 (= 0.48.2-0ubuntu2~cloud0), libstdc++6 (>= 4.6)
+Filename: pool/main/c/ceph/librbd1_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 137662
+MD5sum: 3b1c748283123658aacde546d9bc775c
+SHA1: cb5dd6d18e18f910ecdc408caaf628739491da44
+Description: RADOS block device client library
+ RBD is a block device striped across multiple distributed objects
+ in RADOS, a reliable, autonomic distributed object storage cluster
+ developed as part of the Ceph distributed storage system.  This is a
+ shared library allowing applications to manage these block devices.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: librbd1-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 3727
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: librbd1 (= 0.48.2-0ubuntu2~cloud0)
+Filename: pool/main/c/ceph/librbd1-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 1117956
+MD5sum: fbb9aa01fdaae50d7ba07b9de5502bf2
+SHA1: c6939df89dd5bf65538abca9a9271d99d70408cb
+Description: debugging symbols for librbd1
+ RBD is a block device striped across multiple distributed objects
+ in RADOS, a reliable, autonomic distributed object storage cluster
+ developed as part of the Ceph distributed storage system.  This is a
+ shared library allowing applications to manage these block devices.
+ .
+ This package contains debugging symbols for librbd1.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python-novaclient
+Priority: optional
+Section: python
+Installed-Size: 424
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1:2.10.0.27.g8d36500+git201212141032~precise-0ubuntu1
+Depends: python-argparse, python-httplib2, python-iso8601, python-pkg-resources, python-prettytable (>= 0.6), python-simplejson, python-keyring, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/p/python-novaclient/python-novaclient_2.10.0.27.g8d36500+git201212141032~precise-0ubuntu1_all.deb
+Size: 77874
+MD5sum: b025710575c43d1bf0fd10d31eb83fb3
+SHA1: 65cb7d8b42204f7c2d2ee360df7f17c9ef5f0221
+Description: client library for OpenStack Compute API
+ Python novaclient library and nova CLI tool for interacting with OpenStack
+ Compute (Nova) through the OpenStack Compute API.
+Python-Version: 2.7
+
+Package: librados2
+Source: ceph
+Priority: optional
+Section: libs
+Installed-Size: 3320
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: libcrush, libcrush1, librados, librados1
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), libstdc++6 (>= 4.6), libuuid1 (>= 2.16)
+Conflicts: libcrush, libcrush1, librados, librados1
+Filename: pool/main/c/ceph/librados2_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 1121560
+MD5sum: e5eb91a493cc72e66ae7e12c99bfc9fd
+SHA1: 5fd7dcc41e4bfa2408944d4e3ba2e195990c28de
+Description: RADOS distributed object store client library
+ RADOS is a reliable, autonomic distributed object storage cluster
+ developed as part of the Ceph distributed storage system.  This is a
+ shared library allowing applications to access the distributed object
+ store using a simple file-like interface.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: librados2-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 41372
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: libcrush1-dbg, librados1-dbg
+Depends: librados2 (= 0.48.2-0ubuntu2~cloud0)
+Conflicts: libcrush1-dbg, librados1-dbg
+Filename: pool/main/c/ceph/librados2-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 10670120
+MD5sum: ed1f63ba3b99a411ddd06cb9c6a52931
+SHA1: 1317378bfa80a1b9124800b9393950d728e4ecd2
+Description: debugging symbols for librados2
+ RADOS is a reliable, autonomic distributed object storage cluster
+ developed as part of the Ceph distributed storage system.  This is a
+ shared library allowing applications to access the distributed object
+ store using a simple file-like interface.
+ .
+ This package contains debugging symbols for librados2.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: librados-dev
+Source: ceph
+Priority: optional
+Section: libdevel
+Installed-Size: 8926
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: libcrush-dev, libcrush1-dev, librados1-dev
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:4.1.1), libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), librados2 (= 0.48.2-0ubuntu2~cloud0), libstdc++6 (>= 4.6), libuuid1 (>= 2.16)
+Conflicts: libcrush-dev, libcrush1-dev, librados1-dev
+Filename: pool/main/c/ceph/librados-dev_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 1904044
+MD5sum: 7327d4f9069707dd6133013bff51376c
+SHA1: 0472b2639206f65a5be1b3752d94317a86b396c0
+Description: RADOS distributed object store client library (development files)
+ RADOS is a reliable, autonomic distributed object storage cluster
+ developed as part of the Ceph distributed storage system.  This is a
+ shared library allowing applications to access the distributed object
+ store using a simple file-like interface.
+ .
+ This package contains development files needed for building applications that
+ link against librados2.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: librbd-dev
+Source: ceph
+Priority: optional
+Section: libdevel
+Installed-Size: 9619
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: librbd1-dev
+Depends: librbd1 (= 0.48.2-0ubuntu2~cloud0), librados-dev
+Conflicts: librbd1-dev
+Filename: pool/main/c/ceph/librbd-dev_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 1931262
+MD5sum: 560e5d094ef87b17db54d95a817435ab
+SHA1: f94796bfc5cbcf5f2b12ebedaefdba225d7399f4
+Description: RADOS block device client library (development files)
+ RBD is a block device striped across multiple distributed objects
+ in RADOS, a reliable, autonomic distributed object storage cluster
+ developed as part of the Ceph distributed storage system.  This is a
+ shared library allowing applications to manage these block devices.
+ .
+ This package contains development files needed for building applications that
+ link against librbd1.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: nova-ajax-console-proxy
+Source: nova
+Priority: extra
+Section: oldlibs
+Installed-Size: 2026
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1)
+Filename: pool/main/n/nova/nova-ajax-console-proxy_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050506
+MD5sum: 66af0c5d99548e436c7278d5ac4a3ab6
+SHA1: daab6f3fb4cedb86c46d5d44dc14ee867c077ece
+Description: OpenStack Compute - AJAX console proxy - transitional package
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package used to provide the AJAX proxy, which is now gone.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: obsync
+Source: ceph
+Priority: optional
+Section: admin
+Installed-Size: 93
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: python, python-boto, python-ceph, python-pyxattr, python-lxml
+Filename: pool/main/c/ceph/obsync_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 16722
+MD5sum: a210a8e9157cfb3483e518901269bc3c
+SHA1: 487839e3ad58782583dadb66a90a5b4fa3f45106
+Description: synchronize data between cloud object storage providers or a local directory
+ obsync is a tool to synchronize objects between cloud object
+ storage providers, such as Amazon S3 (or compatible services), a
+ Ceph RADOS cluster, or a local directory.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python-crypto-doc
+Source: python-crypto
+Priority: optional
+Section: doc
+Installed-Size: 1560
+Maintainer: Sebastian Ramacher <s.ramacher@gmx.at>
+Architecture: all
+Version: 2.6-2build3~ubuntu12.04.1~grizzly0
+Replaces: python-crypto (<< 2.3)
+Breaks: python-crypto (<< 2.3)
+Filename: pool/main/p/python-crypto/python-crypto-doc_2.6-2build3~ubuntu12.04.1~grizzly0_all.deb
+Size: 147834
+MD5sum: 2b5489df4516dcd2da67b45f6457f614
+SHA1: a3ba2f6ef3b1d90fa656219e09d2c46abee88136
+Description: cryptographic algorithms and protocols for Python (documentation)
+ A collection of cryptographic algorithms and protocols, implemented
+ for use from Python.
+ .
+ This package contains technical documentation.
+
+Package: python-ceph
+Source: ceph
+Priority: optional
+Section: python
+Installed-Size: 93
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), librados2, librbd1
+Filename: pool/main/c/ceph/python-ceph_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 12034
+MD5sum: 51e3e3393b458afe8d4f580f9207c861
+SHA1: 18372d44c48b39c99e9865b30c930ca0c401246d
+Description: Python libraries for the Ceph distributed filesystem
+ Ceph is a distributed storage and network file system designed to provide
+ excellent performance, reliability, and scalability.
+ .
+ This package contains Python libraries for interacting with Ceph's
+ RADOS object storage, and RBD (RADOS block device).
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python-requests
+Source: requests
+Priority: optional
+Section: python
+Installed-Size: 409
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.14.2-0ubuntu1~ubuntu12.04.1~grizzly0
+Recommends: python-gevent, python-oauthlib
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), ca-certificates, python-urllib3, python-six, python-chardet
+Filename: pool/main/r/requests/python-requests_0.14.2-0ubuntu1~ubuntu12.04.1~grizzly0_all.deb
+Size: 166836
+MD5sum: 18dbc476824e371724bbaa0a6331df3f
+SHA1: a4330ef4bcd345fa64d423c5d98073974e606be9
+Description: elegant and simple HTTP library for Python, built for human beings
+ Requests allow you to send HTTP/1.1 requests. You can add headers, form data,
+ multipart files, and parameters with simple Python dictionaries, and access the
+ response data in the same way. It's powered by httplib and urllib3, but it does
+ all the hard work and crazy hacks for you.
+ .
+ Features
+ .
+ - International Domains and URLs
+ - Keep-Alive & Connection Pooling
+ - Sessions with Cookie Persistence
+ - Browser-style SSL Verification
+ - Basic/Digest Authentication
+ - Elegant Key/Value Cookies
+ - Automatic Decompression
+ - Unicode Response Bodies
+ - Multipart File Uploads
+ - Connection Timeouts
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: python-keystone
+Source: keystone
+Priority: extra
+Section: python
+Installed-Size: 861
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Suggests: python-memcache
+Provides: python2.7-keystone
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-pam, python-webob, python-eventlet, python-greenlet, python-pastedeploy, python-paste, python-routes, python-sqlalchemy (>= 0.7~), python-sqlalchemy (<< 0.8), python-migrate, python-passlib, python-lxml, python-iso8601, python-keystoneclient (>= 1:0.2), python-prettytable
+Filename: pool/main/k/keystone/python-keystone_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 133894
+MD5sum: 89792331836f95c84885bb9ae9778086
+SHA1: 21d0032f77609fe6a5292a9d750ec87d34c3390c
+Description: OpenStack identity service - Python library
+ Keystone is a proposed independent authentication service for OpenStack.
+ .
+ This initial proof of concept aims to address the current use cases in Swift
+ and Nova which are:
+ .
+ * REST-based, token auth for Swift
+ * many-to-many relationship between identity and tenant for Nova. Keystone
+ does authentication and stuff
+ .
+ This package contains the Python libraries.
+Python-Version: 2.7
+Original-Maintainer: Monty Taylor <mordred@inaugust.com>
+
+Package: keystone
+Priority: extra
+Section: python
+Installed-Size: 141
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Depends: python, debconf (>= 0.5) | debconf-2.0, upstart-job, python-keystone (= 2013.1+git201212181001~precise-0ubuntu1), adduser, ssl-cert (>= 1.0.12), dbconfig-common
+Filename: pool/main/k/keystone/keystone_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 29338
+MD5sum: 382de7230451d0b833216896ff27869f
+SHA1: f8746baca3cfa9357bcd620d007342dc300d8d9e
+Description: OpenStack identity service - Daemons
+ Keystone is a proposed independent authentication service for OpenStack.
+ .
+ This initial proof of concept aims to address the current use cases in Swift
+ and Nova which are:
+ .
+ * REST-based, token auth for Swift
+ * many-to-many relationship between identity and tenant for Nova. Keystone
+ does authentication and stuff
+ .
+ This package contains the daemons.
+Original-Maintainer: Monty Taylor <mordred@inaugust.com>
+
+Package: nova-compute-lxc
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2034
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Provides: nova-compute-hypervisor
+Depends: libvirt-bin, nova-compute (= 2013.1+git201212141401~precise-0ubuntu1), python-libvirt
+Conflicts: nova-compute-hypervisor
+Filename: pool/main/n/nova/nova-compute-lxc_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050718
+MD5sum: b72f95f60db03cc7d4440a5916cabae7
+SHA1: 0f9c961f2a10534cb6352871e1dc7b930ecffb28
+Description: OpenStack Compute - compute node (LXC)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using LXC.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-compute-uml
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2034
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Provides: nova-compute-hypervisor
+Depends: libvirt-bin, nova-compute (= 2013.1+git201212141401~precise-0ubuntu1), python-libvirt, user-mode-linux
+Conflicts: nova-compute-hypervisor
+Filename: pool/main/n/nova/nova-compute-uml_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050734
+MD5sum: 1f18641738713922179bc4467eb221f4
+SHA1: a0630ecaf3702c5fe01ef0a3ae85b829d61a43a6
+Description: OpenStack Compute - compute node (UserModeLinux)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using UserModeLinux.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-compute-xen
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2034
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Provides: nova-compute-hypervisor
+Depends: libvirt-bin, nova-compute (= 2013.1+git201212141401~precise-0ubuntu1), python-libvirt, xen-system-amd64 | xen-system-i386
+Conflicts: nova-compute-hypervisor
+Filename: pool/main/n/nova/nova-compute-xen_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050740
+MD5sum: a0639b77d6021fbf60ed37de798e7828
+SHA1: 0dc97b88504d0118fc00ca1e16daf05dab3d4a9d
+Description: OpenStack Compute - compute node (Xen)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using Xen.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-compute-kvm
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2034
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Provides: nova-compute-hypervisor
+Depends: kvm, libvirt-bin, nova-compute (= 2013.1+git201212141401~precise-0ubuntu1), python-libvirt
+Conflicts: nova-compute-hypervisor
+Filename: pool/main/n/nova/nova-compute-kvm_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050718
+MD5sum: da2012bef6c617bc1bb76fa2ec8bcbf7
+SHA1: d3ab8914a5e0cdf6d3f14d1603890df9512b639c
+Description: OpenStack Compute - compute node (KVM)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using kvm.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: python3-prettytable
+Source: prettytable
+Priority: optional
+Section: python
+Installed-Size: 87
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.6-1ubuntu1~cloud0
+Depends: python3 (>= 3.1.3-13~)
+Filename: pool/main/p/prettytable/python3-prettytable_0.6-1ubuntu1~cloud0_all.deb
+Size: 12054
+MD5sum: 8c1133ea5887f1b878f08ee7be262969
+SHA1: af240eea5f7e6ecd8e902932475d26dd111d4295
+Description: library to represent tabular data in visually appealing ASCII tables (Python3)
+ PrettyTable is a simple Python library designed to make it quick and
+ easy to represent tabular data in visually appealing ASCII tables. It
+ was inspired by the ASCII tables used in the PostgreSQL shell
+ psql. PrettyTable allows for selection of which columns are to be
+ printed, independent alignment of columns (left or right justified or
+ centred) and printing of "sub-tables" by specifying a row range.
+ .
+ This package contains the Python 3 version of prettytable.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: keystone-doc
+Source: keystone
+Priority: extra
+Section: doc
+Installed-Size: 2230
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Depends: libjs-jquery
+Filename: pool/main/k/keystone/keystone-doc_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 378054
+MD5sum: 071426c50300b38e15a98b7e6f4045ca
+SHA1: e91325b944a40bb45e7fc68b92d5dac61a06f422
+Description: OpenStack identity service - Documentation
+ Keystone is a proposed independent authentication service for OpenStack.
+ .
+ This initial proof of concept aims to address the current use cases in Swift
+ and Nova which are:
+ .
+ * REST-based, token auth for Swift
+ * many-to-many relationship between identity and tenant for Nova. Keystone
+ does authentication and stuff
+ .
+ This package contains the documentation.
+Original-Maintainer: Monty Taylor <mordred@inaugust.com>
+
+Package: python-django-openstack
+Source: horizon
+Priority: extra
+Section: net
+Installed-Size: 40
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171631~precise-0ubuntu1
+Depends: python-django-horizon (= 2013.1+git201212171631~precise-0ubuntu1)
+Filename: pool/main/h/horizon/python-django-openstack_2013.1+git201212171631~precise-0ubuntu1_all.deb
+Size: 15194
+MD5sum: ba0e34bddf693160b9612850a98aaa53
+SHA1: 4440ce311e1a0bfe9b6874ae4f8594f3a975e372
+Description: dummy transitonal package from python-django-openstack to python-django-horizon
+ This transitional package from the python-django-openstack to the python-django-horizon
+ package. Once this package and its dependencies are installed you can remove it.
+
+Package: openstack-dashboard
+Source: horizon
+Priority: extra
+Section: net
+Installed-Size: 4229
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171631~precise-0ubuntu1
+Recommends: openstack-dashboard-ubuntu-theme
+Depends: adduser, libapache2-mod-wsgi (>= 2.3), python-django-horizon (= 2013.1+git201212171631~precise-0ubuntu1), python (>= 2.7.1-0ubuntu2)
+Pre-Depends: dpkg (>= 1.15.7.2)
+Filename: pool/main/h/horizon/openstack-dashboard_2013.1+git201212171631~precise-0ubuntu1_all.deb
+Size: 805850
+MD5sum: 63a99976a7571a131e19a3131aa1bc4e
+SHA1: 67b77d662a325082026e9327ca69d08216fa165e
+Description: django web interface to Openstack
+ The OpenStack Dashboard is a reference implementation of a Django site that
+ uses the Django-Nova project to provide web based interactions with the
+ OpenStack Nova cloud controller.
+
+Package: ceph-common
+Source: ceph
+Priority: optional
+Section: admin
+Installed-Size: 9519
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: ceph-client-tools
+Suggests: ceph
+Depends: libc6 (>= 2.15), libedit2 (>= 2.11-20080614-1), libgcc1 (>= 1:4.1.1), libkeyutils1, libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), librados2, librbd1 (= 0.48.2-0ubuntu2~cloud0), libstdc++6 (>= 4.6), libuuid1 (>= 2.16)
+Conflicts: ceph-client-tools
+Filename: pool/main/c/ceph/ceph-common_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 3763100
+MD5sum: 92906aed46d4981053bfde001a222422
+SHA1: b3a7a8f3ca84d465a1b690597e2d9feab817f49e
+Description: common utilities to mount and interact with a ceph filesystem
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a collection
+ of common tools, including the mount utility, that allows one to mount the
+ ceph fs with the kernel client.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: ceph-common-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 118373
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: ceph-client-tools-dbg
+Depends: ceph-common (= 0.48.2-0ubuntu2~cloud0)
+Conflicts: ceph-client-tools-dbg
+Filename: pool/main/c/ceph/ceph-common-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 35212692
+MD5sum: 71b32ea9ed3eccf41e277d6ece73ccfd
+SHA1: 6d556f678da9aa127db4113f3a8a0ad53b667bfa
+Description: debugging symbols for ceph-common
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a collection
+ of common tools, including the mount utility, that allows one to mount the
+ ceph fs with the kernel client.
+ .
+ This package contains the debugging symbols for ceph-common.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: libcephfs1
+Source: ceph
+Priority: optional
+Section: libs
+Installed-Size: 3740
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: libceph, libceph1
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), libstdc++6 (>= 4.6), libuuid1 (>= 2.16)
+Conflicts: libceph, libceph1
+Filename: pool/main/c/ceph/libcephfs1_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 1313226
+MD5sum: 3d83ee48f33b5f20193867a5b92196df
+SHA1: 980824ccc1e42eeed8235329b0656750058b5cab
+Description: Ceph distributed file system client library
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a
+ shared library allowing applications to access a Ceph distributed
+ file system via a POSIX-like interface.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: libcephfs1-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 46510
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: libceph1-dbg
+Depends: libcephfs1 (= 0.48.2-0ubuntu2~cloud0)
+Conflicts: libceph1-dbg
+Filename: pool/main/c/ceph/libcephfs1-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 12293334
+MD5sum: b39247b9e9e98957158a525736949a12
+SHA1: dc9033b837b0c8018b56f0d51021b8a6a46e1f25
+Description: debugging symbols for libcephfs1
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a
+ shared library allowing applications to access a Ceph distributed
+ file system via a POSIX-like interface.
+ .
+ This package contains debugging symbols for libcephfs1.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: libcephfs-dev
+Source: ceph
+Priority: optional
+Section: libdevel
+Installed-Size: 126604
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: libceph-dev, libceph1-dev
+Depends: libcephfs1 (= 0.48.2-0ubuntu2~cloud0)
+Conflicts: libceph-dev, libceph1-dev
+Filename: pool/main/c/ceph/libcephfs-dev_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 23124860
+MD5sum: d73b32eb136f90d9058acabdc9be19bb
+SHA1: be1422fb979e06e895c9d892c58249c0effeaa69
+Description: Ceph distributed file system client library (development files)
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a
+ shared library allowing applications to access a Ceph distributed
+ file system via a POSIX-like interface.
+ .
+ This package contains development files needed for building applications that
+ link against libcephfs1.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python3-mock
+Source: python-mock
+Priority: extra
+Section: python
+Installed-Size: 133
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Architecture: all
+Version: 0.8.0-2ubuntu1~cloud0
+Suggests: python-mock-doc
+Depends: python3 (>= 3.1.3-13~)
+Filename: pool/main/p/python-mock/python3-mock_0.8.0-2ubuntu1~cloud0_all.deb
+Size: 25420
+MD5sum: 3100cd95e1878809f05575928de8978a
+SHA1: 2f358c48cc9b94bdd9fcf9f0c6957bdfa3a20a38
+Description: Mocking and Testing Library (Python3 version)
+ mock provides a core mock.Mock class that is intended to reduce the
+ need to create a host of trivial stubs throughout your test suite.
+ After performing an action, you can make assertions about which methods
+ / attributes were used and arguments they were called with. You can
+ also specify return values and set specific attributes in the normal
+ way.
+ .
+ This package contains the Python 3 version of the library.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: python-mock-doc
+Source: python-mock
+Priority: extra
+Section: doc
+Installed-Size: 910
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Architecture: all
+Version: 0.8.0-2ubuntu1~cloud0
+Depends: libjs-sphinxdoc (>= 1.0)
+Filename: pool/main/p/python-mock/python-mock-doc_0.8.0-2ubuntu1~cloud0_all.deb
+Size: 148478
+MD5sum: 99d51ee87b0caa21296144044d6a06bd
+SHA1: b8694022bfa7e2f4e3109b706da9e217376bd49c
+Description: Mocking and Testing Library (Documentation)
+ mock provides a core mock.Mock class that is intended to reduce the
+ need to create a host of trivial stubs throughout your test suite.
+ After performing an action, you can make assertions about which methods
+ / attributes were used and arguments they were called with. You can
+ also specify return values and set specific attributes in the normal
+ way.
+ .
+ This package contains the documentation.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: nova-console
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2058
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Recommends: nova-consoleauth (>= 2012.1~rc1-0ubuntu2)
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/n/nova/nova-console_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053652
+MD5sum: d8eb224472e10dcd6e08401f18953ada
+SHA1: 34e5c783c96866fe36d82262c2a40bb6970290bd
+Description: OpenStack Compute - Console
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the console server.  This enables the use of consoles
+ to be used along with XVP and XenServer.  It is a publically reachable
+ component which proxies access to VNCs running on compute nodes.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: python3-crypto
+Source: python-crypto
+Priority: optional
+Section: python
+Installed-Size: 1380
+Maintainer: Sebastian Ramacher <s.ramacher@gmx.at>
+Architecture: amd64
+Version: 2.6-2build3~ubuntu12.04.1~grizzly0
+Suggests: python3-crypto-dbg, python-crypto-doc
+Provides: python3.2-crypto
+Depends: python3 (>= 3.2), python3 (<< 3.3), libc6 (>= 2.14), libgmp10
+Filename: pool/main/p/python-crypto/python3-crypto_2.6-2build3~ubuntu12.04.1~grizzly0_amd64.deb
+Size: 378802
+MD5sum: e9bddaf64f8c501f9d756991cb05f456
+SHA1: 67eb0e9a455a7f11d9f8a47648e63b783b5f04f2
+Description: cryptographic algorithms and protocols for Python 3
+ A collection of cryptographic algorithms and protocols, implemented
+ for use from Python 3. Among the contents of the package:
+ .
+ * Hash functions: HMAC, MD2, MD4, MD5, RIPEMD160, SHA, SHA256.
+ * Block encryption algorithms: AES, ARC2, Blowfish, CAST, DES, Triple-DES.
+ * Stream encryption algorithms: ARC4, simple XOR.
+ * Public-key algorithms: RSA, DSA, ElGamal.
+ * Protocols: All-or-nothing transforms, chaffing/winnowing.
+ * Miscellaneous: RFC1751 module for converting 128-key keys
+ into a set of English words, primality testing, random number gereration.
+
+Package: python3-crypto-dbg
+Source: python-crypto
+Priority: extra
+Section: debug
+Installed-Size: 1288
+Maintainer: Sebastian Ramacher <s.ramacher@gmx.at>
+Architecture: amd64
+Version: 2.6-2build3~ubuntu12.04.1~grizzly0
+Provides: python3.2-crypto-dbg
+Depends: python3-crypto (= 2.6-2build3~ubuntu12.04.1~grizzly0), libc6 (>= 2.14), libgmp10, python3-dbg (>= 3.2), python3-dbg (<< 3.3)
+Filename: pool/main/p/python-crypto/python3-crypto-dbg_2.6-2build3~ubuntu12.04.1~grizzly0_amd64.deb
+Size: 597366
+MD5sum: 97f54af06920394923183e37727b51c2
+SHA1: 1048c03dd33408b3b1df37afebfbd1e94839a211
+Description: cryptographic algorithms and protocols for Python 3 (debug extension)
+ A collection of cryptographic algorithms and protocols, implemented
+ for use from Python 3.
+ .
+ This package contains the extensions built for the Python 3 debug interpreter.
+
+Package: libleveldb-dev
+Source: leveldb
+Priority: optional
+Section: libdevel
+Installed-Size: 759
+Maintainer: Alessio Treglia <alessio@debian.org>
+Architecture: amd64
+Version: 0+20120530.gitdd0d562-2~cloud0
+Suggests: leveldb-doc
+Depends: libleveldb1 (= 0+20120530.gitdd0d562-2~cloud0)
+Filename: pool/main/l/leveldb/libleveldb-dev_0+20120530.gitdd0d562-2~cloud0_amd64.deb
+Size: 206170
+MD5sum: 7220e531ea2a9dd29fea9ba8c35dd1fd
+SHA1: 68391469fdba18397c823454c06a20cfe5063ea9
+Description: fast key-value storage library (development files)
+ LevelDB is a fast key-value storage library written at Google that
+ provides an ordered mapping from string keys to string values.
+ .
+ This package provides the development files.
+Multi-Arch: same
+Original-Maintainer: Alessio Treglia <alessio@debian.org>
+
+Package: leveldb-doc
+Source: leveldb
+Priority: optional
+Section: doc
+Installed-Size: 103
+Maintainer: Alessio Treglia <alessio@debian.org>
+Architecture: all
+Version: 0+20120530.gitdd0d562-2~cloud0
+Filename: pool/main/l/leveldb/leveldb-doc_0+20120530.gitdd0d562-2~cloud0_all.deb
+Size: 34114
+MD5sum: 7a4090729c214d5d6ec5e24bdcebf1e1
+SHA1: 64f397b28fe505454478aadccb7b1a55a89f1ec9
+Description: LevelDB documentation
+ LevelDB is a fast key-value storage library written at Google that
+ provides an ordered mapping from string keys to string values.
+ .
+ This package provides the developers reference for LevelDB.
+Original-Maintainer: Alessio Treglia <alessio@debian.org>
+
+Package: python-keystoneclient
+Priority: extra
+Section: python
+Installed-Size: 437
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 1:0.2.0.28.gbbfcb6e+git201212171931~precise-0ubuntu1
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-httplib2, python-prettytable, python-simplejson, python-pkg-resources
+Filename: pool/main/p/python-keystoneclient/python-keystoneclient_0.2.0.28.gbbfcb6e+git201212171931~precise-0ubuntu1_all.deb
+Size: 78588
+MD5sum: 08c4fd3c904f19b3c6337ff49a252ae0
+SHA1: f9e8503440aa7b372e1415e879fcbe76ceddc0fc
+Description: Client library for OpenStack Identity API
+ This is a client for the OpenStack Identity API. There's a Python API
+ (the ``keystoneclient`` module), and a command-line script (``keystone``).
+
+Package: quantum-server
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 82
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Recommends: quantum-plugin-openvswitch
+Depends: adduser, quantum-common (= 2013.1+git201212181001~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/q/quantum/quantum-server_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 23446
+MD5sum: 2ec9cd0bab06a10f5450fb5fd80403b6
+SHA1: 43715eabdffb0a7f6cbe650521b0b361461e3155
+Description: Quantum is a virtual network service for Openstack - server
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the Quantum server
+
+Package: quantum-common
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 102
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Replaces: quantum-server (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Depends: adduser, python-quantum (= 2013.1+git201212181001~precise-0ubuntu1), python
+Breaks: quantum-server (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-common_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 27062
+MD5sum: 5bb33c03e0e835e8398e3a65cc2c7254
+SHA1: b65afb7cdafb79a41d241a6b992aee51151a1164
+Description: Quantum is a virtual network service for Openstack - common
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the common files.
+
+Package: quantum-plugin-cisco
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 63
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: quantum-plugin
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-cisco_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 22684
+MD5sum: b356c94f3e4404827233fa102bb48bfa
+SHA1: 726e5dafc6fa1005b3670b1b9a323d195efefcc0
+Description: Quantum is a virtual network service for Openstack - Cisco plugin
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the Cisco plugin.
+
+Package: quantum-plugin-openvswitch
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 65
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: quantum-plugin
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-openvswitch_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 23212
+MD5sum: 9ee74f6c54142d3bf86d870409524b01
+SHA1: 806aed19d6a2c304f41e9d9b116e8ad072be9188
+Description: Quantum is a virtual network service for Openstack - Open vSwitch plugin
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the Open vSwitch plugin.
+
+Package: python-quantum
+Source: quantum
+Priority: optional
+Section: python
+Installed-Size: 3183
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: python2.7-quantum
+Depends: python-amqplib, python-anyjson, python-configobj, python-eventlet, python-gflags, python-httplib2, python-iso8601, python-keystone, python-kombu, python-lxml, python-netaddr, python-paste, python-pastedeploy, python-pyudev, python-quantumclient (>= 1:0.1.0.1-0ubuntu1), python-routes, python-simplejson, python-sqlalchemy (>= 0.7~), python-webob, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-greenlet, python-sqlalchemy (<< 0.8), python-keystoneclient
+Filename: pool/main/q/quantum/python-quantum_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 478200
+MD5sum: 6a771b19e0763253fdbfcaab68a100f2
+SHA1: 82a6febe9f9a4c31848141cfb8e7435a10466a76
+Description: Quantum is a virutal network service for Openstack - Python library
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the Python library.
+Python-Version: 2.7
+
+Package: python-django-horizon
+Source: horizon
+Priority: extra
+Section: python
+Installed-Size: 1767
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171631~precise-0ubuntu1
+Recommends: memcached
+Depends: python-cloudfiles, python-django (>= 1.4), python-compressor, python-cinderclient, python-glanceclient, python-keystoneclient, python-lockfile, python-memcache, python-netaddr, python-novaclient, python-openstack-auth, python-swiftclient, python-tz, python-quantumclient, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/h/horizon/python-django-horizon_2013.1+git201212171631~precise-0ubuntu1_all.deb
+Size: 248538
+MD5sum: c9bc6d7cee9e3535613aaeddb7f540a7
+SHA1: cce67c0a6ef27caf928dbf63dee2d28aa87350d6
+Description: Django module providing web based interaction with OpenStack
+ The Django-Nova project is a Django module that is used to provide web based
+ interactions with the OpenStack Nova cloud controller.
+
+Package: glance-common
+Source: glance
+Priority: extra
+Section: python
+Installed-Size: 109
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171831~precise-0ubuntu1
+Replaces: glance (<= 2011.3-0ubuntu4.1)
+Depends: adduser, python-glance (= 2013.1+git201212171831~precise-0ubuntu1), python
+Breaks: glance (<= 2011.3-0ubuntu4.1)
+Filename: pool/main/g/glance/glance-common_2013.1+git201212171831~precise-0ubuntu1_all.deb
+Size: 26984
+MD5sum: 4ea31791e71b642d38d44b60a0d67c8a
+SHA1: b86d7db9d3803bb21e256a8262e4a928d064c4ca
+Description: OpenStack Image Registry and Delivery Service - Common
+ The Glance project provides an image registration, discovery and
+ delivery service. These services may be used as stand-along services, and
+ they may also be used by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package contains the glance common.
+
+Package: glance-api
+Source: glance
+Priority: extra
+Section: python
+Installed-Size: 161
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171831~precise-0ubuntu1
+Recommends: python-glanceclient
+Replaces: glance (<< 2012.1~e1~20110919.1021-0ubuntu2)
+Depends: glance-common (= 2013.1+git201212171831~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/g/glance/glance-api_2013.1+git201212171831~precise-0ubuntu1_all.deb
+Size: 40130
+MD5sum: e95656cb98dc48b582b0dcf0f39c3d59
+SHA1: 580025aaf8c448da6383d20728f8d79093c06c93
+Description: OpenStack Image Registry and Delivery Service - API
+ The Glance project provides an image registration, discovery and
+ delivery service. These services may be used as stand-along services, and
+ they may also be used by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package contains the glance API server.
+
+Package: glance-registry
+Source: glance
+Priority: extra
+Section: python
+Installed-Size: 108
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171831~precise-0ubuntu1
+Recommends: python-glanceclient
+Replaces: glance (<< 2012.1~e1~20110919.1021-0ubuntu2)
+Depends: glance-common (= 2013.1+git201212171831~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/g/glance/glance-registry_2013.1+git201212171831~precise-0ubuntu1_all.deb
+Size: 29858
+MD5sum: 9201945a2a862972581a939ee9dc516e
+SHA1: 71f6569ad7ed4592608412d322d7560358bb93ae
+Description: OpenStack Image Registry and Delivery Service - Registry
+ The Glance project provides an image registration, discovery and
+ delivery service. These services may be used as stand-along services, and
+ they may also be used by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package contains the glance registry server.
+
+Package: ceph-resource-agents
+Source: ceph
+Priority: extra
+Section: admin
+Installed-Size: 61
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Recommends: pacemaker
+Depends: ceph (= 0.48.2-0ubuntu2~cloud0), resource-agents
+Filename: pool/main/c/ceph/ceph-resource-agents_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 9042
+MD5sum: 7c489ebdb18b297bb4bb273fe3653744
+SHA1: 526b5fc2dcdad1ef7f53e9a0c528042e653e4080
+Description: OCF-compliant resource agents for Ceph
+ Ceph is a distributed storage and network file system designed to provide
+ excellent performance, reliability, and scalability.
+ .
+ This package contains the resource agents (RAs) which integrate
+ Ceph with OCF-compliant cluster resource managers,
+ such as Pacemaker.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: nova-cert
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2058
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/n/nova/nova-cert_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053514
+MD5sum: e24b82a67f1487c744281a8981844123
+SHA1: e44d10883d1d73a064b604985ae3febad5ed8e13
+Description: OpenStack Compute - certificate management
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This is the Nova certificate management component.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: python-quantumclient
+Priority: extra
+Section: python
+Installed-Size: 357
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1:2.1.18.gc86a798+git201212170601~precise-0ubuntu1
+Replaces: quantum-client
+Depends: python-cliff, python-httplib2, python-prettytable, python-pyparsing, python-simplejson, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/p/python-quantumclient/python-quantumclient_2.1.18.gc86a798+git201212170601~precise-0ubuntu1_all.deb
+Size: 43604
+MD5sum: 766f3233344715e9b9017ea0aa27cfe2
+SHA1: 4a8c608470dcb4b0d4a2f2c9f4064b41e4160465
+Description: client - Quantum is a virtual network service for Openstack
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the quantum client.
+Original-Maintainer: Chuck Short <zulcss@buntu.com>
+
+Package: nova-compute-qemu
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2034
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Provides: nova-compute-hypervisor
+Depends: libvirt-bin, nova-compute (= 2013.1+git201212141401~precise-0ubuntu1), python-libvirt, qemu
+Conflicts: nova-compute-hypervisor
+Filename: pool/main/n/nova/nova-compute-qemu_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050730
+MD5sum: 8c3843983f6ea566161a6f0c9dfe859f
+SHA1: a33fc641afb943bdf852c108ea88d1cfd87a2de7
+Description: OpenStack Compute - compute node (QEmu)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using QEmu.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: ceph-mds
+Source: ceph
+Priority: optional
+Section: admin
+Installed-Size: 4977
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:4.1.1), libgoogle-perftools0, libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), libstdc++6 (>= 4.6), libuuid1 (>= 2.16), ceph, ceph-fs-common
+Filename: pool/main/c/ceph/ceph-mds_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 2036774
+MD5sum: 60a5aca6ccf45cce180f8a12064d9a18
+SHA1: 15de30e442385119905529cb1755f57c68ec1226
+Description: distributed filesystem service
+ Ceph is a distributed storage and network file system designed to provide
+ excellent performance, reliability, and scalability.
+ .
+ This package contains the ceph-mds daemon, used for serving the distributed
+ ceph filesystem on top of the distributed storage cluster.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: ceph-mds-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 75319
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: ceph-mds (= 0.48.2-0ubuntu2~cloud0)
+Filename: pool/main/c/ceph/ceph-mds-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 24398720
+MD5sum: f3589c4841a47dba114f4ba7f231db53
+SHA1: d0f8b7c1b2f7edd9e3cde362205e841c4fd88c67
+Description: debugging symbols for ceph
+ Ceph is a distributed storage and network file system designed to provide
+ excellent performance, reliability, and scalability.
+ .
+ This package contains the debugging symbols for ceph-mds
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: ceph-fs-common
+Source: ceph
+Priority: optional
+Section: admin
+Installed-Size: 91
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: ceph-client-tools
+Suggests: ceph
+Depends: libc6 (>= 2.14), libkeyutils1, libstdc++6 (>= 4.4.0), ceph-common (= 0.48.2-0ubuntu2~cloud0)
+Conflicts: ceph-client-tools
+Filename: pool/main/c/ceph/ceph-fs-common_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 23146
+MD5sum: 6558292a6fd771d2cb1426813cbc0500
+SHA1: f0a6e5866e5035d6a2591355b076f98fa1721af5
+Description: common utilities to mount and interact with a ceph filesystem
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a collection
+ of common tools, including the mount utility, that allows one to mount the
+ ceph fs with the kernel client.
+ .
+ This package contains common utilities for the Ceph filesystem.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: ceph-fs-common-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 157
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Replaces: ceph-client-tools-dbg
+Depends: ceph-fs-common (= 0.48.2-0ubuntu2~cloud0)
+Conflicts: ceph-client-tools-dbg
+Filename: pool/main/c/ceph/ceph-fs-common-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 39028
+MD5sum: dc203f6904c7ca062657f06bdf4669d0
+SHA1: c09fcf2def29020701b21e04531efd31c366421b
+Description: debugging symbols for ceph-fs-common
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a collection
+ of common tools, including the mount utility, that allows one to mount the
+ ceph fs with the kernel client.
+ .
+ This package contains the debugging symbols for ceph-fs-common.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: nova-api-metadata
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2066
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Breaks: nova-api
+Filename: pool/main/n/nova/nova-api-metadata_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053752
+MD5sum: 89acce94b36763e03450ab31b2ee28c3
+SHA1: 12a77bbb5148c52f815aa94eafdde2161bb6f828
+Description: OpenStack Compute - metadata API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ This package provides the metadata API backend for guest VMs.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-api-os-compute
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2058
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Breaks: nova-api
+Filename: pool/main/n/nova/nova-api-os-compute_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053380
+MD5sum: 9391672a2e3b85e052f753dec3188d71
+SHA1: 00042db324f01f94e52b82fe8bd94cc49ee9c7da
+Description: OpenStack Compute - OpenStack Compute API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ This package provides the OpenStack Compute API frontend.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-api-os-volume
+Source: nova
+Priority: extra
+Section: oldlibs
+Installed-Size: 2026
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: cinder-api
+Filename: pool/main/n/nova/nova-api-os-volume_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050342
+MD5sum: d03ecb6e00e260d8314d446953de4533
+SHA1: 07660e7198b9667374be0a2288bbd3ec30366535
+Description: OpenStack Compute - OpenStack Volume API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ This is a dummy transitional package that can be removed after upgrade.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-api-ec2
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2057
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Breaks: nova-api
+Filename: pool/main/n/nova/nova-api-ec2_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053458
+MD5sum: e3224898ce93d53118e1d9386b47559f
+SHA1: 13ec94c56edb2c8564ace7c6106cfdce33a516e2
+Description: OpenStack Compute - EC2 API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the EC2 API.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-compute-xcp
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2026
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Provides: nova-compute-hypervisor
+Depends: nova-compute (= 2013.1+git201212141401~precise-0ubuntu1), python-xenapi
+Conflicts: nova-compute-hypervisor
+Filename: pool/main/n/nova/nova-compute-xcp_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2050498
+MD5sum: 9158814e299c25dc38a6f5035320f769
+SHA1: 515b21e2007f94842967061f53e209df08e4050f
+Description: OpenStack Compute - compute node (XCP)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this dependency package on your compute nodes if you're using xcp
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-xcp-plugins
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2099
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: xcp-xapi, python (>= 2.7.1-0ubuntu2)
+Filename: pool/main/n/nova/nova-xcp-plugins_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2069602
+MD5sum: 562ad892e8d05fbd754d76263863c772
+SHA1: 2edd11b15b7d12fc212589a43b94a454d5d24a67
+Description: OpenStack Compute plugin for the Xen Cloud Platform
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package is to be installed on the server where you have installed your
+ master Xen API server (see the xcp-xapi package), so that nova-compute can
+ remotely control your XCP nodes and start VM instances.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-xcp-network
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2095
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: arptables, ebtables, iproute, lsb-base (>= 3.0.6), nova-xcp-plugins (= 2013.1+git201212141401~precise-0ubuntu1), openvswitch-switch, xcp-xapi, python (>= 2.7.1-0ubuntu2)
+Filename: pool/main/n/nova/nova-xcp-network_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2058226
+MD5sum: dc862ce72c835deb43da8f1ed2e520a9
+SHA1: 908fa1f4b3f35d4faa9892aebe0982f7b178ee87
+Description: OpenStack Compute network plugin for the Xen Cloud Platform
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package is to be installed on the server where you have installed your
+ master Xen API server (see the xcp-xapi package), so that nova can remotely
+ configure the network of your XCP servers.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: quantum-plugin-nicira
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 63
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: quantum-plugin
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-nicira_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 22654
+MD5sum: b704ac8607980e6827eafcb20618ca73
+SHA1: 8de8dbde5d85a97ff27155c5bacc3a6bf50af3d4
+Description: Quantum is a virtual network service for Openstack - Nicira plugin
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the Nicira plugin
+
+Package: quantum-plugin-ryu
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 62
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: quantum-plugin
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-ryu_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 22024
+MD5sum: e62133f18163abe96811e140fa9e229a
+SHA1: 2304a64bef63507d40f257e322716a930a98048a
+Description: Quantum is a virtual network service for Openstack - RYU plugin
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the RYU plugin.
+
+Package: glance-client
+Source: glance
+Priority: extra
+Section: python
+Installed-Size: 41
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201211252201~precise-0ubuntu1
+Replaces: glance (<< 2012.1~e1~20110919.1021-0ubuntu2)
+Depends: glance-common (= 2013.1+git201211252201~precise-0ubuntu1)
+Filename: pool/main/g/glance/glance-client_2013.1+git201211252201~precise-0ubuntu1_all.deb
+Size: 17824
+MD5sum: 4b896ad69806f1ba8e5d23a78f6a7572
+SHA1: 1cec69d2bf3f3ca641df96744f7dc34ac1738d3c
+Description: OpenStack Image Registry and Delivery Service - client
+ The Glance project provides an image registration, discovery and
+ delivery service. These services may be used as stand-along services, and
+ they may also be used by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package contains the glance client.
+
+Package: nova-consoleauth
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2058
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Replaces: nova-console (<< 2012.1~rc1-0ubuntu2)
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Breaks: nova-console (<< 2012.1~rc1-0ubuntu2)
+Filename: pool/main/n/nova/nova-consoleauth_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053540
+MD5sum: fb052b91c198ef01a8afa821a835b75e
+SHA1: dafe7cca4b847d12e7763b30f1887e706c65af0f
+Description: OpenStack Compute - Console Authenticator
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the authentication service for nova-console.  It grants
+ user requests for console access based on tokens in the identity service and
+ allows access to virtual consoles via a browser.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: openstack-dashboard-ubuntu-theme
+Source: horizon
+Priority: extra
+Section: net
+Installed-Size: 215
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212171631~precise-0ubuntu1
+Depends: openstack-dashboard (= 2013.1+git201212171631~precise-0ubuntu1)
+Filename: pool/main/h/horizon/openstack-dashboard-ubuntu-theme_2013.1+git201212171631~precise-0ubuntu1_all.deb
+Size: 47642
+MD5sum: 43417f23f79cc083af5e01b6ef40ebfe
+SHA1: 2179e45391b46b458cb1f6aae5de986286b4cfac
+Description: Ubuntu theme for the Openstack dashboard
+ A custom Ubuntu theme for Horizon.  This package is optional and overrides the
+ default theme and branding.
+
+Package: quantum-plugin-openvswitch-agent
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 84
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Replaces: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Depends: openvswitch-switch, quantum-common (= 2013.1+git201212181001~precise-0ubuntu1), quantum-plugin-openvswitch, upstart-job, python
+Breaks: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-openvswitch-agent_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 23278
+MD5sum: 334154997a72b0b28803083d0d952d24
+SHA1: a979b32af5ebcf26bb3bd7ce419d2dd8fb94c234
+Description: Quantum is a virtual network service for Openstack - Open vSwitch plugin agent
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the Open vSwitch plugin agent.
+
+Package: quantum-plugin-linuxbridge-agent
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 84
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Replaces: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Depends: bridge-utils, quantum-common (= 2013.1+git201212181001~precise-0ubuntu1), quantum-plugin-linuxbridge, upstart-job, python
+Breaks: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-linuxbridge-agent_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 23210
+MD5sum: c611219dd7d57fd98954da98c4d683ce
+SHA1: 949afd952d41e861ff86e1439eacd3663e90b1dd
+Description: Quantum is a virtual network service for Openstack - linuxbridge plugin agent
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the linuxbridge plugin agent.
+
+Package: quantum-plugin-ryu-agent
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 84
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Replaces: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1), quantum-server (<< 2012.1-0ubuntu3)
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1), quantum-plugin-ryu, upstart-job, python
+Breaks: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1), quantum-server (<< 2012.1-0ubuntu3)
+Filename: pool/main/q/quantum/quantum-plugin-ryu-agent_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 23258
+MD5sum: 8e8e55c8911d1c885c519b30d45784ff
+SHA1: 428c74a9f9a2e9c121b68dd2f53020702bc032a4
+Description: Quantum is a virtual network service for Openstack - RYU plugin agent
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the RYU plugin agent.
+
+Package: python3-requests
+Source: requests
+Priority: optional
+Section: python
+Installed-Size: 393
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.14.2-0ubuntu1~ubuntu12.04.1~grizzly0
+Depends: python3 (>= 3.1.3-13~), ca-certificates, python3-urllib3, python3-six, python3-chardet
+Filename: pool/main/r/requests/python3-requests_0.14.2-0ubuntu1~ubuntu12.04.1~grizzly0_all.deb
+Size: 165118
+MD5sum: eaf7e9aeeff0dbd95552a3fb391ce8a4
+SHA1: f7897956058cabe9bfbfcdd3dfe3b0462de2ff43
+Description: elegant and simple HTTP library for Python3, built for human beings
+ Requests allow you to send HTTP/1.1 requests. You can add headers, form data,
+ multipart files, and parameters with simple Python dictionaries, and access the
+ response data in the same way. It's powered by httplib and urllib3, but it does
+ all the hard work and crazy hacks for you.
+ .
+ Features
+ .
+ - International Domains and URLs
+ - Keep-Alive & Connection Pooling
+ - Sessions with Cookie Persistence
+ - Browser-style SSL Verification
+ - Basic/Digest Authentication
+ - Elegant Key/Value Cookies
+ - Automatic Decompression
+ - Unicode Response Bodies
+ - Multipart File Uploads
+ - Connection Timeouts
+ .
+ This package contains the Python 3 version of the library.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: python-urllib3
+Priority: optional
+Section: python
+Installed-Size: 157
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.5-0ubuntu1~ubuntu12.04.1~grizzly0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-six
+Filename: pool/main/p/python-urllib3/python-urllib3_1.5-0ubuntu1~ubuntu12.04.1~grizzly0_all.deb
+Size: 31492
+MD5sum: dfae33e638391b5b91fcb110bd459487
+SHA1: ee0fc17d8044562f2fad9cfe53ab9464f1aa6865
+Description: HTTP library with thread-safe connection pooling for Python
+ urllib3 supports features left out of urllib and urllib2 libraries.
+ .
+ - Re-use the same socket connection for multiple requests (HTTPConnectionPool
+ and HTTPSConnectionPool) (with optional client-side certificate
+ verification).
+ - File posting (encode_multipart_formdata).
+ - Built-in redirection and retries (optional).
+ - Supports gzip and deflate decoding.
+ - Thread-safe and sanity-safe.
+ - Small and easy to understand codebase perfect for extending and
+ building upon.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: python3-urllib3
+Source: python-urllib3
+Priority: optional
+Section: python
+Installed-Size: 131
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.5-0ubuntu1~ubuntu12.04.1~grizzly0
+Depends: python3 (>= 3.1.3-13~), python3-six
+Filename: pool/main/p/python-urllib3/python3-urllib3_1.5-0ubuntu1~ubuntu12.04.1~grizzly0_all.deb
+Size: 30536
+MD5sum: dfcaa66e10df20bd270e942484cc3685
+SHA1: cd5c7f9a4e372d0f87b1270295f406aeaa6e16f4
+Description: HTTP library with thread-safe connection pooling for Python3
+ urllib3 supports features left out of urllib and urllib2 libraries.
+ .
+ - Re-use the same socket connection for multiple requests (HTTPConnectionPool
+ and HTTPSConnectionPool) (with optional client-side certificate
+ verification).
+ - File posting (encode_multipart_formdata).
+ - Built-in redirection and retries (optional).
+ - Supports gzip and deflate decoding.
+ - Thread-safe and sanity-safe.
+ - Small and easy to understand codebase perfect for extending and
+ building upon.
+ .
+ This package contains the Python 3 version of the library.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: libleveldb1
+Source: leveldb
+Priority: optional
+Section: libs
+Installed-Size: 335
+Maintainer: Alessio Treglia <alessio@debian.org>
+Architecture: amd64
+Version: 0+20120530.gitdd0d562-2~cloud0
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), libsnappy1, libstdc++6 (>= 4.1.1)
+Pre-Depends: multiarch-support
+Filename: pool/main/l/leveldb/libleveldb1_0+20120530.gitdd0d562-2~cloud0_amd64.deb
+Size: 139346
+MD5sum: bacd184f2c30d686a1258bac6a637029
+SHA1: ca67c20a6faed2c82f693e2c48f16ef678431d1e
+Description: fast key-value storage library
+ LevelDB is a fast key-value storage library written at Google that
+ provides an ordered mapping from string keys to string values.
+ .
+ Features:
+ * Keys and values are arbitrary byte arrays.
+ * Data is stored sorted by key.
+ * Callers can provide a custom comparison function to override
+ the sort order.
+ * The basic operations are Put(key,value), Get(key), Delete(key).
+ * Multiple changes can be made in one atomic batch.
+ * Users can create a transient snapshot to get a consistent view of
+ data.
+ * Forward and backward iteration is supported over the data.
+ * Data is automatically compressed using the Snappy compression
+ library.
+ * External activity (file system operations etc.) is relayed through
+ a virtual interface so users can customize the operating system
+ interactions.
+ * Detailed documentation about how to use the library is included with
+ the source code.
+ .
+ Limitations:
+ * This is not a SQL database. It does not have a relational data model,
+ it does not support SQL queries, and it has no support for indexes.
+ * Only a single process (possibly multi-threaded) can access a
+ particular database at a time.
+ * There is no client-server support builtin to the library.
+ An application that needs such support will have to wrap their own
+ server around the library.
+ .
+ This package provides the shared library.
+Multi-Arch: same
+Original-Maintainer: Alessio Treglia <alessio@debian.org>
+
+Package: python-jsonschema
+Priority: optional
+Section: python
+Installed-Size: 59
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.2-1ubuntu1~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/p/python-jsonschema/python-jsonschema_0.2-1ubuntu1~cloud0_all.deb
+Size: 7588
+MD5sum: e2459d368060acb68f7019498c3fddb5
+SHA1: fb905d8d6c8053bb5aaf9cf838199baf9ef7a0a6
+Description: An(other) implementation of JSON Schema (Draft 3) for Python
+ JSON Schema is a specification for a JSON-based format for defining
+ the structure of JSON data. JSON Schema provides a contract for what
+ JSON data is required for a given application and how it can be
+ modified, much like what XML Schema provides for XML. JSON Schema is
+ intended to provide validation, documentation, and interaction control
+ of JSON data
+Original-Maintainer: Ghe Rivero <ghe@debian.org>
+
+Package: rest-bench
+Source: ceph
+Priority: optional
+Section: admin
+Installed-Size: 563
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:4.1.1), libnspr4 (>= 1.8.0.10), libnss3 (>= 3.12.0~1.9b1), libs3-2, libstdc++6 (>= 4.6), libuuid1 (>= 2.16), ceph-common, xml2, curl
+Filename: pool/main/c/ceph/rest-bench_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 224760
+MD5sum: c7289f1f839993113bba6bba434006c5
+SHA1: d03006b5038faafda337c436eba88db1353ddd0a
+Description: RESTful bencher that can be used to benchmark radosgw performance.
+ Simple tool to benchmark radosgw (or S3) (based on 'rados-bench' command).
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: rest-bench-dbg
+Source: ceph
+Priority: extra
+Section: debug
+Installed-Size: 5626
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 0.48.2-0ubuntu2~cloud0
+Depends: ceph-common, xml2, curl
+Filename: pool/main/c/ceph/rest-bench-dbg_0.48.2-0ubuntu2~cloud0_amd64.deb
+Size: 1796546
+MD5sum: e444d3addee94454d44802197a71beb4
+SHA1: e8ddbabb54f203b5d95c2f1341a76a2ff73f5c30
+Description: RESTful bencher that can be used to benchmark radosgw performance.
+ Simple tool to benchmark radosgw (or S3) (based on 'rados-bench' command).
+ .
+ This package contains the debugging symbols for rest-bench.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python-oauthlib
+Priority: optional
+Section: python
+Installed-Size: 257
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.3.4-0ubuntu1~ubuntu12.04.1~grizzly0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-crypto
+Filename: pool/main/p/python-oauthlib/python-oauthlib_0.3.4-0ubuntu1~ubuntu12.04.1~grizzly0_all.deb
+Size: 43578
+MD5sum: f0b86a63c8f9c42d6d62047cc01ed6fc
+SHA1: 5dab8019e2557c66549eb61b95c3de9b60df3a36
+Description: generic, spec-compliant implementation of OAuth for Python 2
+ OAuthLib is a generic utility which implements the logic of OAuth without
+ assuming a specific HTTP request object. It can be used to graft OAuth support
+ onto HTTP libraries.
+ .
+ OAuth1 and OAuth2 are supported.
+ .
+ This package provides the Python 2 version of the library.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: python-swiftclient
+Priority: extra
+Section: python
+Installed-Size: 198
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1:1.2.0.25.g7df9cad+git201212090431~precise-0ubuntu1
+Replaces: swift (<< 1.7.4-0ubuntu2)
+Depends: python-eventlet, python-httplib2, python-keystoneclient, python-setuptools, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-simplejson
+Breaks: swift (<< 1.7.4-0ubuntu2)
+Filename: pool/main/p/python-swiftclient/python-swiftclient_1.2.0.25.g7df9cad+git201212090431~precise-0ubuntu1_all.deb
+Size: 31620
+MD5sum: 143ee0df4fdc050aef788269c242e866
+SHA1: ffaaf3bee1622eeede38117cb338c7fbf39f1d1f
+Description: Client libary for Openstack Swift API.
+ This is a client for the OpenStack Swift API. There's a Python API
+ (the ``swiftclient`` module), and a command-line script (``swift``).
+Original-Maintainer: Adam Gandelman <adamg@canonical.com>
+
+Package: libs3-2
+Source: libs3
+Priority: extra
+Section: net
+Installed-Size: 143
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+Architecture: amd64
+Version: 2.0-2~cloud0
+Depends: libc6 (>= 2.14), libcurl3-gnutls (>= 7.16.2-1), libxml2 (>= 2.7.4)
+Filename: pool/main/libs/libs3/libs3-2_2.0-2~cloud0_amd64.deb
+Size: 51264
+MD5sum: c721ffc161dc819173dbcbd032584060
+SHA1: 2784a278fd101bc3988b0467e8e54ff19089bcac
+Description: C Library and Tools for Amazon S3 Access
+ This package includes the libs3 shared object library, needed to run
+ applications compiled against libs3, and additionally contains the s3
+ utility for accessing Amazon S3.
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+
+Package: python-glanceclient
+Priority: extra
+Section: python
+Installed-Size: 269
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 1:0.7.0+git201212111931~precise-0ubuntu1
+Replaces: glance-client
+Depends: python-httplib2, python-keystoneclient, python-openssl, python-prettytable (>= 0.6), python-setuptools, python-warlock, python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Breaks: glance-client
+Filename: pool/main/p/python-glanceclient/python-glanceclient_0.7.0+git201212111931~precise-0ubuntu1_all.deb
+Size: 71008
+MD5sum: 1e9bcc3ba27dddecf9776925e940cfdf
+SHA1: 88e1ddc7dcf69052c78d72c3b4d053feb87b7ca5
+Description: Client library for Openstack glance server.
+ This is a client for the Glance which uses the OpenStack Image API. There's a
+ Python API (the ``glanceclient`` module), and a command-line script
+ (``glance``).
+
+Package: quantum-plugin-linuxbridge
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 63
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: quantum-plugin
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-linuxbridge_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 22420
+MD5sum: b46375a72aad77e05bc7c7f7102854aa
+SHA1: 8abcb2675ff2773209314db59939454759721561
+Description: Quantum is a virtual network service for Openstack - linuxbridge plugin
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the linuxbridge plugin.
+
+Package: python-cinderclient
+Priority: optional
+Section: python
+Installed-Size: 241
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 1:1.0.1.4.gd360353+git201212171631~precise-0ubuntu1
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-httplib2, python-prettytable, python-simplejson
+Filename: pool/main/p/python-cinderclient/python-cinderclient_1.0.1.4.gd360353+git201212171631~precise-0ubuntu1_all.deb
+Size: 52412
+MD5sum: a4956bd2fd0bdc6fb82e09cd2479fe4b
+SHA1: 8dd003e11fa2f2b30bd9ccde3a7dd94de6759e2e
+Description: python bindings to the OpenStack Volume API
+ This is a client for the OpenStack Volume API. There's a Python API (the
+ ``cinderclient`` module), and a command-line script (``cinder``). Each
+ implements 100% of the OpenStack Volume API.
+
+Package: python-setuptools-git
+Priority: optional
+Section: python
+Installed-Size: 55
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 0.4.2-0ubuntu3~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-setuptools, git
+Filename: pool/main/p/python-setuptools-git/python-setuptools-git_0.4.2-0ubuntu3~cloud0_all.deb
+Size: 6426
+MD5sum: a23e838621fc0f24abfa9623959816ea
+SHA1: 970208d3ed1193341c41ab34d9d986d21466f4d5
+Description: plugin for setuptools that enables git integration
+ This is a plugin for setup tools that enables Git integration.  Once
+ installed, Setuptools can be told to include in a module distribution
+ all the files tracked by git.  This is an alternative to explicit
+ inclusion specifications with MANIFEST.in.
+ .
+ This package was formerly known as gitlsfiles.  The name change is the
+ result of an effort by the setuptools plugin developers to provide a
+ uniform naming convention.
+
+Package: python-cinder
+Source: cinder
+Priority: extra
+Section: python
+Installed-Size: 6602
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212162331~precise-0ubuntu1
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-sqlalchemy (>= 0.7~), python-sqlalchemy (<< 0.8), python-amqplib, python-anyjson, python-eventlet, python-kombu, python-lockfile, python-lxml, python-routes, python-webob, python-greenlet, python-pastedeploy, python-paste, python-migrate, python-suds, python-paramiko, python-iso8601, python-glanceclient, python-keystoneclient, python-cheetah, python-daemon, python-netaddr, python-glance
+Filename: pool/main/c/cinder/python-cinder_2013.1+git201212162331~precise-0ubuntu1_all.deb
+Size: 1157002
+MD5sum: 807bb9caac823426f2ee95d5ee61d3dd
+SHA1: cb050dc400776e2d840188c36a4f0c71a3b5605a
+Description: Cinder Python libraries
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ Cinder is the OpenStack Block storage service.
+ .
+ This package contains the Python library for Cinder.
+
+Package: cinder-common
+Source: cinder
+Priority: extra
+Section: net
+Installed-Size: 126
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212162331~precise-0ubuntu1
+Depends: python-cinder (= 2013.1+git201212162331~precise-0ubuntu1), python, adduser
+Filename: pool/main/c/cinder/cinder-common_2013.1+git201212162331~precise-0ubuntu1_all.deb
+Size: 27294
+MD5sum: 78391860b60a46739ad57da180e90759
+SHA1: a7ccb7461bd8f24824fec08a09a2644b8d285fc4
+Description: Cinder storage service - common files
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ Cinder is the OpenStack Block storage service.
+ .
+ This package contains commons components for Cinder.
+
+Package: cinder-api
+Source: cinder
+Priority: extra
+Section: net
+Installed-Size: 69
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212162331~precise-0ubuntu1
+Depends: cinder-common (= 2013.1+git201212162331~precise-0ubuntu1), python, upstart-job
+Filename: pool/main/c/cinder/cinder-api_2013.1+git201212162331~precise-0ubuntu1_all.deb
+Size: 16502
+MD5sum: 68bba1140631a6535d64938122c9b409
+SHA1: 6481c246c8af5ee5da20b93ccf4eda245a9fa224
+Description: Cinder storage service - API server
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ Cinder is the OpenStack Block storage service.
+ .
+ This package contains the Cinder API server.
+
+Package: cinder-scheduler
+Source: cinder
+Priority: extra
+Section: net
+Installed-Size: 70
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212162331~precise-0ubuntu1
+Depends: cinder-common (= 2013.1+git201212162331~precise-0ubuntu1), python, upstart-job
+Filename: pool/main/c/cinder/cinder-scheduler_2013.1+git201212162331~precise-0ubuntu1_all.deb
+Size: 16554
+MD5sum: 4ccab16e732a6c472f136291dbb07475
+SHA1: b158d33661e0d6c1a22f2849e5c1a3edc5315b03
+Description: Cinder storage service - Scheduler server
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ Cinder is the OpenStack Block storage service.
+ .
+ This package contains the Cinder Scheduler server.
+
+Package: cinder-volume
+Source: cinder
+Priority: extra
+Section: net
+Installed-Size: 104
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212162331~precise-0ubuntu1
+Replaces: cinder-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Suggests: ceph-common
+Depends: cinder-common (= 2013.1+git201212162331~precise-0ubuntu1), lvm2, tgt, python, upstart-job
+Breaks: cinder-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Filename: pool/main/c/cinder/cinder-volume_2013.1+git201212162331~precise-0ubuntu1_all.deb
+Size: 17568
+MD5sum: e08b5a7401746a45e29827821cc05330
+SHA1: cd5c362f3c5f25e59f698928070363a8436096cd
+Description: Cinder storage service - Volume server
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ Cinder is the OpenStack Block storage service.
+ .
+ This package contains the Cinder Volume server.
+
+Package: python-warlock
+Priority: optional
+Section: python
+Installed-Size: 62
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 0.1.0-0ubuntu1~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-jsonschema
+Filename: pool/main/p/python-warlock/python-warlock_0.1.0-0ubuntu1~cloud0_all.deb
+Size: 4448
+MD5sum: d12fdfb6c6127ff0d0323f166a716400
+SHA1: c9193413e53d60fde200ec05168c3128768f1acd
+Description: Python object model built on top of JSON schema.
+ Build self-validating python objects using JSON schemas
+
+Package: python-cliff
+Priority: extra
+Section: python
+Installed-Size: 109
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.1.2-0ubuntu2~cloud0
+Provides: python2.7-cliff
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-setuptools, python-prettytable, python-cmd2
+Filename: pool/main/p/python-cliff/python-cliff_1.1.2-0ubuntu2~cloud0_all.deb
+Size: 13022
+MD5sum: d15345d31101601ff2ba46cca037f4cd
+SHA1: 90e72448b7c4b485943315a8d9c8566996010bbb
+Description: Command Line Interface Formulation Framework
+ cliff is a framework for building command line programs. It uses setuptools entry points
+ to provide subcommands, output formatters, and other extensions.
+
+Package: python-compressor
+Source: python-django-compressor
+Priority: optional
+Section: python
+Installed-Size: 269
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.1.2-0ubuntu5~cloud0
+Replaces: python-django-compressor (<< 1.1.2-0ubuntu1)
+Provides: python2.7-compressor
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-appconf, python-django (>= 1.1)
+Conflicts: python-django-compressor (<< 1.1.2-0ubuntu1)
+Filename: pool/main/p/python-django-compressor/python-compressor_1.1.2-0ubuntu5~cloud0_all.deb
+Size: 40846
+MD5sum: f268ab7914ebc2f93fdb6daa22650b5e
+SHA1: 69483c6e32bdb125b15285e5ae5ed9b1ef15cc2b
+Description: Compresses linked and inline JavaScript or CSS into single cached files.
+ Django Compressor combines and compresses linked and inline Javascript or CSS in a
+ Django templates into cacheable static files by using the compress template tag.
+
+Package: python-tablib
+Priority: optional
+Section: python
+Installed-Size: 1648
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 0.9.11-0ubuntu1~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8)
+Filename: pool/main/p/python-tablib/python-tablib_0.9.11-0ubuntu1~cloud0_all.deb
+Size: 312264
+MD5sum: f0c48d74ed35c31de07c7c1c06b198d5
+SHA1: fa15e54b67477122e7780a99d02225fe09911744
+Description: Format agnostic tabular data library (XLS, JSON, YAML, CSV)
+ Tablib is a format-agnostic tabular dataset library, written in Python.
+ .
+ Output formats supported:
+ - Excel (Sets + Books)
+ - JSON (Sets + Books)
+ - YAML (Sets + Books)
+ - HTML (Sets)
+ - TSV (Sets)
+ - CSV (Sets)
+ .
+ Note that tablib *purposefully* excludes XML support. It always will.
+ (Note: This is a joke. Pull requests are welcome.)
+
+Package: cliff-tablib
+Priority: extra
+Section: python
+Installed-Size: 70
+Maintainer: Ubuntu Developers <ubuntu-devel@lists.ubunut.com>
+Architecture: all
+Version: 1.0-0ubuntu3~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-cliff, python-tablib
+Filename: pool/main/c/cliff-tablib/cliff-tablib_1.0-0ubuntu3~cloud0_all.deb
+Size: 4438
+MD5sum: 175b01853e7c11cd19877eb8f3cd7301
+SHA1: bb24edcd4a83d7d58ea90a2137f3dcc8989c0171
+Description: tablib formatters for cliff.
+ cliff-tablib is a set of formatter extensions for producing JSON,
+ YAML, and HTML output. Installing cliff-tablib activates these
+ formatters for any cliff-based programs automatically.
+Original-Maintainer: Ubuntu Developers <ubuntu-devel@lists.ubunut.com>
+
+Package: python-appconf
+Source: python-django-appconf
+Priority: extra
+Section: python
+Installed-Size: 88
+Maintainer: Ubuntu Developer <ubuntu-devel@lists.ubuntu.com>
+Architecture: all
+Version: 0.5-0ubuntu2~cloud0
+Provides: python2.7-appconf
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-django (>= 1.1)
+Filename: pool/main/p/python-django-appconf/python-appconf_0.5-0ubuntu2~cloud0_all.deb
+Size: 8664
+MD5sum: 73aa33844fb4809a8d4f1094c0326dd1
+SHA1: 44b08541a9360f0ba3ba59e9a7f8557d1045ca4a
+Description: A helper class for handling configuration defaults of packaged apps gracefully.
+ Django-appconf provides a helper class for handling configuration defaults
+ of packaged apps gracefully.
+
+Package: python-openstack-auth
+Source: python-django-openstack-auth
+Priority: optional
+Section: python
+Installed-Size: 204
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 1.0.1-0ubuntu6~cloud0
+Replaces: python-django-openstack-auth (<< 1.0.1-0ubuntu4~)
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-django, python-keystoneclient
+Conflicts: python-django-openstack-auth (<< 1.0.1-0ubuntu4~)
+Filename: pool/main/p/python-django-openstack-auth/python-openstack-auth_1.0.1-0ubuntu6~cloud0_all.deb
+Size: 16544
+MD5sum: 8f4ba9fd0e490310ccc4d92cfd48a3dc
+SHA1: 18779ee55284de5990a8b5fafc1259870d1de8c9
+Description: A django authentication backend for Openstack
+ Django authentication backend for use with the
+ OpenStack Keystone Identity backend.
+
+Package: python3-oauthlib
+Source: python-oauthlib
+Priority: optional
+Section: python
+Installed-Size: 225
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 0.3.4-0ubuntu1~ubuntu12.04.1~grizzly0
+Depends: python3 (>= 3.2), python3-crypto
+Filename: pool/main/p/python-oauthlib/python3-oauthlib_0.3.4-0ubuntu1~ubuntu12.04.1~grizzly0_all.deb
+Size: 41914
+MD5sum: b565546f101c2ba2f6352a28854c249e
+SHA1: eba8cce6adeeba47d286b804c542c0ee45d9b9af
+Description: generic, spec-compliant implementation of OAuth for Python 3
+ OAuthLib is a generic utility which implements the logic of OAuth without
+ assuming a specific HTTP request object. It can be used to graft OAuth support
+ onto HTTP libraries.
+ .
+ OAuth1 and OAuth2 are supported.
+ .
+ This package provides the Python 3 version of the library.
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+
+Package: quantum-plugin-metaplugin
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 62
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: quantum-plugin
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-plugin-metaplugin_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 21854
+MD5sum: 50e728d5d053f37426762d84f8b68e71
+SHA1: f2f696e4cfbd01369360a22225412176fc107fe3
+Description: Quantum is a virtual network service for Openstack - Metaplugin plugin
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the Metaplugin plugin.
+
+Package: quantum-l3-agent
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 87
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Replaces: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1), upstart-job, python
+Breaks: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-l3-agent_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 25260
+MD5sum: 74bdb77737d9f396c8e3561cfde7bd7f
+SHA1: 20bbc0701e229db6e675dc4495def291c87c1955
+Description: Quantum is a virtual network service for Openstack - l3 agent
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the layer 3 routing agent.
+
+Package: quantum-dhcp-agent
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 83
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Replaces: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1), dnsmasq-base, dnsmasq-utils, upstart-job, python
+Breaks: quantum-common (<= 2012.2~rc1~20120907.1154-0ubuntu1)
+Filename: pool/main/q/quantum/quantum-dhcp-agent_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 24148
+MD5sum: c210abd9967e58857a9e39e65dfdbf54
+SHA1: bd38e6999127923f7b0df86ab61db10057ab178f
+Description: Quantum is a virtual network service for Openstack - DHCP agent
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the DHCP agent.
+
+Package: quantum-plugin-nec
+Source: quantum
+Priority: optional
+Section: net
+Installed-Size: 71
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212181001~precise-0ubuntu1
+Provides: quantum-plugin
+Depends: quantum-common (= 2013.1+git201212181001~precise-0ubuntu1), python
+Filename: pool/main/q/quantum/quantum-plugin-nec_2013.1+git201212181001~precise-0ubuntu1_all.deb
+Size: 22768
+MD5sum: 171b413ed1296c6c3c060767f0e3b55c
+SHA1: 8b662fab3fa0d26d74113e80374b1a5ab122fdd4
+Description: Quantum is a virtual network service for Openstack - NEC plugin
+ Quantum is a virtual network service for Openstack, and a part of
+ Netstack. Just like OpenStack Nova provides an API to dynamically
+ request and configure virtual servers, Quantum provides an API to
+ dynamically request and configure virtual networks. These networks
+ connect "interfaces" from other OpenStack services (e.g., virtual NICs
+ from Nova VMs). The Quantum API supports extensions to provide
+ advanced network capabilities (e.g., QoS, ACLs, network monitoring,
+ etc.)
+ .
+ This package provides the NEC plugin.
+
+Package: websockify
+Priority: optional
+Section: python
+Installed-Size: 145
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: amd64
+Version: 0.2~20121002-0ubuntu1~cloud0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-numpy
+Filename: pool/main/w/websockify/websockify_0.2~20121002-0ubuntu1~cloud0_amd64.deb
+Size: 29478
+MD5sum: 79f2195f1e139689004da78deb54a0b6
+SHA1: d3115a6fbbf6c6b2eca980254f9594d18f116327
+Description: WebSocket to TCP proxy/bridge.
+ websockify was formerly named wsproxy and was part of the noVNC project.
+ .
+ At the most basic level, websockify just translates WebSockets traffic to normal
+ socket traffic. Websockify accepts the WebSockets handshake, parses it,
+ and then begins forwarding traffic between the client and
+ the target in both directions.
+
+Package: nova-novncproxy
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2062
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Suggests: novnc, websocikfy
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/n/nova/nova-novncproxy_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2055118
+MD5sum: 5dfa66d35b73deadc3408208cbb9d381
+SHA1: ec19cf0629d0311de0f7a712a0d96321225644bd
+Description: OpenStack Compute - NoVNC proxy
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the VNC proxy. It is a publically reachable
+ component which proxies access to VNCs running on compute nodes.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: nova-xvpvncproxy
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2055
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), python
+Filename: pool/main/n/nova/nova-xvpvncproxy_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2054036
+MD5sum: cfe3ddf8f735832e3c4297f89644e1eb
+SHA1: 686edcb7669d17a31d4cd00c6ffaa7e0ba2127f2
+Description: OpenStack Compute - XVP VNC proxy
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the VNC proxy. It is a publically reachable
+ component which proxies access to VNCs running on compute nodes.
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
+Package: python-stevedore
+Source: stevedore
+Priority: optional
+Section: python
+Installed-Size: 100
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 0.4-0ubuntu1~ubuntu12.04.1~grizzly0
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-setuptools
+Filename: pool/main/s/stevedore/python-stevedore_0.4-0ubuntu1~ubuntu12.04.1~grizzly0_all.deb
+Size: 8104
+MD5sum: aa4cc23b84f576243345e63983892e3b
+SHA1: 93bd4cda29fdc4a10bf9f72ff9e5292d3d7a06c9
+Description: manage dynamic plugins for Python applications
+ Python module to manage dynamic plugins for Python applications
+
+Package: python-ceilometer
+Source: ceilometer
+Priority: optional
+Section: python
+Installed-Size: 1947
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212170601~precise-0ubuntu1
+Depends: python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), python-webob, python-kombu, python-iso8601, python-lockfile, python-netaddr, python-sqlalchemy (>= 0.7~), python-sqlalchemy (<< 0.8), python-migrate, python-pymongo, python-eventlet, python-anyjson, python-flask, python-stevedore, python-glanceclient, python-novaclient, python-keystoneclient, python-swiftclient, python-pecan, python-lxml
+Filename: pool/main/c/ceilometer/python-ceilometer_2013.1+git201212170601~precise-0ubuntu1_all.deb
+Size: 363962
+MD5sum: e01613757f4c7f38766436d36066fb1d
+SHA1: 4352da8f1a8513618fbf5afadf4468dc2ab0a76b
+Description: ceilometer python libraries
+ Ceilometer aims to deliver a unique point of contact for billing systems to
+ aquire all counters they need to establish  customer billing, accross all
+ current and future OpenStack components. The delivery of counters must
+ be tracable and auditable, the counters must be easily extensible to support
+ new projects, and agents doing data collections should be
+ independent of the overall system.
+ .
+ (A ceilometer is an instrument that measures cloud coverage.)
+ .
+ This package contains the python libraries that are needed for all parts
+ of ceilometer
+
+Package: ceilometer-common
+Source: ceilometer
+Priority: optional
+Section: python
+Installed-Size: 63
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212170601~precise-0ubuntu1
+Depends: python-ceilometer (= 2013.1+git201212170601~precise-0ubuntu1), adduser
+Filename: pool/main/c/ceilometer/ceilometer-common_2013.1+git201212170601~precise-0ubuntu1_all.deb
+Size: 7332
+MD5sum: 41570acaae7233b36bb31268ea58c7e9
+SHA1: b96aff028698c4b408c0a4151883389124524ebc
+Description: ceilometer common files
+ Ceilometer aims to deliver a unique point of contact for billing systems to
+ aquire all counters they need to establish  customer billing, accross all
+ current and future OpenStack components. The delivery of counters must
+ be tracable and auditable, the counters must be easily extensible to support
+ new projects, and agents doing data collections should be
+ independent of the overall system.
+ .
+ (A ceilometer is an instrument that measures cloud coverage.)
+ .
+ This package contains files that are needed for all parts of ceilometer
+
+Package: ceilometer-collector
+Source: ceilometer
+Priority: optional
+Section: python
+Installed-Size: 49
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212170601~precise-0ubuntu1
+Depends: ceilometer-common (= 2013.1+git201212170601~precise-0ubuntu1), python, upstart-job
+Filename: pool/main/c/ceilometer/ceilometer-collector_2013.1+git201212170601~precise-0ubuntu1_all.deb
+Size: 6818
+MD5sum: bd4be44dafaca327e85f9ce64803e0f8
+SHA1: cdf05b204d6c4d4eb74bb9a6a316e111af3bfa7a
+Description: ceioleter collector service
+ Ceilometer aims to deliver a unique point of contact for billing systems to
+ aquire all counters they need to establish  customer billing, accross all
+ current and future OpenStack components. The delivery of counters must
+ be tracable and auditable, the counters must be easily extensible to support
+ new projects, and agents doing data collections should be
+ independent of the overall system.
+ .
+ (A ceilometer is an instrument that measures cloud coverage.)
+ .
+ This package contains the collector service
+
+Package: ceilometer-api
+Source: ceilometer
+Priority: optional
+Section: python
+Installed-Size: 50
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212170601~precise-0ubuntu1
+Depends: ceilometer-common (= 2013.1+git201212170601~precise-0ubuntu1), python, upstart-job
+Filename: pool/main/c/ceilometer/ceilometer-api_2013.1+git201212170601~precise-0ubuntu1_all.deb
+Size: 7268
+MD5sum: 33faa4222656637eca4fb658b601be0f
+SHA1: 492ae76a0fad29b699e27296c9a577f72a954f14
+Description: ceioleter api service
+ Ceilometer aims to deliver a unique point of contact for billing systems to
+ aquire all counters they need to establish  customer billing, accross all
+ current and future OpenStack components. The delivery of counters must
+ be tracable and auditable, the counters must be easily extensible to support
+ new projects, and agents doing data collections should be
+ independent of the overall system.
+ .
+ This package contains the api service
+
+Package: ceilometer-agent-compute
+Source: ceilometer
+Priority: optional
+Section: python
+Installed-Size: 49
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212170601~precise-0ubuntu1
+Depends: ceilometer-common (= 2013.1+git201212170601~precise-0ubuntu1), python, upstart-job
+Filename: pool/main/c/ceilometer/ceilometer-agent-compute_2013.1+git201212170601~precise-0ubuntu1_all.deb
+Size: 6852
+MD5sum: 6d1fefabbe665fd8da4a3fed3386355e
+SHA1: f331e6dfc54421460fc81a1c7b5129af3748fedb
+Description: ceioleter compute agent
+ Ceilometer aims to deliver a unique point of contact for billing systems to
+ aquire all counters they need to establish  customer billing, accross all
+ current and future OpenStack components. The delivery of counters must
+ be tracable and auditable, the counters must be easily extensible to support
+ new projects, and agents doing data collections should be
+ independent of the overall system.
+ .
+ (A ceilometer is an instrument that measures cloud coverage.)
+ .
+ This package contains the compute agent
+
+Package: ceilometer-agent-central
+Source: ceilometer
+Priority: optional
+Section: python
+Installed-Size: 49
+Maintainer: Chuck Short <zulcss@ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212170601~precise-0ubuntu1
+Depends: ceilometer-common (= 2013.1+git201212170601~precise-0ubuntu1), python, upstart-job
+Filename: pool/main/c/ceilometer/ceilometer-agent-central_2013.1+git201212170601~precise-0ubuntu1_all.deb
+Size: 6856
+MD5sum: 9de0bf98e9474e27f9cae7b5a9325ede
+SHA1: 1a7ee1242cb4cbe827f6391068157f7b2aaf895f
+Description: ceioleter central agent
+ Ceilometer aims to deliver a unique point of contact for billing systems to
+ aquire all counters they need to establish  customer billing, accross all
+ current and future OpenStack components. The delivery of counters must
+ be tracable and auditable, the counters must be easily extensible to support
+ new projects, and agents doing data collections should be
+ independent of the overall system.
+ .
+ (A ceilometer is an instrument that measures cloud coverage.)
+ .
+ This package contains the central agent.
+
+Package: nova-conductor
+Source: nova
+Priority: extra
+Section: net
+Installed-Size: 2058
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2013.1+git201212141401~precise-0ubuntu1
+Depends: nova-common (= 2013.1+git201212141401~precise-0ubuntu1), upstart-job, python
+Filename: pool/main/n/nova/nova-conductor_2013.1+git201212141401~precise-0ubuntu1_all.deb
+Size: 2053558
+MD5sum: 4a78797c066eccc2772283268d28f376
+SHA1: 0b6f29b8a0ef61bb6945d630aabda2304e98859f
+Description: OpenStack Compute - conductor service
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This is the Nova conductor service component
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+
