@@ -43,21 +43,18 @@ REPO_NOTE_DEB = 'deb-repo'
 # Name of the hosted file describing the contents of the repository
 REPO_METADATA_FILENAME = 'modules.json'
 
-# File name inside of a module where its metadata is found
-MODULE_METADATA_FILENAME = 'metadata.json'
-
 # Location in the repository where a module will be hosted
 # Substitutions: author first character, author
-HOSTED_MODULE_FILE_RELATIVE_PATH = 'system/releases/%s/%s/'
+HOSTED_DEB_FILE_RELATIVE_PATH = 'system/releases/%s/%s/'
 
 # Name template for a module
-# Substitutions: author, name, version
-MODULE_FILENAME = '%s-%s-%s.tar.gz'
+# Substitutions: maintainer, name, version
+DEB_FILENAME = '%(maintainer)s-%(package)s-%(version)s'
 
 # Location in Pulp where modules will be stored (the filename includes all
 # of the uniqueness of the module, so we can keep this flat)
 # Substitutions: filename
-STORAGE_MODULE_RELATIVE_PATH = '%s'
+STORAGE_DEB_RELATIVE_PATH = '%s'
 
 # -- progress states ----------------------------------------------------------
 
@@ -73,7 +70,10 @@ COMPLETE_STATES = (STATE_SUCCESS, STATE_FAILED, STATE_SKIPPED)
 
 # Location from which to sync modules
 CONFIG_URL = 'url'
-CONFIG_PKG = 'packages'
+CONFIG_DIST = 'dist'
+CONFIG_COMPONENTS = 'components'
+CONFIG_ARCH = 'arch'
+
 
 # List of queries to run on the feed
 CONFIG_QUERIES = 'queries'
