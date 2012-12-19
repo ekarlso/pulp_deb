@@ -71,9 +71,15 @@ COMPLETE_STATES = (STATE_SUCCESS, STATE_FAILED, STATE_SKIPPED)
 # Location from which to sync modules
 CONFIG_URL = 'url'
 CONFIG_DIST = 'dist'
-CONFIG_COMPONENTS = 'components'
+CONFIG_COMPONENTS = 'component'
 CONFIG_ARCH = 'arch'
 
+URL_BASE = '%(url)s/dists/%(dist)s/%(component)s'
+URLS = {
+    'contents': URL_BASE + '/Contents-%(arch)s.gz',
+    'packages': URL_BASE + '/binary-%(arch)s/Packages.gz',
+    'sources': URL_BASE + '/source/Sources.gz'
+}
 
 # List of queries to run on the feed
 CONFIG_QUERIES = 'queries'
