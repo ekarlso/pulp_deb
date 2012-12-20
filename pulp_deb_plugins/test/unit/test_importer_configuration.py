@@ -46,33 +46,6 @@ SOURCES_URL = BASE_URL + '/dists/precise/main/source/Sources.gz'
 CONTENTS_URL = BASE_URL + '/dists/precise/Contents-amd64.gz'
 
 
-class URLTests(unittest.TestCase):
-    def test_get_contents_url(self):
-        data = get_resource_data('contents')
-
-        url = configuration.get_resource_url(data)
-        self.assertEquals(url, CONTENTS_URL)
-
-    def test_get_packages_url(self):
-        data = get_resource_data('packages')
-
-        url = configuration.get_resource_url(data)
-        self.assertEquals(url, PACKAGES_URL)
-
-    def test_get_sources_url(self):
-        data = get_resource_data('sources')
-
-        url = configuration.get_resource_url(data)
-        self.assertEquals(url, SOURCES_URL)
-
-    def test_get_url_missing_info(self):
-        data = get_resource_data('packages')
-        del data['arch']
-
-        for resource in configuration.RESOURCES:
-            self.assertRaises(KeyError, configuration.get_resource_url, data)
-
-
 class ResourcesTests(unittest.TestCase):
     def test_validate_resources(self):
         data = REPO.copy()

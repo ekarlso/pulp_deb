@@ -29,5 +29,9 @@ setup(
         'pulp.server.db.migrations': [
             'pulp_deb = pulp_deb.plugins.migrations',
         ],
+        'pulp.downloaders.deb': [
+            'http = pulp_deb.plugins.importers.downloaders.web:HttpDownloader',
+            'file = pulp_deb.plugins.importers.downloaders.local:LocalDownloader',
+        ]
     }
 )

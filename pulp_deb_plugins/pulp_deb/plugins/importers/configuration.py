@@ -15,54 +15,8 @@
 from gettext import gettext as _
 
 from pulp_deb.common import constants
-
-
-RESOURCES = ['packages', 'sources']
-
-
-def get_url_dict(resource, url, dist, component=None, arch=None):
-    """
-    Return a dict with the necassary data to create a URL
-    """
-    data = {
-        'resource_name': resource,
-        constants.CONFIG_URL: url,
-        constants.CONFIG_DIST: dist,
-        constants.CONFIG_COMPONENT: component}
-
-    if arch is not None:
-        data[constants.CONFIG_ARCH] = arch
-
-    return data
-
-
-def get_resource_url(resource):
-    return constants.URLS.get(resource['resource_name']) % resource
-
-
-def get_repo(config):
-    return dict([(k, config.get(k)) for k in constants.CONFIG_REPO])
-
-
-def get_resources(config):
-    """
-    Get a list containing dicts with the data used + the url for the given resource
-    """
-    repo = get_repo(config)
-
-    resources = []
-
-    def _resource(*args, **kw):
-        resource = get_url_dict(*args, **kw)
-        resource['resource'] = get_resource_url(resource)
-        resources.append(resource)
-
-    for arch in repo['arch']:
-        _resource('contents', repo['url'], repo['dist'], arch=arch)
-        for cmpt in repo['component']:
-            for resource in RESOURCES:
-                _resource(resource, repo['url'], repo['dist'], cmpt, arch=arch)
-    return resources
+from pulp_deb.plugins.importers.downloaders import factory
+from pulp_deb.plugins.importers.downloaders import url_utils
 
 
 def validate(config):
@@ -94,13 +48,17 @@ def _validate_resources(config):
     """
     Validates the location of the repo
     """
-    repo = get_repo(config)
-    print repo.get(constants.CONFIG_URL)
+    repo = url_utils.get_repo(config)
+
     if not repo.get(constants.CONFIG_URL, None):
         return True, None
 
+    if not factory.is_valid_url(repo['url']):
+        msg = 'URL for repo %(url)s is errorous'
+        return False, _(msg) % repo
+
     try:
-        get_resources(config)
+        url_utils.get_resources(config)
     except (KeyError, TypeError):
         msg = 'Resources error for %(url)s %(dist)s %(component)s %(arch)s'
         return False, _(msg) % repo
@@ -109,7 +67,7 @@ def _validate_resources(config):
 
 def _validate_queries(config):
     """
-    Validates the query parameters to apply to the source feed.
+    Validates the query parameters to apply to the source repo.
     """
 
     # The queries are optional

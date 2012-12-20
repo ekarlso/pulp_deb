@@ -32,16 +32,26 @@ DISTRIBUTOR_TYPE_ID = 'deb_distributor'
 DISTRIBUTOR_ID = 'deb_distributor'
 
 # ID of the deb module type definition (must match what's in deb.json)
-TYPE_DEB_MODULE = 'deb_module'
+TYPE_DEB = 'deb_package'
 
 # Used as a note on a repository to indicate it is a deb repository
 REPO_NOTE_KEY = '_repo-type' # needs to be standard across extensions
 REPO_NOTE_DEB = 'deb-repo'
 
+# -- importer configuration keys ----------------------------------------------
+
+# Location from which to sync modules
+CONFIG_URL = 'url'
+CONFIG_DIST = 'dist'
+CONFIG_COMPONENT = 'component'
+CONFIG_ARCH = 'arch'
+
 # -- storage and hosting ------------------------------------------------------
 
 # Name of the hosted file describing the contents of the repository
-REPO_METADATA_FILENAME = 'modules.json'
+CONTENTS_FILENAME = 'Contents-%(arch)s.gz'
+PACKAGES_FILENAME = 'Packages.gz'
+SOURCES_FILENAME = 'Sources.gz'
 
 # Location in the repository where a module will be hosted
 # Substitutions: author first character, author
@@ -66,23 +76,17 @@ STATE_SKIPPED = 'skipped'
 
 COMPLETE_STATES = (STATE_SUCCESS, STATE_FAILED, STATE_SKIPPED)
 
-# -- importer configuration keys ----------------------------------------------
-
-# Location from which to sync modules
-CONFIG_URL = 'url'
-CONFIG_DIST = 'dist'
-CONFIG_COMPONENT = 'component'
-CONFIG_ARCH = 'arch'
-
 CONFIG_REPO = [CONFIG_URL, CONFIG_DIST, CONFIG_COMPONENT, CONFIG_ARCH]
 
 URL_BASE = '%(url)s/dists/%(dist)s'
 URL_COMPONENT_BASE = URL_BASE + '/%(component)s'
 URLS = {
-    'contents': URL_BASE + '/Contents-%(arch)s.gz',
-    'packages': URL_COMPONENT_BASE + '/binary-%(arch)s/Packages.gz',
-    'sources': URL_COMPONENT_BASE + '/source/Sources.gz'
+    'contents': URL_BASE + '/' + CONTENTS_FILENAME,
+    'packages': URL_COMPONENT_BASE + '/binary-%(arch)s/' + PACKAGES_FILENAME,
+    'sources': URL_COMPONENT_BASE + '/source/' + SOURCES_FILENAME
 }
+
+RESOURCES = ['packages', 'sources']
 
 # List of queries to run on the feed
 CONFIG_QUERIES = 'queries'
