@@ -60,7 +60,7 @@ def _validate_resources(config):
     try:
         url_utils.get_resources(config)
     except (KeyError, TypeError):
-        msg = 'Resources error for %(url)s %(dist)s %(component)s %(arch)s'
+        msg = 'Resources error for %(url)s %(dist)s %(component)s %(architecture)s'
         return False, _(msg) % repo
     return True, None
 

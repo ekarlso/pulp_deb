@@ -17,38 +17,13 @@ import unittest
 import mock
 from pulp.plugins.config import PluginCallConfiguration
 
-from pulp_deb.common import constants
+from pulp_deb.common import constants, samples
 from pulp_deb.plugins.importers import configuration
-
-
-REPO = dict(
-    url='http://ubuntu.uib.no/archive',
-    dist='precise',
-    component=['main'],
-    arch=['amd64']
-)
-
-
-def get_resource_data(rn):
-    resource = REPO.copy()
-    resource['component'] = resource.pop('component')[0]
-    resource['arch'] = resource['arch'][0]
-    resource['resource_name'] = rn
-    return resource
-
-
-BASE_URL = 'http://ubuntu.uib.no/archive'
-
-PACKAGES_URL = BASE_URL + '/dists/precise/main/binary-amd64/Packages.gz'
-
-SOURCES_URL = BASE_URL + '/dists/precise/main/source/Sources.gz'
-
-CONTENTS_URL = BASE_URL + '/dists/precise/Contents-amd64.gz'
 
 
 class ResourcesTests(unittest.TestCase):
     def test_validate_resources(self):
-        data = REPO.copy()
+        data = samples.valid_repo()
         config = PluginCallConfiguration(data, {})
         result, msg = configuration._validate_resources(config)
 
@@ -56,7 +31,7 @@ class ResourcesTests(unittest.TestCase):
         self.assertTrue(msg is None)
 
     def test_validate_resources_missing_option(self):
-        data = REPO.copy()
+        data = samples.valid_repo()
         del data['url']
 
         config = PluginCallConfiguration(data, {})
@@ -66,8 +41,8 @@ class ResourcesTests(unittest.TestCase):
         self.assertTrue(msg is None)
 
     def test_validate_resources_invalid(self):
-        data = REPO.copy()
-        del data['arch']
+        data = samples.valid_repo()
+        del data['architecture']
 
         config = PluginCallConfiguration(data, {})
         result, msg = configuration._validate_resources(config)

@@ -56,8 +56,8 @@ class RepositoryMetadata(object):
         """
         Serialize this repo to JSON
         """
-        module_dicts = [m.to_dict() for m in self.modules]
-        serialized = json.dumps(module_dicts)
+        package_dicts = [m.to_dict() for m in self.packages]
+        serialized = json.dumps(package_dicts)
         return serialized
 
 
@@ -96,7 +96,7 @@ class DebianPackage(object):
         """
         self._obj.update(data)
 
-    def to_dict(self):
+    def to_dict(self, full=True):
         """
         Returns a dict view on the module in the same format as was parsed from
         update_from_dict.
@@ -104,7 +104,14 @@ class DebianPackage(object):
         :return: dict view on the module
         :rtype: dict
         """
-        return dict([(self.lowered_key(k), v) for k, v in self._obj.items()])
+        data = dict([(self.lowered_key(k), v) for k, v in self._obj.items()])
+        if not full:
+            return data
+
+        data.update({
+            'prefix': self.prefix()
+        })
+        return data
 
     def update_from_json(self, json):
         """
@@ -147,7 +154,7 @@ class DebianPackage(object):
         it in Pulp. This is the unique key for the inventoried module in Pulp.
         """
         data = self.to_dict()
-        return self.generarte_unit_key(*[data[key] for key in UNIT_KEYS])
+        return self.generate_unit_key(*[data[key] for key in UNIT_KEYS])
 
     def unit_metadata(self):
         """
@@ -158,6 +165,11 @@ class DebianPackage(object):
         metadata = [(k, v) for k, v in data.items() if k not in UNIT_KEYS]
         return metadata
 
+    def prefix(self):
+        pkg = self._obj.get('package')
+        prefix = pkg[0:4] if pkg.startswith('lib') else pkg[0]
+        return prefix
+
     def filename(self):
         """
         Generates the filename for the given module.
@@ -165,6 +177,12 @@ class DebianPackage(object):
         :return: puppet standard filename for this module
         :rtype: str
         """
-        data = self.to_dict()
-        f = constants.DEB_FILENAME % data
-        return f
+        return self.filename_from_deb822() or self.filename_from_data()
+
+    def filename_from_deb822(self):
+        return self._obj.get('filename')
+
+    def filename_from_data(self, data={}):
+        data_ = self.to_dict()
+        data_.update(data)
+        return constants.DEB_FILENAME % data_

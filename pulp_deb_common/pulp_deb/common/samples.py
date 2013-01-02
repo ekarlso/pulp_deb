@@ -11,13 +11,13 @@ REPO = dict(
     url=BASE_URL,
     dist=DIST,
     component=[COMPONENT],
-    arch=[ARCH]
+    architecture=[ARCH]
 )
 
 
-PACKAGES_URL = BASE_URL + '/dists/%(dist)s/%(component)s/binary-%(arch)s/Packages.gz'
+PACKAGES_URL = BASE_URL + '/dists/%(dist)s/%(component)s/binary-%(architecture)s/Packages.gz'
 SOURCES_URL = BASE_URL + '/dists/%(dist)s/%(component)s/source/Sources.gz'
-CONTENTS_URL = BASE_URL + '/dists/%(dist)s/Contents-%(arch)s.gz'
+CONTENTS_URL = BASE_URL + '/dists/%(dist)s/Contents-%(architecture)s.gz'
 
 
 def get_repo(**kw):

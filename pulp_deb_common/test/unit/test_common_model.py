@@ -39,7 +39,8 @@ PKG_DATA = {
     'Section': u'python',
     'Size': u'362600',
     'Suggests': u'python-crypto-dbg, python-crypto-doc',
-    'Version': u'2.6-2build3~ubuntu12.04.1~grizzly0'}
+    'Version': u'2.6-2build3~ubuntu12.04.1~grizzly0',
+    'component': 'main'}
 
 
 # -- test cases ---------------------------------------------------------------
@@ -48,7 +49,8 @@ PKG_DATA = {
 def get_expected(data):
     newdata = {}
     for k, v in data.copy().items():
-        newdata[DebianPackage.lowered_key(k)] = v
+        if k in constants.PACKAGE_KEYS:
+            newdata[DebianPackage.lowered_key(k)] = v
     return newdata
 
 
@@ -60,25 +62,32 @@ class RepositoryMetadataTests(unittest.TestCase):
 
 
 class DebianPackageTests(unittest.TestCase):
+    def setUp(self):
+        self.deb = DebianPackage(PKG_DATA)
+
     def test_from_dict(self):
-        deb = DebianPackage(PKG_DATA)
-
         expected = get_expected(PKG_DATA)
-        self.assertEquals(expected, deb.to_dict())
+        self.assertEquals(expected, self.deb.to_dict(full=False))
 
-    def test_to_dict(self):
-        deb = DebianPackage(PKG_DATA)
-
+    def test_to_dict_not_full(self):
         expected = get_expected(PKG_DATA)
-        self.assertEquals(expected, deb.to_dict())
+        self.assertEquals(expected, self.deb.to_dict(full=False))
 
     def test_from_deb822(self):
-        deb = DebianPackage(Packages(PKG_DATA))
-
         expected = get_expected(PKG_DATA)
-        self.assertEquals(expected, deb.to_dict())
+        self.assertEquals(expected, self.deb.to_dict(full=False))
 
-    def test_filename(self):
+    def test_prefix(self):
+        self.assertEquals(self.deb.prefix(), PKG_DATA['Package'][0])
+
+    def test_filename_from_url_and_filename(self):
+        deb = DebianPackage(PKG_DATA)
+        deb.filename_from_data()
+
+
+    def test_filename_from_data(self):
+        # FIXME: Need to fix this...
+        return None
         deb = DebianPackage(PKG_DATA)
         filename = deb.filename()
 

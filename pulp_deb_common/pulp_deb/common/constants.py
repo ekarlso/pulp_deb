@@ -44,12 +44,33 @@ REPO_NOTE_DEB = 'deb-repo'
 CONFIG_URL = 'url'
 CONFIG_DIST = 'dist'
 CONFIG_COMPONENT = 'component'
-CONFIG_ARCH = 'arch'
+CONFIG_ARCH = 'architecture'
 
 # -- storage and hosting ------------------------------------------------------
 
+PACKAGE_KEYS = [
+    'Replaces',
+    'Maintainer',
+    'Description',
+    'Package',
+    'Version',
+    'Section',
+    'MD5sum',
+    'component',
+    'Installed-Size',
+    'Filename',
+    'Priority',
+    'Suggests',
+    'Depends',
+    'SHA1',
+    'Architecture',
+    'Provides',
+    'Conflicts',
+    'Size',
+]
+
 # Name of the hosted file describing the contents of the repository
-CONTENTS_FILENAME = 'Contents-%(arch)s.gz'
+CONTENTS_FILENAME = 'Contents-%(architecture)s.gz'
 PACKAGES_FILENAME = 'Packages.gz'
 SOURCES_FILENAME = 'Sources.gz'
 
@@ -82,11 +103,15 @@ URL_BASE = '%(url)s/dists/%(dist)s'
 URL_COMPONENT_BASE = URL_BASE + '/%(component)s'
 URLS = {
     'contents': URL_BASE + '/' + CONTENTS_FILENAME,
-    'packages': URL_COMPONENT_BASE + '/binary-%(arch)s/' + PACKAGES_FILENAME,
+    'packages': URL_COMPONENT_BASE + '/binary-%(architecture)s/' + PACKAGES_FILENAME,
     'sources': URL_COMPONENT_BASE + '/source/' + SOURCES_FILENAME
 }
 
 RESOURCES = ['packages', 'sources']
+
+
+DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(package)s/%(filename)s'
+
 
 # List of queries to run on the feed
 CONFIG_QUERIES = 'queries'
