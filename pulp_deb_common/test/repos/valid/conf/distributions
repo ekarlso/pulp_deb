@@ -1,0 +1,8 @@
+Origin: Endre Karlson
+Label: Skypoint Packages
+Suite: unstable
+Codename: precise
+Version: 12.04
+Architectures: amd64 i386 source
+Components: main non-free contrib
+Description: Extra stuff for OpenStack F / G hybrid

@@ -1,0 +1,7 @@
+Archive: unstable
+Version: 12.04
+Component: non-free
+Origin: Endre Karlson
+Label: Skypoint Packages
+Architecture: i386
+Description: Extra stuff for OpenStack F / G hybrid

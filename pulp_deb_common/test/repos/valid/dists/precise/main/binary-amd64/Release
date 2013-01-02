@@ -1,0 +1,7 @@
+Archive: unstable
+Version: 12.04
+Component: main
+Origin: Endre Karlson
+Label: Skypoint Packages
+Architecture: amd64
+Description: Extra stuff for OpenStack F / G hybrid

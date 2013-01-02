@@ -1,0 +1,7 @@
+Archive: unstable
+Version: 12.04
+Component: contrib
+Origin: Endre Karlson
+Label: Skypoint Packages
+Architecture: source
+Description: Extra stuff for OpenStack F / G hybrid
