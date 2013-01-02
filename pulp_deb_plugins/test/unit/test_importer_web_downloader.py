@@ -45,12 +45,12 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         docs = self.downloader.retrieve_resources(self.mock_progress_report)
 
         # Verify
-        self.assertEqual(3, len(docs))
+        self.assertEqual(2, len(docs))
 
         # Progress indicators
-        self.assertEqual(self.mock_progress_report.query_finished_count, 3)
-        self.assertEqual(self.mock_progress_report.query_total_count, 3)
-        self.assertEqual(self.mock_progress_report.update_progress.call_count, 4)
+        self.assertEqual(self.mock_progress_report.query_finished_count, 2)
+        self.assertEqual(self.mock_progress_report.query_total_count, 2)
+        self.assertEqual(self.mock_progress_report.update_progress.call_count, 3)
 
     @mock.patch('pycurl.Curl')
     def test_retrieve_resource_with_error(self, mock_curl_constructor):

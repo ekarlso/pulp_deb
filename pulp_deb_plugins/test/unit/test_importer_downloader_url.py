@@ -6,12 +6,6 @@ from pulp_deb.plugins.importers.downloaders import url_utils
 
 
 class URLTests(unittest.TestCase):
-    def test_get_contents_url(self):
-        data = samples.get_resource_data('contents')
-
-        url = url_utils.get_resource_url(data)
-        self.assertEquals(url, samples.CONTENTS_URL % data)
-
     def test_get_packages_url(self):
         data = samples.get_resource_data('packages')
 
@@ -26,7 +20,7 @@ class URLTests(unittest.TestCase):
 
     def test_get_url_missing_info(self):
         data = samples.get_resource_data('packages')
-        del data['arch']
+        del data['architecture']
 
         for resource in constants.RESOURCES:
             self.assertRaises(KeyError, url_utils.get_resource_url, data)

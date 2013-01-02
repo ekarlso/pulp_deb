@@ -102,7 +102,6 @@ CONFIG_REPO = [CONFIG_URL, CONFIG_DIST, CONFIG_COMPONENT, CONFIG_ARCH]
 URL_BASE = '%(url)s/dists/%(dist)s'
 URL_COMPONENT_BASE = URL_BASE + '/%(component)s'
 URLS = {
-    'contents': URL_BASE + '/' + CONTENTS_FILENAME,
     'packages': URL_COMPONENT_BASE + '/binary-%(architecture)s/' + PACKAGES_FILENAME,
     'sources': URL_COMPONENT_BASE + '/source/' + SOURCES_FILENAME
 }
