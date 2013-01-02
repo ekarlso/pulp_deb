@@ -90,7 +90,7 @@ class HttpDownloader(base.BaseDownloader):
         url = self._create_deb_url(deb)
 
         tmp_dir = _create_download_tmp_dir(self.repo.working_dir)
-        tmp_filename = os.path.join(tmp_dir, deb.filename())
+        tmp_filename = os.path.join(tmp_dir, deb.filename_short())
 
         content = StoredDownloadedContent(tmp_filename)
         content.open()

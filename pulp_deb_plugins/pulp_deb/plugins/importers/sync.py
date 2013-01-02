@@ -23,7 +23,7 @@ from pulp.plugins.conduits.mixins import UnitAssociationCriteria
 
 from pulp_deb.common import constants
 from pulp_deb.common.constants import (STATE_FAILED, STATE_RUNNING, STATE_SUCCESS)
-from pulp_deb.common.model import RepositoryMetadata, DebianPackage
+from pulp_deb.common.model import Repository, DebianPackage
 from pulp_deb.common.sync_progress import SyncProgressReport
 from pulp_deb.plugins.importers import deb
 from pulp_deb.plugins.importers.downloaders import factory as downloader_factory
@@ -88,7 +88,7 @@ class DebianPackageSyncRun(object):
         not continue the sync.
 
         :return: object representation of the metadata
-        :rtype:  RepositoryMetadata
+        :rtype:  Repository
         """
         _LOG.info('Beginning metadata retrieval for repository <%s>' % self.repo.id)
 
@@ -118,7 +118,7 @@ class DebianPackageSyncRun(object):
 
         # Parse the retrieved metadata documents
         try:
-            metadata = RepositoryMetadata()
+            metadata = Repository()
             for doc in metadata_json_docs:
                 metadata.update_from_json(doc)
         except Exception, e:
@@ -157,7 +157,7 @@ class DebianPackageSyncRun(object):
 
         :param metadata: object representation of the repository metadata
                containing the modules to import
-        :type  metadata: RepositoryMetadata
+        :type  metadata: Repository
         """
         _LOG.info('Retrieving modules for repository <%s>' % self.repo.id)
 

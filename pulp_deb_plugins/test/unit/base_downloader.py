@@ -37,9 +37,10 @@ class BaseDownloaderTests(unittest.TestCase):
 
         self.mock_progress_report = mock.MagicMock()
 
-        deb = dict(package='valid',
-                   version='1.1.0',
-                   maintainer='jdob')
+        deb = dict(package='libdaemon',
+                   version='0.14-2',
+                   maintainer='Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
+                   filename='pool/main/libd/libdaemon/libdaemon0_0.14-2_amd64.deb')
         self.deb = model.DebianPackage.from_dict(deb)
 
     def tearDown(self):

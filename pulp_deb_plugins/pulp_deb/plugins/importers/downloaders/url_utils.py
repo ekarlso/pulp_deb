@@ -71,3 +71,8 @@ def determine_url_type(url):
     except Exception:
         LOG.exception('Exception parsing url type for url <%s>' % url)
         raise InvalidURL(url)
+
+
+def get_deb_url(url, deb):
+    base_url = url[len('file://'):]
+    return base_url + '/' + deb.filename()
