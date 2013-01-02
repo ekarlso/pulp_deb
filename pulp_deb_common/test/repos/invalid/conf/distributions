@@ -1,6 +1,6 @@
 Origin: Endre Karlson
 Label: Skypoint Packages
-Suite: unstable
+Suite: precise
 Codename: precise
 Version: 12.04
 Architectures: amd64 i386 source
