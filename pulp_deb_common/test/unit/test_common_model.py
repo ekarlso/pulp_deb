@@ -18,7 +18,7 @@ import unittest
 from pulp.common.compat import json
 
 from pulp_deb.common import constants
-from pulp_deb.common.model import RepositoryMetadata, DebianPackage
+from pulp_deb.common.model import Repository, DebianPackage
 
 # -- constants ----------------------------------------------------------------
 
@@ -54,9 +54,9 @@ def get_expected(data):
     return newdata
 
 
-class RepositoryMetadataTests(unittest.TestCase):
+class RepositoryTests(unittest.TestCase):
     def test_update_from_packages(self):
-        metadata = RepositoryMetadata()
+        metadata = Repository()
         path = os.path.dirname(__file__) + "/Packages"
         metadata.update_from_packages(path)
 

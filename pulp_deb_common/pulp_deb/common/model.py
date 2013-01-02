@@ -1,5 +1,7 @@
+import codecs
 import copy
 from debian.deb822 import Packages
+import gzip
 
 from pulp.common.compat import json
 
@@ -9,48 +11,59 @@ from pulp_deb.common import constants
 UNIT_KEYS = ['package', 'version', 'maintainer']
 
 
-class RepositoryMetadata(object):
+class Repository(object):
 
     def __init__(self):
         self.packages = []
 
-    def _fh(self, f):
-        if not type(f) == file:
-            return open(f)
+    def _read(self, f):
+        if not type(f) == file and type(f) == str:
+            fh = open(f)
+            if f.endswith('.gz'):
+                fh = gzip.GzipFile(fileobj=fh)
         elif type(f) == file:
-            return f
+            fh = f
         else:
             raise RuntimeError('Need to pass either a path or a file')
+        return fh.readlines()
 
-    def _update(self, data):
+    def _update(self, data, **kw):
         for pkg in data:
+            pkg.update(kw)
+
             deb = DebianPackage(pkg)
             self.packages.append(deb)
 
-    def update_from_packages(self, packages_file):
+    def update_from_packages(self, packages_file, **kw):
         """
         Updates this instance with packages in the given Packages file.
 
         :return: object representing the repository and all it's packages
-        :rtype: RepositoryMetadata
+        :rtype: Repository
         """
         try:
-            f = self._fh(packages_file)
+            lines = self._read(packages_file)
         except RuntimeError:
             raise
-        self._update(Packages.iter_paragraphs(f))
+        self._update(Packages.iter_paragraphs(lines), **kw)
 
-    def update_from_json(self, json_string):
+    def update_from_resources(self, resources):
+        for resource in resources:
+            # NOTE: Store dist and component also
+            data = dict([(k, resource[k]) for k in ['dist', 'component']])
+            self.update_from_packages(resource['resource'][len('file://'):], **data)
+
+    def update_from_json(self, json_string, **kw):
         """
         Updates this metadata instance with modules found in the given JSON
         document. This can be called multiple times to merge multiple
         repository metadata JSON documents into this instance.
 
         :return: object representing the repository and all of its modules
-        :rtype:  RepositoryMetadata
+        :rtype:  Repository
         """
         parsed = json.loads(json_string)
-        self._update(parsed)
+        self._update(parsed, **kw)
 
     def to_json(self):
         """
@@ -186,3 +199,6 @@ class DebianPackage(object):
         data_ = self.to_dict()
         data_.update(data)
         return constants.DEB_FILENAME % data_
+
+    def filename_short(self):
+        return self.filename().split('/')[-1]
