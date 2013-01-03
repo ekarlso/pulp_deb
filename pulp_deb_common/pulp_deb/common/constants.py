@@ -32,7 +32,7 @@ DISTRIBUTOR_TYPE_ID = 'deb_distributor'
 DISTRIBUTOR_ID = 'deb_distributor'
 
 # ID of the deb module type definition (must match what's in deb.json)
-TYPE_DEB = 'deb_package'
+TYPE_DEB = 'deb'
 
 # Used as a note on a repository to indicate it is a deb repository
 REPO_NOTE_KEY = '_repo-type' # needs to be standard across extensions
