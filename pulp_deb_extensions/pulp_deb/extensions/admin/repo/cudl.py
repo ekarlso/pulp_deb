@@ -94,7 +94,8 @@ class CreateRepositoryCommand(cudl.CreateRepositoryCommand):
 
         # Create the repository
         self.context.server.repo.create_and_configure(repo_id, name, description,
-            notes, constants.IMPORTER_TYPE_ID, importer_config, distributors)
+            notes, constants.IMPORTER_TYPE_ID, importer_config)
+        #notes, constants.IMPORTER_TYPE_ID, importer_config, distributors)
         msg = _('Successfully created repository [%(r)s]')
         self.context.prompt.render_success_message(msg % {'r' : repo_id})
 
