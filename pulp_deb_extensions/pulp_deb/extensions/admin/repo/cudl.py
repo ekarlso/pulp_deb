@@ -26,8 +26,8 @@ OPTION_URL = PulpCliOption('--url', DESC_URL, required=False)
 DESC_DIST = _('Dist name to get, like "squeeze" or "precise"')
 OPTION_DIST = PulpCliOption('--dist', DESC_DIST, required=False)
 
-DESC_CMPTS = _('Components to get like "main" or "non-free"')
-OPTION_CMPTS = PulpCliOption('--components', DESC_CMPTS, required=False)
+DESC_COMPONENT = _('Components to get like "main" or "non-free"')
+OPTION_COMPONENT = PulpCliOption('--components', DESC_COMPONENT, required=False)
 
 DESC_ARCH = _('Archs to get like "amd64" or "noarch"')
 OPTION_ARCH = PulpCliOption('--arch', DESC_ARCH, required=False)
@@ -52,7 +52,7 @@ class CreateRepositoryCommand(cudl.CreateRepositoryCommand):
 
         self.add_option(OPTION_URL)
         self.add_option(OPTION_DIST)
-        self.add_option(OPTION_CMPTS)
+        self.add_option(OPTION_COMPONENT)
         self.add_option(OPTION_ARCH)
         self.add_option(OPTION_QUERY)
         self.add_option(OPTION_INSECURE)
@@ -73,7 +73,7 @@ class CreateRepositoryCommand(cudl.CreateRepositoryCommand):
         importer_config = {
             constants.CONFIG_URL: kwargs[OPTION_URL.keyword],
             constants.CONFIG_DIST: kwargs[OPTION_DIST.keyword],
-            constants.CONFIG_COMPONENTS: kwargs[OPTION_COMPONENTS.keyword],
+            constants.CONFIG_COMPONENT: kwargs[OPTION_COMPONENT.keyword],
             constants.CONFIG_ARCH: kwargs[OPTION_ARCH.keyword],
             constants.CONFIG_QUERIES: kwargs[OPTION_QUERY.keyword],
         }
