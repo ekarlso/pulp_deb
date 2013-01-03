@@ -25,7 +25,6 @@ from pulp_deb.common import constants
 from pulp_deb.common.constants import (STATE_FAILED, STATE_RUNNING, STATE_SUCCESS)
 from pulp_deb.common.model import Repository, DebianPackage
 from pulp_deb.common.sync_progress import SyncProgressReport
-from pulp_deb.plugins.importers import deb
 from pulp_deb.plugins.importers.downloaders import factory as downloader_factory
 
 _LOG = logging.getLogger(__name__)
