@@ -1,0 +1,9 @@
+{"types": [
+    {
+        "id" : "deb",
+        "display_name" : "Debian Package",
+        "description" : "Debian Package",
+        "unit_key" : ["name", "version", "maintainer"],
+        "search_indexes" : ["author", "tag_list"]
+    }
+]}
