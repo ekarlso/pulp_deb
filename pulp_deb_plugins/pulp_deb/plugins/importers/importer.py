@@ -44,7 +44,7 @@ class DebianPackageImporter(Importer):
         return {
             'id': constants.IMPORTER_TYPE_ID,
             'display_name': _('Debian .deb importer'),
-            'types': [constants.TYPE_BEB_MODULE]
+            'types': [constants.TYPE_DEB]
         }
 
     def validate_config(self, repo, config, related_repos):
