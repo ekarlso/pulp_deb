@@ -63,7 +63,7 @@ class CreateRepositoryCommand(cudl.CreateRepositoryCommand):
         notes = kwargs.pop(options.OPTION_NOTES.keyword) or {}
 
         # Add a note to indicate this is a Deb repository
-        notes[constants.REPO_NOTE_KEY] = constants.REPO_NOTE_DEB
+        notes[constants.REPO_NOTE_KEY] = constants.REPO_NOTE
 
         name = repo_id
         if options.OPTION_NAME.keyword in kwargs:
