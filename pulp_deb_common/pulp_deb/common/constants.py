@@ -36,7 +36,7 @@ TYPE_DEB = 'deb'
 
 # Used as a note on a repository to indicate it is a deb repository
 REPO_NOTE_KEY = '_repo-type' # needs to be standard across extensions
-REPO_NOTE_DEB = 'deb-repo'
+REPO_NOTE = 'deb-repo'
 
 # -- importer configuration keys ----------------------------------------------
 
