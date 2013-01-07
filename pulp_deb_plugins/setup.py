@@ -19,9 +19,9 @@ setup(
     author='Endre Karlson',
     author_email='endre.karlson@bouvet.no',
     entry_points={
-        'pulp.distributors': [
-            'distributor = pulp_deb.plugins.distributors.distributor:entry_point',
-        ],
+        #'pulp.distributors': [
+        #    'distributor = pulp_deb.plugins.distributors.distributor:entry_point',
+        #],
 
         'pulp.importers': [
             'importer = pulp_deb.plugins.importers.importer:entry_point',

@@ -24,8 +24,8 @@ from pulp_deb.extensions.admin.repo import cudl
 @priority()
 def initialize(context):
     structure.ensure_repo_structure(context.cli)
-    repo_section = structure.repo_section(context.cli)
 
+    repo_section = structure.repo_section(context.cli)
     repo_section.add_command(cudl.CreateRepositoryCommand(context))
     repo_section.add_command(cudl.UpdateRepositoryCommand(context))
     repo_section.add_command(base_cudl.DeleteRepositoryCommand(context))
