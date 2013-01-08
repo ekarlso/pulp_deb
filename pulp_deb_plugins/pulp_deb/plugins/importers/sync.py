@@ -68,7 +68,7 @@ class DebianPackageSyncRun(object):
                 report = self.progress_report.build_final_report()
                 return report
 
-            self._import_modules(metadata)
+            self._import_packages(metadata)
         finally:
             # One final progress update before finishing
             self.progress_report.update_progress()
@@ -123,7 +123,7 @@ class DebianPackageSyncRun(object):
         except Exception, e:
             _LOG.exception('Exception parsing metadata for repository <%s>' % self.repo.id)
             self.progress_report.metadata_state = STATE_FAILED
-            self.progress_report.metadata_error_message = _('Error parsing repository modules metadata document')
+            self.progress_report.metadata_error_message = _('Error parsing repository packages metadata document')
             self.progress_report.metadata_exception = e
             self.progress_report.metadata_traceback = sys.exc_info()[2]
 
@@ -146,21 +146,21 @@ class DebianPackageSyncRun(object):
 
         return metadata
 
-    def _import_modules(self, metadata):
+    def _import_packages(self, metadata):
         """
-        Imports each module in the repository into Pulp.
+        Imports each package in the repository into Pulp.
 
         This method is mostly just a wrapper on top of the actual logic
         of performing an import to set the stage for the progress report and
         more importantly catch any rogue exceptions that crop up.
 
         :param metadata: object representation of the repository metadata
-               containing the modules to import
+               containing the packages to import
         :type  metadata: Repository
         """
-        _LOG.info('Retrieving modules for repository <%s>' % self.repo.id)
+        _LOG.info('Retrieving packages for repository <%s>' % self.repo.id)
 
-        self.progress_report.modules_state = STATE_RUNNING
+        self.progress_report.packages_state = STATE_RUNNING
 
         # Do not send the update about the state yet. The counts need to be
         # set later once we know how many are new, so to prevent a situation
@@ -171,35 +171,35 @@ class DebianPackageSyncRun(object):
 
         # Perform the actual logic
         try:
-            self._do_import_modules(metadata)
+            self._do_import_packages(metadata)
         except Exception, e:
-            _LOG.exception('Exception importing modules for repository <%s>' % self.repo.id)
-            self.progress_report.modules_state = STATE_FAILED
-            self.progress_report.modules_error_message = _('Error retrieving modules')
-            self.progress_report.modules_exception = e
-            self.progress_report.modules_traceback = sys.exc_info()[2]
+            _LOG.exception('Exception importing packages for repository <%s>' % self.repo.id)
+            self.progress_report.packages_state = STATE_FAILED
+            self.progress_report.packages_error_message = _('Error retrieving packages')
+            self.progress_report.packages_exception = e
+            self.progress_report.packages_traceback = sys.exc_info()[2]
 
             end_time = datetime.now()
             duration = end_time - start_time
-            self.progress_report.modules_execution_time = duration.seconds
+            self.progress_report.packages_execution_time = duration.seconds
 
             self.progress_report.update_progress()
 
             return
 
         # Last update to the progress report before returning
-        self.progress_report.modules_state = STATE_SUCCESS
+        self.progress_report.packages_state = STATE_SUCCESS
 
         end_time = datetime.now()
         duration = end_time - start_time
-        self.progress_report.modules_execution_time = duration.seconds
+        self.progress_report.packages_execution_time = duration.seconds
 
         self.progress_report.update_progress()
 
-    def _do_import_modules(self, metadata):
+    def _do_import_packages(self, metadata):
         """
-        Actual logic of the import. This method will do a best effort per module;
-        if an individual module fails it will be recorded and the import will
+        Actual logic of the import. This method will do a best effort per package;
+        if an individual package fails it will be recorded and the import will
         continue. This method will only raise an exception in an extreme case
         where it cannot react and continue.
         """
@@ -216,33 +216,33 @@ class DebianPackageSyncRun(object):
 
         downloader = self._create_downloader()
 
-        # Ease lookup of modules
-        modules_by_key = dict([(unit_key_str(m.unit_key()), m) for m in metadata.modules])
+        # Ease lookup of packages
+        packages_by_key = dict([(unit_key_str(m.unit_key()), m) for m in metadata.packages])
 
-        # Collect information about the repository's modules before changing it
-        module_criteria = UnitAssociationCriteria(type_ids=[constants.TYPE_PUPPET_MODULE])
-        existing_units = self.sync_conduit.get_units(criteria=module_criteria)
-        existing_modules = [DebianPackage.from_unit(x) for x in existing_units]
-        existing_module_keys = [unit_key_str(m.unit_key()) for m in existing_modules]
+        # Collect information about the repository's packages before changing it
+        package_criteria = UnitAssociationCriteria(type_ids=[constants.TYPE_DEB])
+        existing_units = self.sync_conduit.get_units(criteria=package_criteria)
+        existing_packages = [DebianPackage.from_unit(x) for x in existing_units]
+        existing_package_keys = [unit_key_str(m.unit_key()) for m in existing_packages]
 
-        new_unit_keys = self._resolve_new_units(existing_module_keys, modules_by_key.keys())
-        remove_unit_keys = self._resolve_remove_units(existing_module_keys, modules_by_key.keys())
+        new_unit_keys = self._resolve_new_units(existing_package_keys, packages_by_key.keys())
+        remove_unit_keys = self._resolve_remove_units(existing_package_keys, packages_by_key.keys())
 
         # Once we know how many things need to be processed, we can update the
         # progress report
-        self.progress_report.modules_total_count = len(new_unit_keys)
-        self.progress_report.modules_finished_count = 0
-        self.progress_report.modules_error_count = 0
+        self.progress_report.packages_total_count = len(new_unit_keys)
+        self.progress_report.packages_finished_count = 0
+        self.progress_report.packages_error_count = 0
         self.progress_report.update_progress()
 
         # Add new units
         for key in new_unit_keys:
-            module = modules_by_key[key]
+            package = packages_by_key[key]
             try:
-                self._add_new_module(downloader, module)
-                self.progress_report.modules_finished_count += 1
+                self._add_new_package(downloader, package)
+                self.progress_report.packages_finished_count += 1
             except Exception, e:
-                self.progress_report.add_failed_module(module, e, sys.exc_info()[2])
+                self.progress_report.add_failed_package(package, e, sys.exc_info()[2])
 
             self.progress_report.update_progress()
 
@@ -258,51 +258,51 @@ class DebianPackageSyncRun(object):
                 doomed = existing_units_by_key[key]
                 self.sync_conduit.remove_unit(doomed)
 
-    def _add_new_module(self, downloader, module):
+    def _add_new_package(self, downloader, package):
         """
         Performs the tasks for downloading and saving a new unit in Pulp.
 
         :param downloader: downloader instance to use for retrieving the unit
-        :param module: module instance to download
-        :type  module: DebianPackage
+        :param package: package instance to download
+        :type  package: DebianPackage
         """
         # Initialize the unit in Pulp
-        type_id = constants.TYPE_PUPPET_MODULE
-        unit_key = module.unit_key()
+        type_id = constants.TYPE_DEB
+        unit_key = package.unit_key()
         unit_metadata = {} # populated later but needed for the init call
-        relative_path = constants.STORAGE_MODULE_RELATIVE_PATH % module.filename()
+        relative_path = constants.STORAGE_MODULE_RELATIVE_PATH % package.filename()
 
         unit = self.sync_conduit.init_unit(type_id, unit_key, unit_metadata,
                                            relative_path)
 
         try:
-            if not self._module_exists(unit.storage_path):
+            if not self._package_exists(unit.storage_path):
                 # Download the bits
-                downloaded_filename = downloader.retrieve_module(self.progress_report, module)
+                downloaded_filename = downloader.retrieve_package(self.progress_report, package)
 
                 # Copy them to the final location
                 shutil.copy(downloaded_filename, unit.storage_path)
 
-            # Extract the extra metadata into the module
-            metadata.extract_metadata(module, unit.storage_path, self.repo.working_dir)
+            # Extract the extra metadata into the package
+            metadata.extract_metadata(package, unit.storage_path, self.repo.working_dir)
 
             # Update the unit with the extracted metadata
-            unit.metadata = module.unit_metadata()
+            unit.metadata = package.unit_metadata()
 
             # Save the unit and associate it to the repository
             self.sync_conduit.save_unit(unit)
         finally:
-            # Clean up the temporary module
-            downloader.cleanup_module(module)
+            # Clean up the temporary package
+            downloader.cleanup_package(package)
 
-    def _module_exists(self, filename):
+    def _package_exists(self, filename):
         """
-        Determines if the module at the given filename is already downloaded.
+        Determines if the package at the given filename is already downloaded.
 
-        :param filename: full path to the module in Pulp
+        :param filename: full path to the package in Pulp
         :type  filename: str
 
-        :return: true if the module file already exists; false otherwise
+        :return: true if the package file already exists; false otherwise
         :rtype:  bool
         """
         return os.path.exists(filename)
@@ -331,7 +331,7 @@ class DebianPackageSyncRun(object):
         Uses the configuratoin to determine which downloader style to use
         for this run.
 
-        :return: one of the *Downloader classes in the downloaders module
+        :return: one of the *Downloader classes in the downloaders package
         """
 
         feed = self.config.get(constants.CONFIG_FEED)

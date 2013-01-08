@@ -55,11 +55,11 @@ class Repository(object):
 
     def update_from_json(self, json_string, **kw):
         """
-        Updates this metadata instance with modules found in the given JSON
+        Updates this metadata instance with packages found in the given JSON
         document. This can be called multiple times to merge multiple
         repository metadata JSON documents into this instance.
 
-        :return: object representing the repository and all of its modules
+        :return: object representing the repository and all of its packages
         :rtype:  Repository
         """
         parsed = json.loads(json_string)
@@ -95,7 +95,7 @@ class DebianPackage(object):
     @classmethod
     def from_dict(cls, data):
         """
-        Parses the given snippet of module metadata into an object
+        Parses the given snippet of package metadata into an object
         representation. This call assumes the JSON has already been parsed
 
         :return: object representation of the given deb
@@ -111,10 +111,10 @@ class DebianPackage(object):
 
     def to_dict(self, full=True):
         """
-        Returns a dict view on the module in the same format as was parsed from
+        Returns a dict view on the package in the same format as was parsed from
         update_from_dict.
 
-        :return: dict view on the module
+        :return: dict view on the package
         :rtype: dict
         """
         data = dict([(self.lowered_key(k), v) for k, v in self._obj.items()])
@@ -128,7 +128,7 @@ class DebianPackage(object):
 
     def update_from_json(self, json):
         """
-        Takes the module's metadata in JSON format and merges it into this
+        Takes the package's metadata in JSON format and merges it into this
         instance.
 
         :param json: Package metadata in JSON
@@ -145,7 +145,7 @@ class DebianPackage(object):
         :param pulp_unit: unit returned from the Pulp conduit
         :type  pulp_unit: pulp.plugins.model.Unit
 
-        :return: object representation of the given module
+        :return: object representation of the given package
         :rtype:  DebianPackage
         """
         unit_as_dict = copy.copy(pulp_unit.unit_key)
@@ -163,8 +163,8 @@ class DebianPackage(object):
 
     def unit_key(self):
         """
-        Returns the unit key for this module that will uniquely identify
-        it in Pulp. This is the unique key for the inventoried module in Pulp.
+        Returns the unit key for this package that will uniquely identify
+        it in Pulp. This is the unique key for the inventoried package in Pulp.
         """
         data = self.to_dict()
         return self.generate_unit_key(*[data[key] for key in UNIT_KEYS])
@@ -172,7 +172,7 @@ class DebianPackage(object):
     def unit_metadata(self):
         """
         Returns all non-unit key metadata that should be stored in Pulp
-        for this module. This is how the module will be inventoried in Pulp.
+        for this package. This is how the package will be inventoried in Pulp.
         """
         data = self.to_dict()
         metadata = [(k, v) for k, v in data.items() if k not in UNIT_KEYS]
@@ -185,9 +185,9 @@ class DebianPackage(object):
 
     def filename(self):
         """
-        Generates the filename for the given module.
+        Generates the filename for the given package.
 
-        :return: puppet standard filename for this module
+        :return: package standard filename for this package
         :rtype: str
         """
         return self.filename_from_deb822() or self.filename_from_data()

@@ -40,7 +40,7 @@ def handle_uploaded_unit(repo, type_id, unit_key, metadata, file_path, conduit):
     :type  conduit: pulp.plugins.conduit.upload.UploadConduit
     """
 
-    if type_id != constants.TYPE_DEB_PACKAGE:
+    if type_id != constants.TYPE_DEB:
         raise NotImplementedError()
 
     # Create a deb out of the uploaded metadata
@@ -48,9 +48,9 @@ def handle_uploaded_unit(repo, type_id, unit_key, metadata, file_path, conduit):
     combined.update(metadata)
     deb = DebianPackage.from_dict(combined)
 
-    # Extract the metadata from the module
+    # Extract the metadata from the package
     # FIXME: What does this do?
-    metadata_parser.extract_metadata(module, file_path, repo.working_dir)
+    metadata_parser.extract_metadata(package, file_path, repo.working_dir)
 
     # Create the Pulp unit
     type_id = constants.TYPE_DEB

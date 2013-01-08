@@ -36,7 +36,7 @@ def get_downloader(url, repo, conduit, config, is_cancelled_call):
     """
     Returns an instance of the correct downloader to use for the given url.
 
-    :param url: location from which to sync modules
+    :param url: location from which to sync packages
     :type  url: str
 
     :param repo: describes the repository being synchronized

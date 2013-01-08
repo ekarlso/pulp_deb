@@ -31,7 +31,7 @@ DISTRIBUTOR_TYPE_ID = 'deb_distributor'
 # ID used to refer to the deb distributor instance on a repository
 DISTRIBUTOR_ID = 'deb_distributor'
 
-# ID of the deb module type definition (must match what's in deb.json)
+# ID of the deb package type definition (must match what's in deb.json)
 TYPE_DEB = 'deb'
 
 # Used as a note on a repository to indicate it is a deb repository
@@ -40,7 +40,7 @@ REPO_NOTE = 'deb-repo'
 
 # -- importer configuration keys ----------------------------------------------
 
-# Location from which to sync modules
+# Location from which to sync packages
 CONFIG_URL = 'url'
 CONFIG_DIST = 'dist'
 CONFIG_COMPONENT = 'component'
@@ -74,16 +74,16 @@ CONTENTS_FILENAME = 'Contents-%(architecture)s.gz'
 PACKAGES_FILENAME = 'Packages.gz'
 SOURCES_FILENAME = 'Sources.gz'
 
-# Location in the repository where a module will be hosted
+# Location in the repository where a package will be hosted
 # Substitutions: author first character, author
 HOSTED_DEB_FILE_RELATIVE_PATH = 'system/releases/%s/%s/'
 
-# Name template for a module
+# Name template for a package
 # Substitutions: maintainer, name, version
 DEB_FILENAME = '%(maintainer)s-%(package)s-%(version)s'
 
-# Location in Pulp where modules will be stored (the filename includes all
-# of the uniqueness of the module, so we can keep this flat)
+# Location in Pulp where packages will be stored (the filename includes all
+# of the uniqueness of the package, so we can keep this flat)
 # Substitutions: filename
 STORAGE_DEB_RELATIVE_PATH = '%s'
 
@@ -115,14 +115,14 @@ DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(package)s/%(filename)s'
 # List of queries to run on the feed
 CONFIG_QUERIES = 'queries'
 
-# Whether or not to remove modules that were previously synchronized but were
+# Whether or not to remove packages that were previously synchronized but were
 # not on a subsequent sync
 CONFIG_REMOVE_MISSING = 'remove_missing'
 DEFAULT_REMOVE_MISSING = False
 
 # -- distributor configuration keys -------------------------------------------
 
-# Controls if modules will be served insecurely or not
+# Controls if packages will be served insecurely or not
 CONFIG_SERVE_INSECURE = 'serve_https'
 DEFAULT_SERVE_INSECURE = True
 

@@ -13,7 +13,7 @@
 
 """
 Contains methods related to formatting the progress reports sent back to Pulp
-by all of the puppet plugins.
+by all of the package plugins.
 """
 
 import traceback

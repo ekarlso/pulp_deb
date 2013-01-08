@@ -26,7 +26,7 @@ PKG_DATA = {
     'Architecture': u'amd64',
     'Conflicts': u'python2.3-crypto, python2.4-crypto',
     'Depends': u'python2.7, python (>= 2.7.1-0ubuntu2), python (<< 2.8), libc6 (>= 2.14), libgmp10',
-    'Description': u'cryptographic algorithms and protocols for Python\n A collection of cryptographic algorithms and protocols, implemented\n for use from Python. Among the contents of the package:\n .\n * Hash functions: HMAC, MD2, MD4, MD5, RIPEMD160, SHA, SHA256.\n * Block encryption algorithms: AES, ARC2, Blowfish, CAST, DES, Triple-DES.\n * Stream encryption algorithms: ARC4, simple XOR.\n * Public-key algorithms: RSA, DSA, ElGamal.\n * Protocols: All-or-nothing transforms, chaffing/winnowing.\n * Miscellaneous: RFC1751 module for converting 128-key keys\n into a set of English words, primality testing, random number gereration.',
+    'Description': u'cryptographic algorithms and protocols for Python\n A collection of cryptographic algorithms and protocols, implemented\n for use from Python. Among the contents of the package:\n .\n * Hash functions: HMAC, MD2, MD4, MD5, RIPEMD160, SHA, SHA256.\n * Block encryption algorithms: AES, ARC2, Blowfish, CAST, DES, Triple-DES.\n * Stream encryption algorithms: ARC4, simple XOR.\n * Public-key algorithms: RSA, DSA, ElGamal.\n * Protocols: All-or-nothing transforms, chaffing/winnowing.\n * Miscellaneous: RFC1751 package for converting 128-key keys\n into a set of English words, primality testing, random number gereration.',
     'Filename': u'pool/main/p/python-crypto/python-crypto_2.6-2build3~ubuntu12.04.1~grizzly0_amd64.deb',
     'Installed-Size': u'1500',
     'MD5sum': u'e9242f4b733d993da0b096bea5809d42',

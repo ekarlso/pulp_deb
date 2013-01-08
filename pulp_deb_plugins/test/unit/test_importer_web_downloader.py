@@ -113,7 +113,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         mock_curl.getinfo.return_value = 200
         mock_curl_create.return_value = mock_curl
 
-        url = 'http://localhost/module.tar.gz'
+        url = 'http://localhost/package.tar.gz'
         destination = mock.MagicMock()
 
         # Test
@@ -135,7 +135,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         mock_curl.getinfo.return_value = 401
         mock_curl_create.return_value = mock_curl
 
-        url = 'http://localhost/module.tar.gz'
+        url = 'http://localhost/package.tar.gz'
         destination = mock.MagicMock()
 
         # Test
@@ -152,7 +152,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         mock_curl.getinfo.return_value = 404
         mock_curl_create.return_value = mock_curl
 
-        url = 'http://localhost/module.tar.gz'
+        url = 'http://localhost/package.tar.gz'
         destination = mock.MagicMock()
 
         # Test
@@ -169,7 +169,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         mock_curl.getinfo.return_value = 500
         mock_curl_create.return_value = mock_curl
 
-        url = 'http://localhost/module.tar.gz'
+        url = 'http://localhost/package.tar.gz'
         destination = mock.MagicMock()
 
         # Test

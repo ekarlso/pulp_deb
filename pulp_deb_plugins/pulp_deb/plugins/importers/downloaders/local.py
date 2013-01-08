@@ -26,7 +26,7 @@ def strip_scheme(url):
 
 class LocalDownloader(BaseDownloader):
     """
-    Used when the source for deb modules is a directory local to the Pulp
+    Used when the source for deb packages is a directory local to the Pulp
     server.
     """
 

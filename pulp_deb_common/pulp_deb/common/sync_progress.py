@@ -12,7 +12,7 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 """
-Contains classes and functions related to tracking the progress of the puppet
+Contains classes and functions related to tracking the progress of the package
 importer.
 """
 
@@ -58,16 +58,16 @@ class SyncProgressReport(object):
         r.metadata_exception = m['error']
         r.metadata_traceback = m['traceback']
 
-        m = report['modules']
-        r.modules_state = m['state']
-        r.modules_execution_time = m['execution_time']
-        r.modules_total_count = m['total_count']
-        r.modules_finished_count = m['finished_count']
-        r.modules_error_count = m['error_count']
-        r.modules_individual_errors = m['individual_errors']
-        r.modules_error_message = m['error_message']
-        r.modules_exception = m['error']
-        r.modules_traceback = m['traceback']
+        m = report['packages']
+        r.packages_state = m['state']
+        r.packages_execution_time = m['execution_time']
+        r.packages_total_count = m['total_count']
+        r.packages_finished_count = m['finished_count']
+        r.packages_error_count = m['error_count']
+        r.packages_individual_errors = m['individual_errors']
+        r.packages_error_message = m['error_message']
+        r.packages_exception = m['error']
+        r.packages_traceback = m['traceback']
 
         return r
 
@@ -85,15 +85,15 @@ class SyncProgressReport(object):
         self.metadata_traceback = None
 
         # Module download
-        self.modules_state = STATE_NOT_STARTED
-        self.modules_execution_time = None
-        self.modules_total_count = None
-        self.modules_finished_count = None
-        self.modules_error_count = None
-        self.modules_individual_errors = None # mapping of module to its error
-        self.modules_error_message = None # overall execution error
-        self.modules_exception = None
-        self.modules_traceback = None
+        self.packages_state = STATE_NOT_STARTED
+        self.packages_execution_time = None
+        self.packages_total_count = None
+        self.packages_finished_count = None
+        self.packages_error_count = None
+        self.packages_individual_errors = None # mapping of package to its error
+        self.packages_error_message = None # overall execution error
+        self.packages_exception = None
+        self.packages_traceback = None
 
     # -- public methods -------------------------------------------------------
 
@@ -114,21 +114,21 @@ class SyncProgressReport(object):
 
         # Report fields
         total_execution_time = -1
-        if self.metadata_execution_time is not None and self.modules_execution_time is not None:
-            total_execution_time = self.metadata_execution_time + self.modules_execution_time
+        if self.metadata_execution_time is not None and self.packages_execution_time is not None:
+            total_execution_time = self.metadata_execution_time + self.packages_execution_time
 
         summary = {
             'total_execution_time' : total_execution_time
         }
 
         details = {
-            'total_count' : self.modules_total_count,
-            'finished_count' : self.modules_finished_count,
-            'error_count' : self.modules_error_count,
+            'total_count' : self.packages_total_count,
+            'finished_count' : self.packages_finished_count,
+            'error_count' : self.packages_error_count,
         }
 
         # Determine if the report was successful or failed
-        all_step_states = (self.metadata_state, self.modules_state)
+        all_step_states = (self.metadata_state, self.packages_state)
         unsuccessful_steps = [s for s in all_step_states if s != STATE_SUCCESS]
 
         if len(unsuccessful_steps) == 0:
@@ -149,18 +149,18 @@ class SyncProgressReport(object):
 
         report = {
             'metadata' : self._metadata_section(),
-            'modules'  : self._modules_section(),
+            'packages'  : self._packages_section(),
         }
         return report
 
-    def add_failed_module(self, module, exception, traceback):
+    def add_failed_package(self, package, exception, traceback):
         """
-        Updates the progress report that a module failed to be imported.
+        Updates the progress report that a package failed to be imported.
         """
-        self.modules_error_count += 1
-        self.modules_individual_errors = self.modules_individual_errors or {}
-        error_key = '%s-%s-%s' % (module.name, module.version, module.author)
-        self.modules_individual_errors[error_key] = {
+        self.packages_error_count += 1
+        self.packages_individual_errors = self.packages_individual_errors or {}
+        error_key = '%s-%s-%s' % (package.name, package.version, package.author)
+        self.packages_individual_errors[error_key] = {
             'exception' : reporting.format_exception(exception),
             'traceback' : reporting.format_traceback(traceback),
         }
@@ -180,16 +180,16 @@ class SyncProgressReport(object):
         }
         return metadata_report
 
-    def _modules_section(self):
-        modules_report = {
-            'state' : self.modules_state,
-            'execution_time' : self.modules_execution_time,
-            'total_count' : self.modules_total_count,
-            'finished_count' : self.modules_finished_count,
-            'error_count' : self.modules_error_count,
-            'individual_errors' : self.modules_individual_errors,
-            'error_message' : self.modules_error_message,
-            'error' : reporting.format_exception(self.modules_exception),
-            'traceback' : reporting.format_traceback(self.modules_traceback),
+    def _packages_section(self):
+        packages_report = {
+            'state' : self.packages_state,
+            'execution_time' : self.packages_execution_time,
+            'total_count' : self.packages_total_count,
+            'finished_count' : self.packages_finished_count,
+            'error_count' : self.packages_error_count,
+            'individual_errors' : self.packages_individual_errors,
+            'error_message' : self.packages_error_message,
+            'error' : reporting.format_exception(self.packages_exception),
+            'traceback' : reporting.format_traceback(self.packages_traceback),
         }
-        return modules_report
+        return packages_report

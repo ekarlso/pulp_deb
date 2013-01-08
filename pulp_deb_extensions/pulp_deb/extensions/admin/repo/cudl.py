@@ -34,8 +34,8 @@ OPTION_ARCH = PulpCliOption('--arch', DESC_ARCH, required=False)
 
 
 DESC_QUERY = _(
-    'query to issue against the feed\'s modules.json file to scope which '
-    'modules are imported; multiple queries may be added by specifying this '
+    'query to issue against the feed\'s packages.json file to scope which '
+    'packages are imported; multiple queries may be added by specifying this '
     'argument multiple times'
 )
 OPTION_QUERY = PulpCliOption('--query', DESC_QUERY, required=False, allow_multiple=True)

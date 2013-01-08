@@ -21,7 +21,7 @@ from pulp_deb.plugins.importers.downloaders import url_utils
 
 def validate(config):
     """
-    Validates the configuration for the puppet module importer.
+    Validates the configuration for the package package importer.
 
     :param config: configuration passed in by Pulp
     :type  config: pulp.plugins.config.PluginCallConfiguration
@@ -84,7 +84,7 @@ def _validate_queries(config):
 
 def _validate_remove_missing(config):
     """
-    Validates the remove missing modules value if it is specified.
+    Validates the remove missing packages value if it is specified.
     """
 
     # The flag is optional

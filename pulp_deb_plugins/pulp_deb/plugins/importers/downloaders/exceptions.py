@@ -28,7 +28,7 @@ class UnsupportedURLType(Exception):
 class FileRetrievalException(Exception):
     """
     Base class for all exceptions related to trying to retrieve files, either
-    metadata documents or modules. This should only directly be used if there
+    metadata documents or packages. This should only directly be used if there
     is no more specific subclass.
     """
     def __init__(self, location, *args):

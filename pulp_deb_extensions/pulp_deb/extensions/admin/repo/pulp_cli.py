@@ -16,14 +16,16 @@ from pulp.client.commands.repo import cudl as base_cudl, sync_publish, upload
 from pulp.client.extensions.decorator import priority
 from pulp.client.upload.manager import UploadManager
 
-
 from pulp_deb.extensions.admin import structure
-from pulp_deb.extensions.admin.repo import cudl
+from pulp_deb.extensions.admin.repo import (cudl, copy_package, packages,
+        publish_schedules, remove, status, sync_schedules)
 
 
 @priority()
 def initialize(context):
     structure.ensure_repo_structure(context.cli)
+
+    renderer = status.StatusRenderer(context)
 
     repo_section = structure.repo_section(context.cli)
     repo_section.add_command(cudl.CreateRepositoryCommand(context))
@@ -31,6 +33,20 @@ def initialize(context):
     repo_section.add_command(base_cudl.DeleteRepositoryCommand(context))
     repo_section.add_command(cudl.ListRepositoriesCommand(context))
     repo_section.add_command(cudl.SearchRepositoriesCommand(context))
+
+    repo_section.add_command(packages.PackagesCommand(context))
+    repo_section.add_command(copy_package.PackageCopyCommand(context))
+
+    sync_section = structure.repo_sync_section(context.cli)
+    sync_section.add_command(sync_publish.RunSyncRepositoryCommand(context, renderer))
+    sync_section.add_command(sync_publish.SyncStatusCommand(context, renderer))
+
+    sync_schedules_section = structure.repo_sync_schedules_section(context.cli)
+    sync_schedules_section.add_command(sync_schedules.CreateScheduleCommand(context))
+    sync_schedules_section.add_command(sync_schedules.UpdateScheduleCommand(context))
+    sync_schedules_section.add_command(sync_schedules.DeleteScheduleCommand(context))
+    sync_schedules_section.add_command(sync_schedules.ListScheduleCommand(context))
+    sync_schedules_section.add_command(sync_schedules.NextRunCommand(context))
 
 
 def __upload_manager(context):

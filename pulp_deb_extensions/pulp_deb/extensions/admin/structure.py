@@ -38,7 +38,7 @@ DESC_PUBLISH_SCHEDULES = _('manage repository publish schedules')
 def ensure_deb_root(cli):
     """
     Verifies that the root of deb-related commands exists in the CLI,
-    creating it using constants from this module if it does not.
+    creating it using constants from this package if it does not.
 
     :param cli: CLI instance being configured
     :type  cli: pulp.client.extensions.core.PulpCli
@@ -53,7 +53,7 @@ def ensure_deb_root(cli):
 def ensure_repo_structure(cli):
     """
     Verifies that the repository section and all of its subsections are present
-    in the CLI, creating them using constants from this module if they are not.
+    in the CLI, creating them using constants from this package if they are not.
 
     :param cli: CLI instance being configured
     :type  cli: pulp.client.extensions.core.PulpCli
