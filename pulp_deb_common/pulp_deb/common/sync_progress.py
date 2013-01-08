@@ -159,8 +159,7 @@ class SyncProgressReport(object):
         """
         self.packages_error_count += 1
         self.packages_individual_errors = self.packages_individual_errors or {}
-        error_key = '%s-%s-%s' % (package.name, package.version, package.author)
-        self.packages_individual_errors[error_key] = {
+        self.packages_individual_errors[package.key()] = {
             'exception' : reporting.format_exception(exception),
             'traceback' : reporting.format_traceback(traceback),
         }
