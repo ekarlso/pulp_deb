@@ -12,7 +12,6 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 import os
-import ipdb
 
 from pulp_deb.plugins.importers.downloaders.base import BaseDownloader
 from pulp_deb.plugins.importers.downloaders.exceptions import FileNotFoundException
