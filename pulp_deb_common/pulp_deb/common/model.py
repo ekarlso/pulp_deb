@@ -202,3 +202,6 @@ class DebianPackage(object):
 
     def filename_short(self):
         return self.filename().split('/')[-1]
+
+    def key(self):
+        return constants.DEB_KEY % self.to_dict()

@@ -74,19 +74,6 @@ CONTENTS_FILENAME = 'Contents-%(architecture)s.gz'
 PACKAGES_FILENAME = 'Packages.gz'
 SOURCES_FILENAME = 'Sources.gz'
 
-# Location in the repository where a package will be hosted
-# Substitutions: author first character, author
-HOSTED_DEB_FILE_RELATIVE_PATH = 'system/releases/%s/%s/'
-
-# Name template for a package
-# Substitutions: maintainer, name, version
-DEB_FILENAME = '%(maintainer)s-%(package)s-%(version)s'
-
-# Location in Pulp where packages will be stored (the filename includes all
-# of the uniqueness of the package, so we can keep this flat)
-# Substitutions: filename
-STORAGE_DEB_RELATIVE_PATH = '%s'
-
 # -- progress states ----------------------------------------------------------
 
 STATE_NOT_STARTED = 'not-started'
@@ -111,6 +98,9 @@ RESOURCES = ['packages', 'sources']
 
 DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(package)s/%(filename)s'
 
+# Key template for a package
+# Substitutions: maintainer, name, version
+DEB_KEY = '%(maintainer)s-%(package)s-%(version)s'
 
 # List of queries to run on the feed
 CONFIG_QUERIES = 'queries'
