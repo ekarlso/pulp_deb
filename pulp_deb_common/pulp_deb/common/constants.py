@@ -49,24 +49,27 @@ CONFIG_ARCH = 'architecture'
 # -- storage and hosting ------------------------------------------------------
 
 PACKAGE_KEYS = [
+    'Homepage',
+    'Original-Maintainer',
     'Replaces',
     'Maintainer',
     'Description',
     'Package',
+    'Source',
     'Version',
     'Section',
     'MD5sum',
-    'component',
     'Installed-Size',
     'Filename',
     'Priority',
     'Suggests',
     'Depends',
     'SHA1',
+    'SHA256',
     'Architecture',
     'Provides',
     'Conflicts',
-    'Size',
+    'Size'
 ]
 
 # Name of the hosted file describing the contents of the repository
@@ -95,12 +98,11 @@ URLS = {
 
 RESOURCES = ['packages', 'sources']
 
-
 DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(package)s/%(filename)s'
 
 # Key template for a package
 # Substitutions: maintainer, name, version
-DEB_KEY = '%(maintainer)s-%(package)s-%(version)s'
+DEB_KEY = '%(package)s-%(version)s-%(maintainer)s'
 
 # List of queries to run on the feed
 CONFIG_QUERIES = 'queries'
