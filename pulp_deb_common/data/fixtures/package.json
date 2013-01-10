@@ -1,30 +1,19 @@
 {
-    "SHA1": "6d10e81457f7dcd9c2c48fce797662246d8de947",
-    "Maintainer": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-    "Description": "lightweight C library for daemons - runtime library\n
-libdaemon is a leightweight C library which eases the writing of UNIX
-daemons.\n It consists of the following parts:\n .\n  * Wrapper around fork()
-for correct daemonization of a process\n  * Wrapper around syslog() for simple
-log output to syslog or STDERR\n  * An API for writing PID files\n  * An API
-for serializing signals into a pipe for use with select() or poll()\n  * An API
-for running subprocesses with STDOUT and STDERR redirected to syslog\n .\n
-Routines like these are included in most of the daemon software available. It\n
-is not simple to get these done right and code duplication is not acceptable.\n
-.\n This package includes the libdaemon run time shared library.",
-    "Original-Maintainer": "Utopia Maintenance Team
-<pkg-utopia-maintainers@lists.alioth.debian.org>",
-    "Package": "libdaemon0",
-    "Section": "libs",
-    "MD5sum": "c714e7fec80be42a0d4b54ab88c2c08a",
-    "Installed-Size": "84",
-    "Filename": "pool/main/libd/libdaemon/libdaemon0_0.14-2_amd64.deb",
-    "Priority": "optional",
-    "Source": "libdaemon",
-    "Depends": "libc6 (>= 2.8)",
-    "Version": "0.14-2",
-    "Architecture": "amd64",
-    "SHA256":
-"6081ce4e689934a0de2ff9525c11e35b604d2b1b695dcad3cf12e95830611be8",
-    "Homepage": "http://0pointer.de/lennart/projects/libdaemon/",
-    "Size": "18916"
+  "SHA256": "6081ce4e689934a0de2ff9525c11e35b604d2b1b695dcad3cf12e95830611be8",
+  "Maintainer": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+  "Description": "lightweight C library for daemons - runtime library\n libdaemon is a leightweight C library which eases the writing of UNIX daemons.\n It consists of the following parts:\n .\n  * Wrapper around fork() for correct daemonization of a process\n  * Wrapper around syslog() for simple log output to syslog or STDERR\n  * An API for writing PID files\n  * An API for serializing signals into a pipe for use with select() or poll()\n  * An API for running subprocesses with STDOUT and STDERR redirected to syslog\n .\n Routines like these are included in most of the daemon software available. It\n is not simple to get these done right and code duplication is not acceptable.\n .\n This package includes the libdaemon run time shared library.",
+  "SHA1": "6d10e81457f7dcd9c2c48fce797662246d8de947",
+  "Package": "libdaemon0",
+  "Section": "libs",
+  "MD5sum": "c714e7fec80be42a0d4b54ab88c2c08a",
+  "Depends": "libc6 (>= 2.8)",
+  "Filename": "pool/main/libd/libdaemon/libdaemon0_0.14-2_amd64.deb",
+  "Priority": "optional",
+  "Source": "libdaemon",
+  "Installed-Size": "84",
+  "Version": "0.14-2",
+  "Architecture": "amd64",
+  "Size": "18916",
+  "Homepage": "http://0pointer.de/lennart/projects/libdaemon/",
+  "Original-Maintainer": "Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>"
 }
