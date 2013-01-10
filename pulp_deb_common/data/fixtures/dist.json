@@ -1,0 +1,13 @@
+{
+    "name": "precise",
+    "components": [
+        {
+            "arch": [
+                "amd64",
+                "i686"
+            ],
+            "name": "main"
+        }
+    ]
+}
+
