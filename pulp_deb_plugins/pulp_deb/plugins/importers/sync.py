@@ -14,6 +14,7 @@
 from datetime import datetime
 from gettext import gettext as _
 import logging
+import ipdb
 import os
 import shutil
 import sys
@@ -32,7 +33,7 @@ _LOG = logging.getLogger(__name__)
 # -- public classes -----------------------------------------------------------
 
 
-class DebianPackageSyncRun(object):
+class PackageSyncRun(object):
     """
     Used to perform a single sync of a Debian repository. This class will
     maintain state relevant to the run and should not be reused across runs.
@@ -63,12 +64,12 @@ class DebianPackageSyncRun(object):
         _LOG.info('Beginning sync for repository <%s>' % self.repo.id)
 
         try:
-            metadata = self._parse_metadata()
-            if not metadata:
+            repo = self._get_repo_from_resources()
+            if not repo:
                 report = self.progress_report.build_final_report()
                 return report
 
-            self._import_packages(metadata)
+            self._import_packages_from_repo(repo)
         finally:
             # One final progress update before finishing
             self.progress_report.update_progress()
@@ -76,22 +77,22 @@ class DebianPackageSyncRun(object):
             report = self.progress_report.build_final_report()
             return report
 
-    def _parse_metadata(self):
+    def _get_repo_from_resources(self):
         """
         Takes the necessary actions (according to the run configuration) to
-        retrieve and parse the repository's metadata. This call will return
-        either the successfully parsed metadata or None if it could not
+        retrieve and parse the repository's resources. This call will return
+        either the successfully parsed resources or None if it could not
         be retrieved or parsed. The progress report will be updated with the
         appropriate description of what went wrong in the event of an error,
         so the caller should interpet a None return as an error occuring and
         not continue the sync.
 
-        :return: object representation of the metadata
+        :return: object representation of the resources
         :rtype:  Repository
         """
-        _LOG.info('Beginning metadata retrieval for repository <%s>' % self.repo.id)
+        _LOG.info('Beginning resources retrieval for repository <%s>' % self.repo.id)
 
-        self.progress_report.metadata_state = STATE_RUNNING
+        self.progress_report.resource_state = STATE_RUNNING
         self.progress_report.update_progress()
 
         start_time = datetime.now()
@@ -99,54 +100,53 @@ class DebianPackageSyncRun(object):
         # Retrieve the metadata from the source
         try:
             downloader = self._create_downloader()
-            metadata_json_docs = downloader.retrieve_metadata(self.progress_report)
+            resources = downloader.retrieve_resources(self.progress_report)
         except Exception, e:
-            _LOG.exception('Exception while retrieving metadata for repository <%s>' % self.repo.id)
-            self.progress_report.metadata_state = STATE_FAILED
-            self.progress_report.metadata_error_message = _('Error downloading metadata')
-            self.progress_report.metadata_exception = e
-            self.progress_report.metadata_traceback = sys.exc_info()[2]
+            _LOG.exception('Exception while retrieving resources for repository <%s>' % self.repo.id)
+            self.progress_report.state = STATE_FAILED
+            self.progress_report.error_message = _('Error downloading resources')
+            self.progress_report.exception = e
+            self.progress_report.traceback = sys.exc_info()[2]
 
             end_time = datetime.now()
             duration = end_time - start_time
-            self.progress_report.metadata_execution_time = duration.seconds
+            self.progress_report.execution_time = duration.seconds
 
             self.progress_report.update_progress()
 
             return None
 
-        # Parse the retrieved metadata documents
+        # Parse the retrieved resoruces documents
         try:
-            metadata = Repository()
-            for doc in metadata_json_docs:
-                metadata.update_from_json(doc)
+            repo = Repository()
+            repo.update_from_resources(resources)
         except Exception, e:
-            _LOG.exception('Exception parsing metadata for repository <%s>' % self.repo.id)
-            self.progress_report.metadata_state = STATE_FAILED
-            self.progress_report.metadata_error_message = _('Error parsing repository packages metadata document')
-            self.progress_report.metadata_exception = e
-            self.progress_report.metadata_traceback = sys.exc_info()[2]
+            _LOG.exception('Exception parsing resources for repository <%s>' % self.repo.id)
+            self.progress_report.state = STATE_FAILED
+            self.progress_report.error_message = _('Error parsing repository packages resources document')
+            self.progress_report.exception = e
+            self.progress_report.traceback = sys.exc_info()[2]
 
             end_time = datetime.now()
             duration = end_time - start_time
-            self.progress_report.metadata_execution_time = duration.seconds
+            self.progress_report.execution_time = duration.seconds
 
             self.progress_report.update_progress()
 
             return None
 
         # Last update to the progress report before returning
-        self.progress_report.metadata_state = STATE_SUCCESS
+        self.progress_report.state = STATE_SUCCESS
 
         end_time = datetime.now()
         duration = end_time - start_time
-        self.progress_report.metadata_execution_time = duration.seconds
+        self.progress_report.execution_time = duration.seconds
 
         self.progress_report.update_progress()
 
-        return metadata
+        return repo
 
-    def _import_packages(self, metadata):
+    def _import_packages_from_repo(self, repo):
         """
         Imports each package in the repository into Pulp.
 
@@ -171,7 +171,7 @@ class DebianPackageSyncRun(object):
 
         # Perform the actual logic
         try:
-            self._do_import_packages(metadata)
+            self._do_import_packages_from_repo(repo)
         except Exception, e:
             _LOG.exception('Exception importing packages for repository <%s>' % self.repo.id)
             self.progress_report.packages_state = STATE_FAILED
@@ -196,34 +196,23 @@ class DebianPackageSyncRun(object):
 
         self.progress_report.update_progress()
 
-    def _do_import_packages(self, metadata):
+    def _do_import_packages_from_repo(self, repo):
         """
         Actual logic of the import. This method will do a best effort per package;
         if an individual package fails it will be recorded and the import will
         continue. This method will only raise an exception in an extreme case
         where it cannot react and continue.
         """
-
-        def unit_key_str(unit_key_dict):
-            """
-            Converts the unit key dict form into a single string that can be
-            used as the key in a dict lookup.
-            """
-            template = '%s-%s-%s'
-            return template % (encode_unicode(unit_key_dict['name']),
-                               encode_unicode(unit_key_dict['version']),
-                               encode_unicode(unit_key_dict['author']))
-
         downloader = self._create_downloader()
 
         # Ease lookup of packages
-        packages_by_key = dict([(unit_key_str(m.unit_key()), m) for m in metadata.packages])
+        packages_by_key = dict([(d.key(), d) for d in repo.packages])
 
         # Collect information about the repository's packages before changing it
         package_criteria = UnitAssociationCriteria(type_ids=[constants.TYPE_DEB])
         existing_units = self.sync_conduit.get_units(criteria=package_criteria)
-        existing_packages = [DebianPackage.from_unit(x) for x in existing_units]
-        existing_package_keys = [unit_key_str(m.unit_key()) for m in existing_packages]
+        existing_packages = [DebianPackage.from_unit(u) for u in existing_units]
+        existing_package_keys = [p.key() for p in existing_packages]
 
         new_unit_keys = self._resolve_new_units(existing_package_keys, packages_by_key.keys())
         remove_unit_keys = self._resolve_remove_units(existing_package_keys, packages_by_key.keys())
@@ -270,30 +259,36 @@ class DebianPackageSyncRun(object):
         type_id = constants.TYPE_DEB
         unit_key = package.unit_key()
         unit_metadata = {} # populated later but needed for the init call
-        relative_path = constants.STORAGE_MODULE_RELATIVE_PATH % package.filename()
 
         unit = self.sync_conduit.init_unit(type_id, unit_key, unit_metadata,
-                                           relative_path)
+                                           package.filename())
 
-        try:
-            if not self._package_exists(unit.storage_path):
-                # Download the bits
-                downloaded_filename = downloader.retrieve_package(self.progress_report, package)
+        print "PATH", unit.storage_path
+        if not self._package_exists(unit.storage_path):
+            # Download the bits
+            downloaded_filename = downloader.retrieve_deb(self.progress_report, package)
 
-                # Copy them to the final location
+            # Create the relative path if it's not there..
+            path = os.path.dirname(unit.storage_path)
+            if not os.path.exists(path):
+                os.makedirs(path)
+
+            # Copy them to the final location
+            try:
                 shutil.copy(downloaded_filename, unit.storage_path)
+            except Exception, e:
+                _LOG.error("Error copying package to %s" % unit.storage_path)
+                raise
 
-            # Extract the extra metadata into the package
-            metadata.extract_metadata(package, unit.storage_path, self.repo.working_dir)
+        # NOTE: Maybe we should do this if we import a single package?
+        # Extract the extra metadata into the package
+        # metadata.extract_metadata(package, unit.storage_path, self.repo.working_dir)
 
-            # Update the unit with the extracted metadata
-            unit.metadata = package.unit_metadata()
+        # Update the unit with the extracted metadata
+        unit.metadata = package.unit_metadata()
 
-            # Save the unit and associate it to the repository
-            self.sync_conduit.save_unit(unit)
-        finally:
-            # Clean up the temporary package
-            downloader.cleanup_package(package)
+        # Save the unit and associate it to the repository
+        self.sync_conduit.save_unit(unit)
 
     def _package_exists(self, filename):
         """
@@ -333,9 +328,8 @@ class DebianPackageSyncRun(object):
 
         :return: one of the *Downloader classes in the downloaders package
         """
-
-        feed = self.config.get(constants.CONFIG_FEED)
-        downloader = downloader_factory.get_downloader(feed, self.repo, self.sync_conduit,
+        url = self.config.get(constants.CONFIG_URL)
+        downloader = downloader_factory.get_downloader(url, self.repo, self.sync_conduit,
                                                        self.config, self.is_cancelled_call)
         return downloader
 
