@@ -8,10 +8,15 @@ DATA_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                          '..', '..', 'data')
 
 
-def load(f):
+def read(f):
     fh = open(os.path.join(DATA_PATH, 'fixtures', f + '.json'))
-    json_str = fh.read()
+    fc = fh.read()
     fh.close()
+    return fc
+
+
+def load(f):
+    json_str = read(f)
     return json.loads(json_str)
 
 
