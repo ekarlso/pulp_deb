@@ -20,18 +20,12 @@ def load(f):
     return json.loads(json_str)
 
 
+DIST = load('dist')
+COMPONENT = load('component')
+PACKAGE = load('package')
+
+
 BASE_URL = 'http://ubuntu.uib.no/archive'
-DIST_NAME = 'precise'
-COMPONENT_NAME = 'main'
-ARCH_NAMES = ['amd64', 'i686']
-
-COMPONENT = dict(
-    name=COMPONENT_NAME,
-    arch=ARCH_NAMES)
-
-DIST = dict(
-    name=DIST_NAME,
-    components=[COMPONENT])
 
 
 PACKAGES_URL = BASE_URL + '/dists/%(dist)s/%(component)s/binary-%(architecture)s/Packages.gz'
