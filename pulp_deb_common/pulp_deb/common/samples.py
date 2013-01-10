@@ -20,9 +20,25 @@ def load(f):
     return json.loads(json_str)
 
 
-DIST = load('dist')
-COMPONENT = load('component')
-PACKAGE = load('package')
+MODELS = dict(
+    dist=model.Distribution,
+    component=model.Component,
+    package=model.Package)
+
+
+DATA = {}
+for k in MODELS.keys():
+    DATA[k] = load(k)
+
+
+def data(name, **kw):
+    d = DATA[name].copy()
+    d.update(**kw)
+    return d
+
+
+def model(name, **kw):
+    return MODELS[name](**data(name, **kw))
 
 
 BASE_URL = 'http://ubuntu.uib.no/archive'
@@ -35,24 +51,6 @@ CONTENTS_URL = BASE_URL + '/dists/%(dist)s/Contents-%(architecture)s.gz'
 
 def local_repo_location():
     return 'file://' + os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..', 'test', 'repos')
-
-
-def dist(**kw):
-    data = load('dist')
-    data.update(kw)
-    return model.Distribution(**data)
-
-
-def component(**kw):
-    data = load('component')
-    data.update(kw)
-    return model.Component(**data)
-
-
-def package(**kw):
-    data = load('package')
-    data.update(kw)
-    return model.Package(**data)
 
 
 def valid_repo(**kw):
