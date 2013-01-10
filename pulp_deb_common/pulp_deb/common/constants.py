@@ -98,7 +98,7 @@ URLS = {
 
 RESOURCES = ['packages', 'sources']
 
-DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(package)s/%(filename_short)s'
+DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(source)s/%(filename_short)s'
 
 # Key template for a package
 # Substitutions: maintainer, name, version
