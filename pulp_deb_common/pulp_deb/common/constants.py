@@ -44,7 +44,7 @@ REPO_NOTE = 'deb-repo'
 CONFIG_URL = 'url'
 CONFIG_DIST = 'dist'
 CONFIG_COMPONENT = 'component'
-CONFIG_ARCH = 'architecture'
+CONFIG_ARCH = 'arch'
 
 # -- storage and hosting ------------------------------------------------------
 
@@ -73,7 +73,7 @@ PACKAGE_KEYS = [
 ]
 
 # Name of the hosted file describing the contents of the repository
-CONTENTS_FILENAME = 'Contents-%(architecture)s.gz'
+CONTENTS_FILENAME = 'Contents-%(arch)s.gz'
 PACKAGES_FILENAME = 'Packages.gz'
 SOURCES_FILENAME = 'Sources.gz'
 
@@ -92,11 +92,9 @@ CONFIG_REPO = [CONFIG_URL, CONFIG_DIST, CONFIG_COMPONENT, CONFIG_ARCH]
 URL_BASE = '%(url)s/dists/%(dist)s'
 URL_COMPONENT_BASE = URL_BASE + '/%(component)s'
 URLS = {
-    'packages': URL_COMPONENT_BASE + '/binary-%(architecture)s/' + PACKAGES_FILENAME,
+    'packages': URL_COMPONENT_BASE + '/binary-%(arch)s/' + PACKAGES_FILENAME,
     'sources': URL_COMPONENT_BASE + '/source/' + SOURCES_FILENAME
 }
-
-RESOURCES = ['packages', 'sources']
 
 DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(source)s/%(filename_short)s'
 
