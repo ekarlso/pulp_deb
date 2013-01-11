@@ -82,7 +82,7 @@ class HttpDownloader(base.BaseDownloader):
         :type  progress_report: pulp_deb.importer.sync_progress.ProgressReport
 
         :param deb: .deb to download
-        :type  deb: pulp_deb.common.model.DebianPackage
+        :type  deb: pulp_deb.common.model.Package
 
         :return: full path to the temporary location where the deb file is
         :rtype:  str
@@ -109,7 +109,7 @@ class HttpDownloader(base.BaseDownloader):
         Generates the URL for a deb at the configured source.
 
         :param deb: deb instance being downloaded
-        :type  deb: pulp_deb.common.model.DebianPackage
+        :type  deb: pulp_deb.common.model.Package
 
         :return: full URL to download the deb
         :rtype:  str

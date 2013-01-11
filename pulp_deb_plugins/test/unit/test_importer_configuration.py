@@ -42,7 +42,7 @@ class ResourcesTests(unittest.TestCase):
 
     def test_validate_resources_invalid(self):
         data = samples.valid_repo()
-        del data['architecture']
+        del data['arch']
 
         config = PluginCallConfiguration(data, {})
         result, msg = configuration._validate_resources(config)

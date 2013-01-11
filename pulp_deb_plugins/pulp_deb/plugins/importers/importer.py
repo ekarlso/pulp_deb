@@ -30,13 +30,13 @@ def entry_point():
     :return: importer class and its config
     :rtype:  Importer, {}
     """
-    return DebianPackageImporter, {}
+    return PackageImporter, {}
 
 
-class DebianPackageImporter(Importer):
+class PackageImporter(Importer):
 
     def __init__(self):
-        super(DebianPackageImporter, self).__init__()
+        super(PackageImporter, self).__init__()
         self.sync_cancelled = False
 
     @classmethod
@@ -52,7 +52,7 @@ class DebianPackageImporter(Importer):
 
     def sync_repo(self, repo, sync_conduit, config):
         self.sync_cancelled = False
-        sync_runner = sync.DebianPackageSyncRun(repo, sync_conduit, config, self.is_sync_cancelled)
+        sync_runner = sync.PackageSyncRun(repo, sync_conduit, config, self.is_sync_cancelled)
         report = sync_runner.perform_sync()
         return report
 

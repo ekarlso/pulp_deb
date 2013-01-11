@@ -12,11 +12,11 @@
 import unittest
 
 from pulp_deb.plugins.importers import importer
-from pulp_deb.plugins.importers.importer import DebianPackageImporter
+from pulp_deb.plugins.importers.importer import PackageImporter
 
 
 class TestImporter(unittest.TestCase):
     def test_entry_point(self):
         ret = importer.entry_point()
-        self.assertEqual(ret[0], DebianPackageImporter)
+        self.assertEqual(ret[0], PackageImporter)
         self.assertTrue(isinstance(ret[1], dict))

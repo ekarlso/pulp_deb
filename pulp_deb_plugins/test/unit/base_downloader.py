@@ -41,7 +41,7 @@ class BaseDownloaderTests(unittest.TestCase):
                    version='0.14-2',
                    maintainer='Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
                    filename='pool/main/libd/libdaemon/libdaemon0_0.14-2_amd64.deb')
-        self.deb = model.DebianPackage.from_dict(deb)
+        self.deb = model.Package.from_dict(deb)
 
     def tearDown(self):
         if os.path.exists(self.working_dir):

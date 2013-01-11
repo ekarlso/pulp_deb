@@ -15,7 +15,7 @@ import copy
 import shutil
 
 from pulp_deb.common import constants
-from pulp_deb.common.model import DebianPackage
+from pulp_deb.common.model import Package
 # from pulp_deb.plugins.importers import metadata as metadata_parser
 
 def handle_uploaded_unit(repo, type_id, unit_key, metadata, file_path, conduit):
@@ -46,7 +46,7 @@ def handle_uploaded_unit(repo, type_id, unit_key, metadata, file_path, conduit):
     # Create a deb out of the uploaded metadata
     combined = copy.copy(unit_key)
     combined.update(metadata)
-    deb = DebianPackage.from_dict(combined)
+    deb = Package.from_dict(combined)
 
     # Extract the metadata from the package
     # FIXME: What does this do?

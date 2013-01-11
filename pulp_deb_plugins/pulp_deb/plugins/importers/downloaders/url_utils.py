@@ -8,7 +8,7 @@ from pulp_deb.plugins.importers.downloaders.exceptions import UnsupportedURLType
 LOG = logging.getLogger(__name__)
 
 
-def get_url_dict(resource, url, dist, component=None, architecture=None):
+def get_url_dict(resource, url, dist, component=None, arch=None):
     """
     Return a dict with the necassary data to create a URL
     """
@@ -18,8 +18,8 @@ def get_url_dict(resource, url, dist, component=None, architecture=None):
         constants.CONFIG_DIST: dist,
         constants.CONFIG_COMPONENT: component}
 
-    if architecture is not None:
-        data[constants.CONFIG_ARCH] = architecture
+    if arch is not None:
+        data[constants.CONFIG_ARCH] = arch
 
     return data
 
@@ -41,10 +41,10 @@ def get_resources(config):
         resource['resource'] = get_resource_url(resource)
         resources.append(resource)
 
-    for architecture in repo['architecture']:
+    for arch in repo['arch']:
         for cmpt in repo['component']:
             for resource in constants.RESOURCES:
-                _resource(resource, repo['url'], repo['dist'], cmpt, architecture=architecture)
+                _resource(resource, repo['url'], repo['dist'], cmpt, arch=arch)
     return resources
 
 

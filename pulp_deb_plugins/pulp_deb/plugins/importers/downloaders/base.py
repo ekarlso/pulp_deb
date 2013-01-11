@@ -46,7 +46,7 @@ class BaseDownloader(object):
         :type  progress_report: pulp_deb.importer.sync_progress.ProgressReport
 
         :param deb: deb to download
-        :type  deb: pulp_deb.common.model.DebianPackage
+        :type  deb: pulp_deb.common.model.Package
 
         :return: full path to the temporary location where the deb file is
         :rtype:  str

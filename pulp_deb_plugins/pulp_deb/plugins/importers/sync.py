@@ -24,7 +24,7 @@ from pulp.plugins.conduits.mixins import UnitAssociationCriteria
 
 from pulp_deb.common import constants
 from pulp_deb.common.constants import (STATE_FAILED, STATE_RUNNING, STATE_SUCCESS)
-from pulp_deb.common.model import Repository, DebianPackage
+from pulp_deb.common.model import Repository, Package
 from pulp_deb.common.sync_progress import SyncProgressReport
 from pulp_deb.plugins.importers.downloaders import factory as downloader_factory
 
@@ -211,7 +211,7 @@ class PackageSyncRun(object):
         # Collect information about the repository's packages before changing it
         package_criteria = UnitAssociationCriteria(type_ids=[constants.TYPE_DEB])
         existing_units = self.sync_conduit.get_units(criteria=package_criteria)
-        existing_packages = [DebianPackage.from_unit(u) for u in existing_units]
+        existing_packages = [Package.from_unit(u) for u in existing_units]
         existing_package_keys = [p.key() for p in existing_packages]
 
         new_unit_keys = self._resolve_new_units(existing_package_keys, packages_by_key.keys())
@@ -239,7 +239,7 @@ class PackageSyncRun(object):
         if self._should_remove_missing():
             existing_units_by_key = {}
             for u in existing_units:
-                unit_key = DebianPackage.generate_unit_key(u.unit_key['name'], u.unit_key['version'], u.unit_key['author'])
+                unit_key = Package.generate_unit_key(u.unit_key['name'], u.unit_key['version'], u.unit_key['author'])
                 s = unit_key_str(unit_key)
                 existing_units_by_key[s] = u
 
@@ -253,7 +253,7 @@ class PackageSyncRun(object):
 
         :param downloader: downloader instance to use for retrieving the unit
         :param package: package instance to download
-        :type  package: DebianPackage
+        :type  package: Package
         """
         # Initialize the unit in Pulp
         type_id = constants.TYPE_DEB

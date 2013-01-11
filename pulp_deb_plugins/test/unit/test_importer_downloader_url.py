@@ -20,7 +20,7 @@ class URLTests(unittest.TestCase):
 
     def test_get_url_missing_info(self):
         data = samples.get_resource_data('packages')
-        del data['architecture']
+        del data['arch']
 
         for resource in constants.RESOURCES:
             self.assertRaises(KeyError, url_utils.get_resource_url, data)
