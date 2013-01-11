@@ -92,7 +92,6 @@ class Model(object):
 
         def _dictable(obj):
             if hasattr(obj, 'to_dict'):
-                print "DICTABLE", obj
                 return True
             else:
                 return False
@@ -158,7 +157,6 @@ class Distribution(Model):
             self.add_package(component_name, pkg)
 
 
-
 class Component(Model):
     """
     The Component sits under a repository holding the packages
@@ -195,13 +193,18 @@ class Component(Model):
 
         self.add_packages(data)
 
-    def update_from_resources(self, resources):
+    def update_from_resource(self, resource):
+        """
+        Read packages from a resource file...
+
+        :param resource: A debian style resource file
+        """
         for resource in resources:
             # NOTE: Store dist and component also
             data = dict([(k, resource[k]) for k in ['dist', 'component']])
             self.update_from_packages(resource['resource'][len('file://'):], **data)
 
-    def update_from_json(self, json_string, **kw):
+    def update_from_json(self, json_string):
         """
         Updates this metadata instance with packages found in the given JSON
         document. This can be called multiple times to merge multiple
@@ -211,7 +214,28 @@ class Component(Model):
         :rtype:  Repository
         """
         parsed = json.loads(json_string)
-        self._update(parsed, **kw)
+        self.add_packages(parsed.pop('packages', []))
+        self.data(parsed)
+
+    def get_indexes(self):
+        r = []
+        data = dict(
+            url=self.dist.data['url'],
+            dist=self.dist.data['name'],
+            component=self.data['name'])
+
+        def _r(t, **kw):
+            d = data.copy()
+            d.update(kw)
+            d['index_url'] = constants.URLS[t] % d
+            d['type'] = t
+            return d
+
+        r.append(_r('sources'))
+
+        for arch in self.data['arch']:
+            r.append(_r('packages', arch=arch))
+        return r
 
 
 class Package(Model):
