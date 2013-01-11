@@ -57,9 +57,12 @@ class DistributionTests(unittest.TestCase):
 
 class ComponentTests(unittest.TestCase):
     def setUp(self):
-        self.dist = samples.model('dist')
-        ipdb.set_trace()
+        self.dist = samples.valid_repo()
+        self.cmpt = self.dist['components'][0]
 
+    def test_resource_urls(self):
+        resource = self.cmpt.get_indexes()
+        self.assertEquals(len(resource), 3)
 
 
 class PackageTests(unittest.TestCase):
