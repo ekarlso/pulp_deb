@@ -50,18 +50,19 @@ CONTENTS_URL = BASE_URL + '/dists/%(dist)s/Contents-%(architecture)s.gz'
 
 
 def local_repo_location():
-    return 'file://' + os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..', 'test', 'repos')
+    return 'file://' + os.path.join(DATA_PATH, 'repos')
+
+
+def repo(path='valid', **kw):
+    if 'url' not in kw:
+        kw['url'] = os.path.join(local_repo_location(), path)
+    repo = model('dist', **kw)
+    return repo
 
 
 def valid_repo(**kw):
-    if 'url' not in kw:
-        kw['url'] = local_repo_location() + '/valid'
-    repo = get_repo(**kw)
-    return repo
+    return repo(**kw)
 
 
 def invalid_repo(**kw):
-    if 'url' not in kw:
-        kw['url'] = local_repo_location() + '/invalid'
-    repo = get_repo(**kw)
-    return repo
+    return repo(path='invalid', **kw)
