@@ -44,9 +44,9 @@ def model(name, **kw):
 BASE_URL = 'http://ubuntu.uib.no/archive'
 
 
-PACKAGES_URL = BASE_URL + '/dists/%(dist)s/%(component)s/binary-%(architecture)s/Packages.gz'
+PACKAGES_URL = BASE_URL + '/dists/%(dist)s/%(component)s/binary-%(arch)s/Packages.gz'
 SOURCES_URL = BASE_URL + '/dists/%(dist)s/%(component)s/source/Sources.gz'
-CONTENTS_URL = BASE_URL + '/dists/%(dist)s/Contents-%(architecture)s.gz'
+CONTENTS_URL = BASE_URL + '/dists/%(dist)s/Contents-%(arch)s.gz'
 
 
 def local_repo_location():
