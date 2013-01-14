@@ -41,14 +41,13 @@ def _type(obj):
     if type(obj) in (str, unicode):
         key = obj.split('/')[-1][:-len('.gz')]
     elif type(obj) == dict:
-        for i, k in KEY_TO_NAME:
-            if i in obj:
+        for name, key in KEY_TO_NAME:
+            if name in [k.lower() for k in obj.keys()]:
                 key = k
                 break
 
     if key not in SUPPORTED:
-        name = obj['Package'] if (type(obj) == dict and 'Package' in obj) else obj
-        msg = 'Can\'t get class for %s' % name
+        msg = 'Can\'t get class for data: %s' % obj
         raise RuntimeError(msg)
     return SUPPORTED[key]
 
@@ -105,7 +104,7 @@ class Model(object):
         :return: object representation of the given data
         :rtype:  Model
         """
-        return cls(data)
+        return cls(**data)
 
     def data_to_dict(self):
         """
