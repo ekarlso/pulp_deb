@@ -31,14 +31,15 @@ for k in MODELS.keys():
     DATA[k] = load(k)
 
 
-def data(name, **kw):
+def get_data(name, **kw):
     d = DATA[name].copy()
     d.update(**kw)
     return d
 
 
-def model(name, **kw):
-    return MODELS[name](**data(name, **kw))
+def get_model(name, **kw):
+    data = get_data(name, **kw)
+    return MODELS[name](**data)
 
 
 BASE_URL = 'http://ubuntu.uib.no/archive'
@@ -56,7 +57,7 @@ def local_repo_location():
 def repo(path='valid', **kw):
     if 'url' not in kw:
         kw['url'] = os.path.join(local_repo_location(), path)
-    repo = model('dist', **kw)
+    repo = get_model('dist', **kw)
     return repo
 
 

@@ -12,7 +12,7 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 import unittest
-from debian import deb822
+from debian.deb822 import Packages
 
 from pulp_deb.common import constants, samples
 from pulp_deb.common.model import Distribution, Component, Package
@@ -29,30 +29,35 @@ def get_expected(data):
     return newdata
 
 
-PACKAGE = get_expected(samples.data('package'))
+PACKAGE = get_expected(samples.get_data('package'))
 DATA = samples.DATA
 
 import ipdb
 
 
 class DistributionTests(unittest.TestCase):
-    def setUp(self):
-        self.dist = samples.model('dist')
-
     def test_serialize_dist_wo_packages(self):
-        self.assertEqual(self.dist.serialize(exclude=['packages']), DATA['dist'])
+        dist = samples.get_model('dist')
+        self.assertEqual(dist.serialize(exclude=['packages']), DATA['dist'])
 
     def test_serialize_dist_with_packages(self):
-        self.dist.add_package(DATA['component']['name'], DATA['package'])
+        dist = samples.get_model('dist')
+        dist.add_package(DATA['component']['name'], DATA['package'])
 
-        dist = self.dist.serialize()
-        self.assertEquals(dist['name'], DATA['dist']['name'])
+        dist_data = dist.serialize()
+        self.assertEquals(dist_data['name'], DATA['dist']['name'])
 
-        cmpts = dist['components']
+        cmpts = dist_data['components']
         self.assertEquals(len(cmpts), 1)
         self.assertEquals(cmpts[0]['arch'], DATA['component']['arch'])
         self.assertEquals(cmpts[0]['name'], DATA['component']['name'])
         self.assertEquals(len(cmpts[0]['packages']), 1)
+
+    def test_get_indexes(self):
+        dist = samples.valid_repo()
+        indexes = dist.get_indexes()
+        self.assertEquals(len(indexes), 3)
+        #ipdb.set_trace()
 
 
 class ComponentTests(unittest.TestCase):
@@ -60,22 +65,31 @@ class ComponentTests(unittest.TestCase):
         self.dist = samples.valid_repo()
         self.cmpt = self.dist['components'][0]
 
-    def test_resource_urls(self):
-        resource = self.cmpt.get_indexes()
-        self.assertEquals(len(resource), 3)
+    def test_get_indexes(self):
+        indexes = self.cmpt.get_indexes()
+        self.assertEquals(len(indexes), 3)
+
+    def test_update_from_indexes(self):
+        # NOTE: When it's a local repository the index_path is valid. If not it
+        # has to be downloaded before running update_from_indexes()
+        indexes = self.cmpt.get_indexes()
+        # NOTE: It has i686 as well but there's no index file for it so skip it
+        self.cmpt.update_from_indexes([i['index_path'] for i in indexes],
+                                      empty_on_io=True)
+        self.assertEquals(len(self.cmpt.data['packages']), 2)
 
 
 class PackageTests(unittest.TestCase):
     def setUp(self):
-        self.pkg = samples.model('package')
+        self.pkg = samples.get_model('package')
 
     def test_from_dict(self):
         pkg = Package(**samples.load('package'))
         self.assertEquals(PACKAGE, pkg.to_dict(full=False))
 
     def test_from_deb822(self):
-        deb = deb822.Packages(samples.load('package'))
-        pkg = Package(deb=deb)
+        deb822 = Packages(samples.load('package'))
+        pkg = Package(deb822=deb822)
         self.assertEquals(PACKAGE, pkg.to_dict(full=False))
 
     def test_to_dict_not_full(self):
@@ -85,7 +99,7 @@ class PackageTests(unittest.TestCase):
         self.assertEquals(PACKAGE['package'][0:4], self.pkg.prefix())
 
     def test_filename_from_data_eq_filename(self):
-        pkg = samples.model('package', component='main')
+        pkg = samples.get_model('package', component='main')
         self.assertEquals(pkg.filename_from_data(), pkg.filename_from_deb822())
 
     def test_filename_short(self):

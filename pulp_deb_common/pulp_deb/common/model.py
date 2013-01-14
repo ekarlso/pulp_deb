@@ -1,7 +1,6 @@
 import copy
 from debian.deb822 import Packages, Sources
 import gzip
-import re
 
 from pulp.common.compat import json
 from pulp_deb.common import constants
@@ -10,22 +9,55 @@ from pulp_deb.common import constants
 UNIT_KEYS = ['package', 'version', 'maintainer']
 
 
-RESOURCE_TYPES = {
-    'sources': Sources,
-    'packages': Packages
-}
+SUPPORTED = {
+    'Packages': Packages,
+    'Sources': Sources}
 
 
-def _read(self, f):
-    if not type(f) == file and type(f) == str:
-        fh = open(f)
-    if f.endswith('.gz'):
-        fh = gzip.GzipFile(fileobj=fh)
-    elif type(f) == file:
-        fh = f
-    else:
-        raise RuntimeError('Need to pass either a path or a file')
+KEY_TO_NAME = [('Source', 'Packages'), ('Binary', 'Sources')]
+
+
+def _read(f, empty_on_io=False):
+    try:
+        if not type(f) == file and type(f) in (str, unicode):
+            fh = open(f)
+
+        if f.endswith('.gz'):
+            fh = gzip.GzipFile(fileobj=fh)
+        elif type(f) == file:
+            fh = f
+        else:
+            raise RuntimeError('Need to pass either a path or a file')
+    except IOError:
+        if empty_on_io:
+            return []
+        else:
+            raise
     return fh.readlines()
+
+
+def _type(obj):
+    key = None
+    if type(obj) in (str, unicode):
+        key = obj.split('/')[-1][:-len('.gz')]
+    elif type(obj) == dict:
+        for i, k in KEY_TO_NAME:
+            if i in obj:
+                key = k
+                break
+
+    if key not in SUPPORTED:
+        name = obj['Package'] if (type(obj) == dict and 'Package' in obj) else obj
+        msg = 'Can\'t get class for %s' % name
+        raise RuntimeError(msg)
+    return SUPPORTED[key]
+
+
+def _iter_paragraphs_path(index, empty_on_io=False):
+    # NOTE: Add exception here?
+    type_cls = _type(index)
+    lines = _read(index, empty_on_io=empty_on_io)
+    return type_cls.iter_paragraphs(lines)
 
 
 class Model(object):
@@ -75,8 +107,14 @@ class Model(object):
         """
         return cls(data)
 
+    def data_to_dict(self):
+        """
+        Some models doesn't have a working .copy() method.
+        """
+        return self.data.copy()
+
     def to_dict(self, exclude=[], **kw):
-        data = self.data.copy()
+        data = self.data_to_dict()
         data = dict([(k, v) for k, v in data.items() if not k in exclude])
         data.update(kw)
         return data
@@ -143,16 +181,48 @@ class Distribution(Model):
         kw['components'] = components
         super(Distribution, self).__init__(**kw)
 
+    def get_indexes(self):
+        """
+        Get the indexes that represents this Distribution from the underlying
+        Components
+
+        :return: List of indexes
+        :rtype: list
+        """
+        indexes = []
+        for c in self.data['components']:
+            indexes.extend(c.get_indexes())
+        return indexes
+
     def get_component(self, name):
+        """
+        Get a component by name
+
+        :return: A Component object representing the wanted component
+        :rtype: Component
+        """
         for c in self.data['components']:
             if c['name'] == name:
                 return c
 
     def add_package(self, component_name, package):
+        """
+        Add a package to a component
+
+        :param component_name: The component
+        :param package: The package as a dict, may have deb822=Package
+                        if it's already a deb822 object
+        """
         component = self.get_component(component_name)
         component.add_package(package)
 
     def add_packages(self, component_name, packages):
+        """
+        Add multiple Packages to a component
+
+        :param component_name: The component
+        :param packages: A list of Package
+        """
         for pkg in packages:
             self.add_package(component_name, pkg)
 
@@ -176,33 +246,47 @@ class Component(Model):
         for p in packages:
             self.add_package(p)
 
-    def update_from_index(self, index, **kw):
+    def update_from_index(self, index, empty_on_io=False):
         """
         Updates this instance with packages in the given Packages file.
 
         :return: object representing the repository and all it's packages
         :rtype: Repository
         """
-        lines = _read(index)
-        if re.match(index, 'Sources'):
-            data = Sources.iter_paragraphs(lines)
-        elif re.match(index, 'Packages'):
-            data = Packages.iter_paragraphs(lines)
-        else:
-            raise RuntimeError('Must be either Sources or Packages')
+        data = _iter_paragraphs_path(index, empty_on_io=empty_on_io)
+        self.add_packages([{'deb822': p} for p in data])
 
-        self.add_packages(data)
-
-    def update_from_resource(self, resource):
+    def update_from_indexes(self, indexes, empty_on_io=False):
         """
-        Read packages from a resource file...
-
-        :param resource: A debian style resource file
+        Update from a list of indexes
         """
-        for resource in resources:
-            # NOTE: Store dist and component also
-            data = dict([(k, resource[k]) for k in ['dist', 'component']])
-            self.update_from_packages(resource['resource'][len('file://'):], **data)
+        for index in indexes:
+            self.update_from_index(index, empty_on_io=empty_on_io)
+
+    def get_indexes(self):
+        """
+        Return all indexes related to this Component under a Distribution
+        """
+        r = []
+        data = dict(
+            url=self.dist.data['url'],
+            dist=self.dist.data['name'],
+            component=self.data['name'])
+
+        def _r(t, **kw):
+            d = data.copy()
+            d.update(kw)
+            url = constants.URLS[t] % d
+            d['index_url'] = url
+            d['index_path'] = url[len('file://'):]
+            d['type'] = t
+            return d
+
+        r.append(_r('sources'))
+
+        for arch in self.data['arch']:
+            r.append(_r('packages', arch=arch))
+        return r
 
     def update_from_json(self, json_string):
         """
@@ -217,36 +301,20 @@ class Component(Model):
         self.add_packages(parsed.pop('packages', []))
         self.data(parsed)
 
-    def get_indexes(self):
-        r = []
-        data = dict(
-            url=self.dist.data['url'],
-            dist=self.dist.data['name'],
-            component=self.data['name'])
-
-        def _r(t, **kw):
-            d = data.copy()
-            d.update(kw)
-            d['index_url'] = constants.URLS[t] % d
-            d['type'] = t
-            return d
-
-        r.append(_r('sources'))
-
-        for arch in self.data['arch']:
-            r.append(_r('packages', arch=arch))
-        return r
-
 
 class Package(Model):
     """
     A Pulp object sitting ontop of a deb822 object
     """
-    def __init__(self, deb=None, **kw):
-        if isinstance(deb, Packages):
-            self.data = deb
+    def __init__(self, deb822=None, **kw):
+        if isinstance(deb822, (Packages, Sources)):
+            self.data = deb822
         else:
-            self.data = Packages(kw)
+            type_cls = _type(kw)
+            self.data = type_cls(kw)
+
+    def data_to_dict(self):
+        return dict(self.data)
 
     def to_dict(self, full=True, **kw):
         """
