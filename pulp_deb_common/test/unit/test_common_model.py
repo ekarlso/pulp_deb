@@ -54,7 +54,7 @@ class DistributionTests(unittest.TestCase):
         self.assertEquals(len(cmpts[0]['packages']), 1)
 
     def test_get_indexes(self):
-        dist = samples.valid_repo()
+        dist = samples.get_valid_repo()
         indexes = dist.get_indexes()
         self.assertEquals(len(indexes), 3)
         #ipdb.set_trace()
@@ -62,7 +62,7 @@ class DistributionTests(unittest.TestCase):
 
 class ComponentTests(unittest.TestCase):
     def setUp(self):
-        self.dist = samples.valid_repo()
+        self.dist = samples.get_valid_repo()
         self.cmpt = self.dist['components'][0]
 
     def test_get_indexes(self):
@@ -70,13 +70,13 @@ class ComponentTests(unittest.TestCase):
         self.assertEquals(len(indexes), 3)
 
     def test_update_from_indexes(self):
-        # NOTE: When it's a local repository the index_path is valid. If not it
+        # NOTE: When it's a local repository the path is valid. If not it
         # has to be downloaded before running update_from_indexes()
         indexes = self.cmpt.get_indexes()
         # NOTE: It has i686 as well but there's no index file for it so skip it
-        self.cmpt.update_from_indexes([i['index_path'] for i in indexes],
+        self.cmpt.update_from_indexes([i['path'] for i in indexes],
                                       empty_on_io=True)
-        self.assertEquals(len(self.cmpt.data['packages']), 2)
+        self.assertEquals(len(self.cmpt.data['packages']), 3)
 
 
 class PackageTests(unittest.TestCase):

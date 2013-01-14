@@ -180,6 +180,25 @@ class Distribution(Model):
         kw['components'] = components
         super(Distribution, self).__init__(**kw)
 
+    def update_components(self):
+        """
+        Update each component in this Distribution from it's own indexes
+        """
+        for cmpt in self.components:
+            indexes = cmpt.get_indexes()
+            cmpt.update_from_indexes([i['path'] for i in indexes])
+
+    @property
+    def components(self):
+        return self.data['components']
+
+    @property
+    def packages(self):
+        data = []
+        for cmpt in self.components:
+            data.extend(cmpt.packages)
+        return data
+
     def get_indexes(self):
         """
         Get the indexes that represents this Distribution from the underlying
@@ -200,9 +219,9 @@ class Distribution(Model):
         :return: A Component object representing the wanted component
         :rtype: Component
         """
-        for c in self.data['components']:
-            if c['name'] == name:
-                return c
+        for cmpt in self.components:
+            if cmpt['name'] == name:
+                return cmpt
 
     def add_package(self, component_name, package):
         """
@@ -234,6 +253,10 @@ class Component(Model):
         self.dist = dist
         super(Component, self).__init__(**kw)
         self.data['packages'] = []
+
+    @property
+    def packages(self):
+        return self.data['packages']
 
     def add_package(self, package):
         """
@@ -277,7 +300,7 @@ class Component(Model):
             d.update(kw)
             url = constants.URLS[t] % d
             d['index_url'] = url
-            d['index_path'] = url[len('file://'):]
+            d['path'] = url[len('file://'):]
             d['type'] = t
             return d
 
