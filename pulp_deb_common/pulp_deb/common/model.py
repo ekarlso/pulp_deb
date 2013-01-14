@@ -19,12 +19,13 @@ KEY_TO_NAME = [('Source', 'Packages'), ('Binary', 'Sources')]
 
 def _read(f, empty_on_io=False):
     try:
-        if not type(f) == file and type(f) in (str, unicode):
+        fh = None
+        if isinstance(f, basestring):
             fh = open(f)
 
-        if f.endswith('.gz'):
+        if fh is not None and f.endswith('.gz'):
             fh = gzip.GzipFile(fileobj=fh)
-        elif type(f) == file:
+        elif isinstance(f, file):
             fh = f
         else:
             raise RuntimeError('Need to pass either a path or a file')
@@ -38,7 +39,7 @@ def _read(f, empty_on_io=False):
 
 def _type(obj):
     key = None
-    if type(obj) in (str, unicode):
+    if isinstance(obj, basestring):
         key = obj.split('/')[-1][:-len('.gz')]
     elif type(obj) == dict:
         for name, key in KEY_TO_NAME:
