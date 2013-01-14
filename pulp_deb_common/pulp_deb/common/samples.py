@@ -1,7 +1,7 @@
 import json
 import os
 
-from pulp_deb.common import model
+from pulp_deb.common import constants, model
 
 
 DATA_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)),
@@ -20,10 +20,10 @@ def load(f):
     return json.loads(json_str)
 
 
-MODELS = dict(
-    dist=model.Distribution,
-    component=model.Component,
-    package=model.Package)
+MODELS = {
+    constants.CONFIG_DIST: model.Distribution,
+    constants.CONFIG_COMPONENT: model.Component,
+    'package': model.Package}
 
 
 DATA = {}
@@ -54,16 +54,15 @@ def local_repo_location():
     return 'file://' + os.path.join(DATA_PATH, 'repos')
 
 
-def repo(path='valid', **kw):
+def get_repo(path='valid', load_model=True, **kw):
     if 'url' not in kw:
         kw['url'] = os.path.join(local_repo_location(), path)
-    repo = get_model('dist', **kw)
-    return repo
+    return get_model('dist', **kw) if load_model else get_data('dist', **kw)
 
 
-def valid_repo(**kw):
-    return repo(**kw)
+def get_valid_repo(**kw):
+    return get_repo(**kw)
 
 
-def invalid_repo(**kw):
-    return repo(path='invalid', **kw)
+def get_invalid_repo(**kw):
+    return get_repo(path='invalid', **kw)
