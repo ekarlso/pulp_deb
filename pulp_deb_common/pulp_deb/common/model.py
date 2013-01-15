@@ -188,7 +188,7 @@ class Distribution(Model):
         for resource in resources:
             cmpt_name = resource['component']
             cmpt = self.get_component(cmpt_name)
-            cmpt.update_from_index(resource['destination_path'])
+            cmpt.update_from_index(resource['path'])
 
     @property
     def components(self):
@@ -302,7 +302,7 @@ class Component(Model):
             d.update(kw)
             url = constants.URLS[t] % d
             d['url'] = url
-            d['path'] = url[len('file://'):]
+            d['source'] = url[len('file://'):]
             d['type'] = t
             return d
 
