@@ -57,7 +57,6 @@ class DistributionTests(unittest.TestCase):
         dist = samples.get_valid_repo()
         indexes = dist.get_indexes()
         self.assertEquals(len(indexes), 3)
-        #ipdb.set_trace()
 
 
 class ComponentTests(unittest.TestCase):

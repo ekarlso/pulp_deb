@@ -181,13 +181,14 @@ class Distribution(Model):
         kw['components'] = components
         super(Distribution, self).__init__(**kw)
 
-    def update_components(self):
+    def update_from_resources(self, resources):
         """
         Update each component in this Distribution from it's own indexes
         """
-        for cmpt in self.components:
-            indexes = cmpt.get_indexes()
-            cmpt.update_from_indexes([i['path'] for i in indexes])
+        for resource in resources:
+            cmpt_name = resource['component']
+            cmpt = self.get_component(cmpt_name)
+            cmpt.update_from_index(resource['destination_path'])
 
     @property
     def components(self):
@@ -209,7 +210,7 @@ class Distribution(Model):
         :rtype: list
         """
         indexes = []
-        for c in self.data['components']:
+        for c in self.components:
             indexes.extend(c.get_indexes())
         return indexes
 
@@ -300,7 +301,7 @@ class Component(Model):
             d = data.copy()
             d.update(kw)
             url = constants.URLS[t] % d
-            d['index_url'] = url
+            d['url'] = url
             d['path'] = url[len('file://'):]
             d['type'] = t
             return d
