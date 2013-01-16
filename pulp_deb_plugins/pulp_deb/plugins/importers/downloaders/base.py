@@ -25,30 +25,17 @@ class BaseDownloader(object):
         self.config = config
         self.is_cancelled_call = is_cancelled_call
 
-    def retrieve_resources(self, progress_report):
+    def download_resources(self, resources, progress_report):
         """
-        Retrieve all Package, Source and Content lists for the given Repo
+        Retrieve all given resources
+
+        :param: resources: Resources to download
+        :type   resources: list
 
         :param progress_report: used to communicate the progress of this operation
         :type  progress_report: pulp_deb.importer.sync_progress.ProgressReport
 
-        :return: list Resource (Packages, Sources.... .gz) documents describing all deb to import
+        :return: list of resources containing the original dict with added destination path
         :rtype:  list
-        """
-        raise NotImplementedError()
-
-    def retrieve_deb(self, progress_report, deb):
-        """
-        Retrieve a .deb file based on the deb object
-
-        :param progress_report: used if any updates need to be made as the
-               download runs
-        :type  progress_report: pulp_deb.importer.sync_progress.ProgressReport
-
-        :param deb: deb to download
-        :type  deb: pulp_deb.common.model.Package
-
-        :return: full path to the temporary location where the deb file is
-        :rtype:  str
         """
         raise NotImplementedError()

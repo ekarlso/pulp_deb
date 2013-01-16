@@ -15,12 +15,6 @@ import os
 
 from pulp_deb.plugins.importers.downloaders.base import BaseDownloader
 from pulp_deb.plugins.importers.downloaders.exceptions import FileNotFoundException
-from pulp_deb.plugins.importers.downloaders import url_utils
-from pulp_deb.common import constants
-
-
-def strip_scheme(url):
-    return url[len('file://'):]
 
 
 class LocalDownloader(BaseDownloader):
@@ -29,39 +23,22 @@ class LocalDownloader(BaseDownloader):
     server.
     """
 
-    def retrieve_resources(self, progress_report):
-        resources = url_utils.get_resources(self.config)
-        #ipdb.set_trace()
-
+    def download_resources(self, resources, progress_report, download=False):
         # Only do one query for this implementation
         progress_report.query_finished_count = 0
         progress_report.query_total_count = (len(resources))
         progress_report.update_progress()
 
         for resource in resources:
-            progress_report.current_query = resource['resource']
+            progress_report.current_query = resource['source']
 
-            if not os.path.exists(strip_scheme(resource['resource'])):
+            if not os.path.exists(resource['source']):
                 # The caller will take care of stuffing this error into the
                 # progress report
-                raise FileNotFoundException(resource['resource'])
+                raise FileNotFoundException(resource['source'])
 
-            f = open(resource['resource'][len('file://'):], 'r')
-            resource['contents'] = f.readlines()
-            f.close()
+            resource['path'] = resource['source']
 
             progress_report.query_finished_count += 1
         progress_report.update_progress()
         return resources
-
-    def retrieve_deb(self, progress_report, deb):
-        # Determine the full path to the existing deb on disk. This assumes
-        # a structure where the deb are located in the same directory as
-        # specified in the feed.
-        repo = self.config.get(constants.CONFIG_URL)
-        url = url_utils.get_deb_url(repo, deb)
-
-        if not os.path.exists(url):
-            raise FileNotFoundException(url)
-
-        return url

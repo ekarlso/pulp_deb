@@ -22,7 +22,8 @@ import unittest
 from pulp.plugins.config import PluginCallConfiguration
 from pulp.plugins.model import Repository
 
-from pulp_deb.common import model
+from pulp_deb.common import model, samples
+
 
 class BaseDownloaderTests(unittest.TestCase):
 
@@ -37,11 +38,8 @@ class BaseDownloaderTests(unittest.TestCase):
 
         self.mock_progress_report = mock.MagicMock()
 
-        deb = dict(package='libdaemon',
-                   version='0.14-2',
-                   maintainer='Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
-                   filename='pool/main/libd/libdaemon/libdaemon0_0.14-2_amd64.deb')
-        self.deb = model.Package.from_dict(deb)
+        self.dist = samples.get_valid_repo()
+        self.pkg = model.Package(**samples.get_data('package'))
 
     def tearDown(self):
         if os.path.exists(self.working_dir):
