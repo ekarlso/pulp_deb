@@ -68,7 +68,7 @@ class HttpDownloader(base.BaseDownloader):
             else:
                 tmp_dir = _create_download_tmp_dir(self.repo.working_dir)
 
-                name = resource['url'].split('/')
+                name = resource['url'].split('/')[-1]
                 tmp_filename = os.path.join(tmp_dir, name)
 
                 content = StoredDownloadedContent(tmp_filename)
