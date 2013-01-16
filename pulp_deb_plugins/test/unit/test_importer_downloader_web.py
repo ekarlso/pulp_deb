@@ -35,10 +35,6 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         self.dist = samples.get_repo(url=URL)
         self.downloader = HttpDownloader(self.repo, None, self.config, self.mock_cancelled_callback)
 
-    def _ensure_resources(self, resources):
-        for resource in resources:
-            self.assertEquals(os.path.exists(resource['path']), True)
-
     @mock.patch('pycurl.Curl')
     def test_download_resources(self, mock_curl_constructor):
         # Setup
@@ -54,7 +50,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         # Verify
         self.assertEqual(3, len(resources))
 
-        self._ensure_resources(resources)
+        self._ensure_path_exists(resources)
 
         # Progress indicators
         self.assertEqual(self.mock_progress_report.query_finished_count, 3)
@@ -94,7 +90,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         self.downloader.download_resources(pkg_resources, self.mock_progress_report)
 
         # Verify
-        self._ensure_resources(pkg_resources)
+        self._ensure_path_exists(pkg_resources)
 
     @mock.patch('pycurl.Curl')
     def test_retrieve_packages_404(self, mock_curl_constructor):

@@ -44,3 +44,7 @@ class BaseDownloaderTests(unittest.TestCase):
     def tearDown(self):
         if os.path.exists(self.working_dir):
             shutil.rmtree(self.working_dir)
+
+    def _ensure_path_exists(self, resources):
+        for resource in resources:
+            self.assertEquals(os.path.exists(resource['path']), True)
