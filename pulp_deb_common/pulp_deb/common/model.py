@@ -1,9 +1,8 @@
 import copy
 from debian.deb822 import Packages, Sources
-import gzip
 
 from pulp.common.compat import json
-from pulp_deb.common import constants
+from pulp_deb.common import constants, utils
 
 
 UNIT_KEYS = ['package', 'version', 'maintainer']
@@ -15,26 +14,6 @@ SUPPORTED = {
 
 
 KEY_TO_NAME = [('Source', 'Packages'), ('Binary', 'Sources')]
-
-
-def _read(f, empty_on_io=False):
-    try:
-        fh = None
-        if isinstance(f, basestring):
-            fh = open(f)
-
-        if fh is not None and f.endswith('.gz'):
-            fh = gzip.GzipFile(fileobj=fh)
-        elif isinstance(f, file):
-            fh = f
-        else:
-            raise RuntimeError('Need to pass either a path or a file')
-    except IOError:
-        if empty_on_io:
-            return []
-        else:
-            raise
-    return fh.readlines()
 
 
 def _type(obj):
@@ -56,7 +35,7 @@ def _type(obj):
 def _iter_paragraphs_path(index, empty_on_io=False):
     # NOTE: Add exception here?
     type_cls = _type(index)
-    lines = _read(index, empty_on_io=empty_on_io)
+    lines = utils._read(index, empty_on_io=empty_on_io)
     return type_cls.iter_paragraphs(lines)
 
 
