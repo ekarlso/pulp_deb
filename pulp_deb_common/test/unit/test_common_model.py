@@ -32,8 +32,6 @@ def get_expected(data):
 PACKAGE = get_expected(samples.get_data('package'))
 DATA = samples.DATA
 
-import ipdb
-
 
 class DistributionTests(unittest.TestCase):
     def test_serialize_dist_wo_packages(self):
@@ -72,8 +70,9 @@ class ComponentTests(unittest.TestCase):
         # NOTE: When it's a local repository the path is valid. If not it
         # has to be downloaded before running update_from_indexes()
         indexes = self.cmpt.get_indexes()
+
         # NOTE: It has i686 as well but there's no index file for it so skip it
-        self.cmpt.update_from_indexes([i['path'] for i in indexes],
+        self.cmpt.update_from_indexes([i['source'] for i in indexes],
                                       empty_on_io=True)
         self.assertEquals(len(self.cmpt.data['packages']), 3)
 
