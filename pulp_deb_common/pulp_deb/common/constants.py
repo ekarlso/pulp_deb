@@ -96,7 +96,7 @@ URLS = {
     'sources': URL_COMPONENT_BASE + '/source/' + SOURCES_FILENAME
 }
 
-DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(source)s/%(filename_short)s'
+DEB_FILENAME = 'pool/%(component)s/%(prefix)s/%(source_name)s/%(name)s'
 
 # Key template for a package
 # Substitutions: maintainer, name, version

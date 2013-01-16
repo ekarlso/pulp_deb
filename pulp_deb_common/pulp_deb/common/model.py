@@ -188,10 +188,10 @@ class Distribution(Model):
             cmpt.update_from_index(resource)
 
     def get_package_resources(self):
-        data = []
+        resources = []
         for cmpt in self.components:
-            data.extend(cmpt.get_package_resources())
-        return data
+            resources.extend(cmpt.get_package_resources())
+        return resources
 
     @property
     def components(self):
@@ -204,12 +204,25 @@ class Distribution(Model):
             data.extend(cmpt.packages)
         return data
 
+    def get_resource_data(self, **kw):
+        """
+        Get some data to use for resources
+
+        :return: Resource dict
+        :rtype: dict
+        """
+        data = dict(
+            url=self['url'],
+            dist=self['name'])
+        data.update(kw)
+        return data
+
     def get_indexes(self):
         """
         Get the indexes that represents this Distribution from the underlying
         Components
 
-        :return: List of indexes
+        :return: List of resources
         :rtype: list
         """
         indexes = []
@@ -271,6 +284,12 @@ class Component(Model):
         self.data['packages'].append(obj)
 
     def add_packages(self, packages):
+        """
+        Add a list of packages
+
+        :return: A list of packages
+        :rtype: list
+        """
         for p in packages:
             self.add_package(p)
 
@@ -287,6 +306,9 @@ class Component(Model):
     def update_from_indexes(self, data, **kw):
         """
         Update from a list of indexes
+
+        :param data: Indexes from which to update from
+        :type data: list
         """
         for i in data:
             self.update_from_index(i, **kw)
@@ -294,27 +316,21 @@ class Component(Model):
     def get_indexes(self):
         """
         Return all indexes related to this Component under a Distribution
+
+        :return: A list of index resources
+        :rtype: list
         """
-        r = []
-        data = dict(
-            url=self.dist.data['url'],
-            dist=self.dist.data['name'],
-            component=self.data['name'])
+        resources = []
 
-        def _r(t, **kw):
-            d = data.copy()
-            d.update(kw)
-            url = constants.URLS[t] % d
-            d['url'] = url
-            d['source'] = url[len('file://'):]
-            d['type'] = t
-            return d
-
-        r.append(_r('sources'))
+        data = self.get_resource_data(type='sources')
+        data['url'] = constants.URLS['sources'] % data
+        resources.append(data)
 
         for arch in self.data['arch']:
-            r.append(_r('packages', arch=arch))
-        return r
+            data = self.get_resource_data(type='packages', arch=arch)
+            data['url'] = constants.URLS['packages'] % data
+            resources.append(data)
+        return resources
 
     def update_from_json(self, json_string):
         """
@@ -322,25 +338,27 @@ class Component(Model):
         document. This can be called multiple times to merge multiple
         repository metadata JSON documents into this instance.
 
-        :return: object representing the repository and all of its packages
-        :rtype:  Repository
+        :param json_string: A JSON string
+        :type json_string: basestr
         """
         parsed = json.loads(json_string)
         self.add_packages(parsed.pop('packages', []))
         self.data(parsed)
 
+    def get_resource_data(self, **kw):
+        return self.dist.get_resource_data(component=self['name'], **kw)
+
     def get_package_resources(self):
+        """
+        Get a list of package resources
+
+        :return: list of package resources
+        :rtype: list
+        """
         resources = []
         for pkg in self.packages:
-            url = self.dist['url'] + '/' + pkg.filename()
-            data = {
-                'url': url,
-                'source': url[len('file://'):],
-                'component': self['name'],
-                'dist': self.dist['name'],
-                'type': 'package'
-            }
-            resources.append(data)
+            resource_data = self.get_resource_data()
+            resources.extend(pkg.get_resources(resource_data))
         return resources
 
 
@@ -354,6 +372,56 @@ class Package(Model):
         else:
             type_cls = get_deb822_cls(kw)
             self.data = type_cls(kw)
+
+    @property
+    def package_type(self):
+        if 'source' in self:
+            return 'package'
+        elif 'binary' in self:
+            return 'source'
+
+    @property
+    def package_source_name(self):
+        return self['source'] if self.package_type == 'package' else self.name
+
+    @property
+    def name(self):
+        return self['package']
+
+    @property
+    def prefix(self):
+        pkg = self.name
+        prefix = pkg[0:4] if pkg.startswith('lib') else pkg[0]
+        return prefix
+
+    @property
+    def key(self):
+        """
+        Get the key representing this package
+        """
+        return constants.DEB_KEY % self.to_dict()
+
+    @property
+    def files(self):
+        """
+        Return all files associated with this package
+        """
+        files = []
+        if self.package_type == 'package':
+            file_data = dict([(k, self[k]) \
+                             for k in ['size', 'sha1', 'sha256', 'md5sum']])
+            file_data['name'] = self['filename'].split('/')[-1]
+            files.append(file_data)
+        else:
+            for d in self['files']:
+                file_data = d.copy()
+                # Get checksum data as well...
+                for key in ['sha1', 'sha256']:
+                    for data in self['checksums-' + key]:
+                        if file_data['name'] == data['name']:
+                            file_data[key] = data[key]
+                files.append(file_data)
+        return files
 
     def data_to_dict(self):
         return dict(self.data)
@@ -369,13 +437,6 @@ class Package(Model):
         data = super(Package, self).to_dict(**kw)
         data = dict([(k.lower(), v) for k, v in data.items()])
 
-        if not full:
-            return data
-
-        data.update({
-            'prefix': self.prefix(),
-            'filename_short': self.filename().split('/')[-1]
-        })
         return data
 
     @classmethod
@@ -419,49 +480,33 @@ class Package(Model):
         metadata = [(k, v) for k, v in data.items() if k not in UNIT_KEYS]
         return metadata
 
-    def prefix(self):
-        pkg = self.data.get('package')
-        prefix = pkg[0:4] if pkg.startswith('lib') else pkg[0]
-        return prefix
-
-    def filename(self):
+    def get_resources(self, resource_data):
         """
-        Generates the filename for the given package.
+        Get the resources for this package
 
-        :return: package standard filename for this package
+        :param resource_data: Resource data to use
+        :type resource_data: dict
+
+        :return: Resource dict.
+        :rtype: dict
+        """
+        resources = []
+        for resource in self.files:
+            resource.update(resource_data)
+
+            relative_path = self.relative_path(
+                resource, prefix=self.prefix, source_name=self.package_source_name)
+            resource['url'] = resource['url'] + relative_path
+            resources.append(resource)
+        return resources
+
+    def relative_path(self, data, **kw):
+        """
+        Construct a relative path based on our own data.
+
+        :return: Relative path for this package object
         :rtype: str
         """
-        return self.filename_from_deb822() or self.filename_from_data()
-
-    def filename_from_deb822(self):
-        """
-        Get the filename from the self.data
-
-        :return: package standard filename for this package
-        :rtype: str
-        """
-        return self.data.get('filename')
-
-    def filename_from_data(self, data={}):
-        """
-        Construct the filename from our own data
-
-        :return: package standard filename for this package
-        :rtype: str
-        """
-        data_ = self.to_dict()
-        data_.update(data)
-        return constants.DEB_FILENAME % data_
-
-    def filename_short(self):
-        """
-        :return: Only the filename of this package
-        :rtype: str
-        """
-        return self.filename().split('/')[-1]
-
-    def key(self):
-        """
-        Get the key representing this package
-        """
-        return constants.DEB_KEY % self.to_dict()
+        path_data = data.copy()
+        path_data.update(kw)
+        return constants.DEB_FILENAME % path_data

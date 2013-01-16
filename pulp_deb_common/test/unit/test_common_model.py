@@ -85,7 +85,7 @@ class ComponentTests(unittest.TestCase):
     def test_update_from_index_files(self):
         # NOTE: When it's a local repository the path is valid. If not it
         # has to be downloaded before running update_from_indexes()
-        indexes = [i['source'] for i in self.cmpt.get_indexes()]
+        indexes = [i['url'][len('file://'):] for i in self.cmpt.get_indexes()]
 
         # NOTE: It has i686 as well but there's no index file for it so skip it
         self.cmpt.update_from_indexes(indexes)
@@ -96,7 +96,7 @@ class ComponentTests(unittest.TestCase):
         # contains 'source' before it's downloaded...
         resources = []
         for resource in self.cmpt.get_indexes():
-            resource['path'] = resource['source']
+            resource['path'] = resource['url'][len('file://'):]
             resources.append(resource)
 
         self.cmpt.update_from_indexes(resources)
@@ -105,7 +105,7 @@ class ComponentTests(unittest.TestCase):
     def test_update_from_resources_with_content(self):
         resources = []
         for resource in self.cmpt.get_indexes():
-            resource['content'] = utils._read(resource['source'])
+            resource['content'] = utils._read(resource['url'][len('file://'):])
             resources.append(resource)
         self.cmpt.update_from_indexes(resources)
         self.assertEquals(len(self.cmpt.data['packages']), 3)
@@ -128,12 +128,4 @@ class PackageTests(unittest.TestCase):
         self.assertEquals(PACKAGE, self.pkg.to_dict(full=False))
 
     def test_prefix(self):
-        self.assertEquals(PACKAGE['package'][0:4], self.pkg.prefix())
-
-    def test_filename_from_data_eq_filename(self):
-        pkg = samples.get_model('package', component='main')
-        self.assertEquals(pkg.filename_from_data(), pkg.filename_from_deb822())
-
-    def test_filename_short(self):
-        expected = PACKAGE['filename'].split('/')[-1]
-        self.assertEquals(self.pkg.filename_short(), expected)
+        self.assertEquals(PACKAGE['package'][0:4], self.pkg.prefix)
