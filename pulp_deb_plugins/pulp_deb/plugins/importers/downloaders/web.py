@@ -24,6 +24,7 @@ from pulp_deb.plugins.importers.downloaders import base, exceptions, url_utils
 
 # -- constants ----------------------------------------------------------------
 
+
 DOWNLOAD_TMP_DIR = 'http-downloads'
 
 _LOG = logging.getLogger(__name__)
@@ -31,12 +32,13 @@ _LOG = logging.getLogger(__name__)
 
 # -- downloader implementations -----------------------------------------------
 
+
 class HttpDownloader(base.BaseDownloader):
     """
     Used when the source for deb packages is a remote source over HTTP.
     """
 
-    def retrieve_resources(self, progress_report):
+    def download_resources(self, resources, progress_report, in_memory=False):
         """
         Retrieves all metadata documents needed to fulfill the configuration
         set for the repository. The progress report will be updated as the
@@ -48,78 +50,42 @@ class HttpDownloader(base.BaseDownloader):
         :return: Resources needed to download packages
         :rtype:  list
         """
-        resources = url_utils.get_resources(self.config)
-
         # Update the progress report to reflect the number of queries it will take
         progress_report.query_finished_count = 0
         progress_report.query_total_count = len(resources)
 
-        all_resources = []
         for resource in resources:
-            _LOG.info('Retrieving URL <%s>' % resource['resource'])
-            progress_report.current_url = resource
+            _LOG.info('Retrieving URL <%s>' % resource['url'])
+            progress_report.current_query = resource['url']
             progress_report.update_progress()
 
             # Let any exceptions from this bubble up, the caller will update
             # the progress report as necessary
-            content = InMemoryDownloadedContent()
-            self._download_file(resource['resource'], content)
-            all_resources.append(content.content)
+            if in_memory:
+                content = InMemoryDownloadedContent()
+                self._download_file(resource['url'], content)
+                resource['content'] = content.content
+            else:
+                tmp_dir = _create_download_tmp_dir(self.repo.working_dir)
+
+                name = resource.get('path', resource['source'].split('/')[-1])
+                tmp_filename = os.path.join(tmp_dir, name)
+
+                content = StoredDownloadedContent(tmp_filename)
+                content.open()
+                try:
+                    self._download_file(resource['url'], content)
+                    content.close()
+                except:
+                    content.close()
+                    content.delete()
+                    raise
+                resource['path'] = tmp_filename
 
             progress_report.query_finished_count += 1
 
         progress_report.update_progress() # to get the final finished count out there
-        return all_resources
-
-    def retrieve_deb(self, progress_report, deb):
-        """
-        Retrieves the given deb and returns where on disk it can be
-        found. It is the caller's job to relocate this file to where Pulp
-        wants it to live as its final resting place.
-
-        :param progress_report: used if any updates need to be made as the
-               download runs
-        :type  progress_report: pulp_deb.importer.sync_progress.ProgressReport
-
-        :param deb: .deb to download
-        :type  deb: pulp_deb.common.model.Package
-
-        :return: full path to the temporary location where the deb file is
-        :rtype:  str
-        """
-        url = self._create_deb_url(deb)
-
-        tmp_dir = _create_download_tmp_dir(self.repo.working_dir)
-        tmp_filename = os.path.join(tmp_dir, deb.filename_short())
-
-        content = StoredDownloadedContent(tmp_filename)
-        content.open()
-        try:
-            self._download_file(url, content)
-            content.close()
-        except Exception:
-            content.close()
-            content.delete()
-            raise
-
-        return tmp_filename
-
-    def _create_deb_url(self, deb):
-        """
-        Generates the URL for a deb at the configured source.
-
-        :param deb: deb instance being downloaded
-        :type  deb: pulp_deb.common.model.Package
-
-        :return: full URL to download the deb
-        :rtype:  str
-        """
-        url = self.config.get(constants.CONFIG_URL)
-        if not url.endswith('/'):
-            url += '/'
-
-        url += deb.filename()
-        return url
+        return resources
 
     def _download_file(self, url, destination):
         """
@@ -246,3 +212,4 @@ def _create_download_tmp_dir(repo_working_dir):
     if not os.path.exists(tmp_dir):
         os.mkdir(tmp_dir)
     return tmp_dir
+

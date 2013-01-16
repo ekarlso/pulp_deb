@@ -20,92 +20,101 @@ import unittest
 import mock
 
 import base_downloader
-from pulp_deb.common import constants, model, samples
+from pulp_deb.common import samples
 from pulp_deb.plugins.importers.downloaders import exceptions
 from pulp_deb.plugins.importers.downloaders import web
-from pulp_deb.plugins.importers.downloaders import url_utils
 from pulp_deb.plugins.importers.downloaders.web import HttpDownloader
 
 
-class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
+URL = 'http://ubuntu.uib.no/archive'
 
+
+class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
     def setUp(self):
         super(HttpDownloaderTests, self).setUp()
-        self.config.repo_plugin_config.update(samples.REPO)
+        self.dist = samples.get_repo(url=URL)
         self.downloader = HttpDownloader(self.repo, None, self.config, self.mock_cancelled_callback)
 
+    def _ensure_resources(self, resources):
+        for resource in resources:
+            self.assertEquals(os.path.exists(resource['path']), True)
+
     @mock.patch('pycurl.Curl')
-    def test_retrieve_resources(self, mock_curl_constructor):
+    def test_download_resources(self, mock_curl_constructor):
         # Setup
+        indexes = self.dist.get_indexes()
+
         mock_curl = mock.MagicMock()
         mock_curl.getinfo.return_value = 200 # simulate a successful download
         mock_curl_constructor.return_value = mock_curl
 
         # Test
-        docs = self.downloader.retrieve_resources(self.mock_progress_report)
+        resources = self.downloader.download_resources(indexes, self.mock_progress_report)
 
         # Verify
-        self.assertEqual(2, len(docs))
+        self.assertEqual(3, len(resources))
+
+        self._ensure_resources(resources)
 
         # Progress indicators
-        self.assertEqual(self.mock_progress_report.query_finished_count, 2)
-        self.assertEqual(self.mock_progress_report.query_total_count, 2)
-        self.assertEqual(self.mock_progress_report.update_progress.call_count, 3)
+        self.assertEqual(self.mock_progress_report.query_finished_count, 3)
+        self.assertEqual(self.mock_progress_report.query_total_count, 3)
+        self.assertEqual(self.mock_progress_report.update_progress.call_count, 4)
 
     @mock.patch('pycurl.Curl')
-    def test_retrieve_resource_with_error(self, mock_curl_constructor):
+    def test_download_resources_with_error(self, mock_curl_constructor):
         # Setup
+        indexes = self.dist.get_indexes()
+        indexes[0]['url'] = indexes[0]['url'] + '_'
+
         mock_curl = mock.MagicMock()
         mock_curl.getinfo.return_value = 404 # simulate an error
         mock_curl_constructor.return_value = mock_curl
 
         # Test & Verify
         try:
-            self.downloader.retrieve_resources(self.mock_progress_report)
+            self.downloader.download_resources(indexes, self.mock_progress_report)
             self.fail()
         except exceptions.FileNotFoundException, e:
-            expected = url_utils.get_resources(self.config)[0]['resource']
-            self.assertEqual(expected, e.location)
+            self.assertEqual(indexes[0]['url'], e.location)
+            self.assertEqual('path' in indexes[0], False)
 
     @mock.patch('pycurl.Curl')
-    def test_retrieve_deb(self, mock_curl_constructor):
+    def test_retrieve_packages(self, mock_curl_constructor):
+        self.dist.add_package(self.dist.components[0]['name'], self.pkg)
+
         # Setup
         mock_curl = mock.MagicMock()
         mock_curl.getinfo.return_value = 200 # simulate a successful download
         mock_curl_constructor.return_value = mock_curl
 
+        pkg_resources = self.dist.get_package_resources()
+
         # Test
-        stored_filename = self.downloader.retrieve_deb(self.mock_progress_report, self.deb)
+        self.downloader.download_resources(pkg_resources, self.mock_progress_report)
 
         # Verify
-        self.assertTrue(os.path.exists(stored_filename))
+        self._ensure_resources(pkg_resources)
 
     @mock.patch('pycurl.Curl')
-    def test_retrieve_deb_404(self, mock_curl_constructor):
+    def test_retrieve_packages_404(self, mock_curl_constructor):
+        self.dist.add_package(self.dist.components[0]['name'], self.pkg)
+
         # Setup
         mock_curl = mock.MagicMock()
         mock_curl.getinfo.return_value = 404 # simulate a not found
         mock_curl_constructor.return_value = mock_curl
 
+        pkg_resources = self.dist.get_package_resources()
+        pkg_resources[0]['url'] = pkg_resources[0]['url'] + '_'
+
         # Test & Verify
         try:
-            self.downloader.retrieve_deb(self.mock_progress_report, self.deb)
+            self.downloader.download_resources(pkg_resources, self.mock_progress_report)
             self.fail()
         except exceptions.FileNotFoundException, e:
-            self.assertTrue(self.deb.filename() in e.location)
-            expected_filename = web._create_download_tmp_dir(self.working_dir)
-            expected_filename = os.path.join(expected_filename, self.deb.filename())
-            self.assertTrue(not os.path.exists(os.path.join(expected_filename)))
-
-    def test_create_deb_url(self):
-        # Setup
-
-        # Test
-        url = self.downloader._create_deb_url(self.deb)
-
-        # Verify
-        expected = self.config.repo_plugin_config[constants.CONFIG_URL] + '/' + self.deb.filename()
-        self.assertEquals(url, expected)
+            self.assertTrue(pkg_resources[0]['url'] in e.location)
+            self.assertTrue('destination' not in pkg_resources[0])
 
     @mock.patch('pulp_deb.plugins.importers.downloaders.web.HttpDownloader._create_and_configure_curl')
     def test_download_file(self, mock_curl_create):
@@ -181,7 +190,6 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
 
     @mock.patch('pycurl.Curl')
     def test_create_and_configure_curl(self, mock_constructor):
-
         # PyCurl doesn't give visibility into what options are set, so mock out
         # the constructor so we can check what's being set on the curl instance
 
