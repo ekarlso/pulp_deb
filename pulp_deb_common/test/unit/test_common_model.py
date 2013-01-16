@@ -12,10 +12,9 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 import unittest
-from debian.deb822 import Packages
+from debian.deb822 import Packages, Sources
 
-from pulp_deb.common import constants, samples
-from pulp_deb.common.model import Distribution, Component, Package
+from pulp_deb.common import constants, model, samples, utils
 
 
 # -- test cases ---------------------------------------------------------------
@@ -25,12 +24,29 @@ def get_expected(data):
     newdata = {}
     for k, v in data.copy().items():
         if k in constants.PACKAGE_KEYS:
-            newdata[Package.lowered_key(k)] = v
+            newdata[k.lower()] = v
     return newdata
 
 
 PACKAGE = get_expected(samples.get_data('package'))
 DATA = samples.DATA
+
+
+class UtilTests(unittest.TestCase):
+    def test_cls_from_package_dict(self):
+        cls = model.get_deb822_cls(PACKAGE)
+        self.assertEqual(cls, Packages)
+
+    def test_cls_from_resource(self):
+        data = [('packages', Packages), ('sources', Sources)]
+        for cls_type, cls_expected in data:
+            resource = {'type': cls_type}
+            cls = model.get_deb822_cls(resource)
+            self.assertEqual(cls_expected, cls)
+
+    def test_cls_from_string(self):
+        self.assertEqual(Packages, model.get_deb822_cls('Packages.gz'))
+        self.assertEqual(Sources, model.get_deb822_cls('Sources.gz'))
 
 
 class DistributionTests(unittest.TestCase):
@@ -66,14 +82,32 @@ class ComponentTests(unittest.TestCase):
         indexes = self.cmpt.get_indexes()
         self.assertEquals(len(indexes), 3)
 
-    def test_update_from_indexes(self):
+    def test_update_from_index_files(self):
         # NOTE: When it's a local repository the path is valid. If not it
         # has to be downloaded before running update_from_indexes()
-        indexes = self.cmpt.get_indexes()
+        indexes = [i['source'] for i in self.cmpt.get_indexes()]
 
         # NOTE: It has i686 as well but there's no index file for it so skip it
-        self.cmpt.update_from_indexes([i['source'] for i in indexes],
-                                      empty_on_io=True)
+        self.cmpt.update_from_indexes(indexes)
+        self.assertEquals(len(self.cmpt.data['packages']), 3)
+
+    def test_update_from_resources_with_paths(self):
+        # The get_index_content() looks for 'path' as a key, resource only
+        # contains 'source' before it's downloaded...
+        resources = []
+        for resource in self.cmpt.get_indexes():
+            resource['path'] = resource['source']
+            resources.append(resource)
+
+        self.cmpt.update_from_indexes(resources)
+        self.assertEquals(len(self.cmpt.data['packages']), 3)
+
+    def test_update_from_resources_with_content(self):
+        resources = []
+        for resource in self.cmpt.get_indexes():
+            resource['content'] = utils._read(resource['source'])
+            resources.append(resource)
+        self.cmpt.update_from_indexes(resources)
         self.assertEquals(len(self.cmpt.data['packages']), 3)
 
 
@@ -82,12 +116,12 @@ class PackageTests(unittest.TestCase):
         self.pkg = samples.get_model('package')
 
     def test_from_dict(self):
-        pkg = Package(**samples.load('package'))
+        pkg = model.Package(**samples.load('package'))
         self.assertEquals(PACKAGE, pkg.to_dict(full=False))
 
     def test_from_deb822(self):
         deb822 = Packages(samples.load('package'))
-        pkg = Package(deb822=deb822)
+        pkg = model.Package(deb822=deb822)
         self.assertEquals(PACKAGE, pkg.to_dict(full=False))
 
     def test_to_dict_not_full(self):

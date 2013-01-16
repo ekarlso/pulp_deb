@@ -13,30 +13,52 @@ SUPPORTED = {
     'Sources': Sources}
 
 
-KEY_TO_NAME = [('Source', 'Packages'), ('Binary', 'Sources')]
+KEY_TO_NAME = [('source', 'Packages'), ('binary', 'Sources')]
 
 
-def _type(obj):
-    key = None
+def get_deb822_cls(obj):
+    """
+    Get the deb822 class to use based on obj
+    """
     if isinstance(obj, basestring):
         key = obj.split('/')[-1][:-len('.gz')]
-    elif type(obj) == dict:
-        for name, key in KEY_TO_NAME:
-            if name in [k.lower() for k in obj.keys()]:
-                key = k
-                break
-
-    if key not in SUPPORTED:
-        msg = 'Can\'t get class for data: %s' % obj
-        raise RuntimeError(msg)
+    elif isinstance(obj, dict):
+        # NOTE: Support a resource object
+        if 'type' in obj:
+            key = obj['type'].title()
+        else:
+            for map_key, cls_key in KEY_TO_NAME:
+                if map_key in [k.lower() for k in obj.keys()]:
+                    key = cls_key
+                    break
     return SUPPORTED[key]
 
 
-def _iter_paragraphs_path(index, empty_on_io=False):
+def get_index_content(obj, **kw):
+    """
+    Get the index content based on obj
+    """
+    path = obj
+
+    # NOTE: It's already a read content list
+    if isinstance(obj, list):
+        return obj
+    elif isinstance(obj, dict):
+        # NOTE: It's a resource with content inside...
+        if 'content' in obj:
+            return obj['content']
+        # NOTE: It's a resource with a path that should be read.
+        elif 'path' in obj:
+            path = obj['path']
+    # NOTE: It's just a path, read it
+    return utils._read(path, **kw)
+
+
+def _iter_paragraphs_path(obj, empty_on_io=False):
     # NOTE: Add exception here?
-    type_cls = _type(index)
-    lines = utils._read(index, empty_on_io=empty_on_io)
-    return type_cls.iter_paragraphs(lines)
+    type_cls = get_deb822_cls(obj)
+    content = get_index_content(obj, empty_on_io=empty_on_io)
+    return type_cls.iter_paragraphs(content)
 
 
 class Model(object):
@@ -66,10 +88,6 @@ class Model(object):
 
     def __contains__(self, key):
         return key.lower() in self.data
-
-    @staticmethod
-    def lowered_key(key):
-        return key.lower()
 
     @staticmethod
     def uppered_key(key):
@@ -167,7 +185,7 @@ class Distribution(Model):
         for resource in resources:
             cmpt_name = resource['component']
             cmpt = self.get_component(cmpt_name)
-            cmpt.update_from_index(resource['path'])
+            cmpt.update_from_index(resource)
 
     def get_package_resources(self):
         data = []
@@ -256,22 +274,22 @@ class Component(Model):
         for p in packages:
             self.add_package(p)
 
-    def update_from_index(self, index, empty_on_io=False):
+    def update_from_index(self, data, **kw):
         """
         Updates this instance with packages in the given Packages file.
 
         :return: object representing the repository and all it's packages
         :rtype: Repository
         """
-        data = _iter_paragraphs_path(index, empty_on_io=empty_on_io)
-        self.add_packages([{'deb822': p} for p in data])
+        packages = _iter_paragraphs_path(data, **kw)
+        self.add_packages([{'deb822': p} for p in packages])
 
-    def update_from_indexes(self, indexes, empty_on_io=False):
+    def update_from_indexes(self, data, **kw):
         """
         Update from a list of indexes
         """
-        for index in indexes:
-            self.update_from_index(index, empty_on_io=empty_on_io)
+        for i in data:
+            self.update_from_index(i, **kw)
 
     def get_indexes(self):
         """
@@ -334,7 +352,7 @@ class Package(Model):
         if isinstance(deb822, (Packages, Sources)):
             self.data = deb822
         else:
-            type_cls = _type(kw)
+            type_cls = get_deb822_cls(kw)
             self.data = type_cls(kw)
 
     def data_to_dict(self):
@@ -349,7 +367,7 @@ class Package(Model):
         :rtype: dict
         """
         data = super(Package, self).to_dict(**kw)
-        data = dict([(self.lowered_key(k), v) for k, v in data.items()])
+        data = dict([(k.lower(), v) for k, v in data.items()])
 
         if not full:
             return data
