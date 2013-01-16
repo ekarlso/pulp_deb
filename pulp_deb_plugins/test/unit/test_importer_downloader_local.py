@@ -15,11 +15,6 @@
 import base_downloader
 from pulp_deb.plugins.importers.downloaders.exceptions import FileNotFoundException
 from pulp_deb.plugins.importers.downloaders.local import LocalDownloader
-from pulp_deb.plugins.importers.downloaders import url_utils
-
-
-def resource_urls(config):
-    return [r['resource'] for r in url_utils.get_resources(config)]
 
 
 class LocalDownloaderTests(base_downloader.BaseDownloaderTests):
@@ -38,9 +33,6 @@ class LocalDownloaderTests(base_downloader.BaseDownloaderTests):
         # Verify
         self.assertEqual(3, len(indexes))
 
-        self.dist.update_from_resources([i for i in indexes])
-        self.assertEqual(3, len(self.dist.packages))
-
         self.assertEqual(3, self.mock_progress_report.query_total_count)
         self.assertEqual(3, self.mock_progress_report.query_finished_count)
         self.assertEqual(2, self.mock_progress_report.update_progress.call_count)
@@ -56,3 +48,16 @@ class LocalDownloaderTests(base_downloader.BaseDownloaderTests):
             self.fail()
         except FileNotFoundException, e:
             self.assertEqual(e.location in [r['source'] for r in indexes], True)
+
+    def test_download_in_memory_as_list(self):
+        resources = self.dist.get_indexes()
+
+        self.downloader.download_resources(
+            resources, self.mock_progress_report, in_memory=True)
+
+        # Verify
+        self.assertEqual(3, len(resources))
+
+        for resource in resources:
+            self.assertEqual(type(resource['content']), list)
+            self.assertEqual(len(resource['content']) > 1, True)

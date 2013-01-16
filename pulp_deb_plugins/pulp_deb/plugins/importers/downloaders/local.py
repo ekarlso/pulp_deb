@@ -13,6 +13,7 @@
 
 import os
 
+from pulp_deb.common import utils
 from pulp_deb.plugins.importers.downloaders.base import BaseDownloader
 from pulp_deb.plugins.importers.downloaders.exceptions import FileNotFoundException
 
@@ -23,7 +24,7 @@ class LocalDownloader(BaseDownloader):
     server.
     """
 
-    def download_resources(self, resources, progress_report, download=False):
+    def download_resources(self, resources, progress_report, in_memory=False):
         # Only do one query for this implementation
         progress_report.query_finished_count = 0
         progress_report.query_total_count = (len(resources))
@@ -37,7 +38,10 @@ class LocalDownloader(BaseDownloader):
                 # progress report
                 raise FileNotFoundException(resource['source'])
 
-            resource['path'] = resource['source']
+            if in_memory:
+                resource['content'] = utils._read(resource['source'], as_list=True)
+            else:
+                resource['path'] = resource['source']
 
             progress_report.query_finished_count += 1
         progress_report.update_progress()
