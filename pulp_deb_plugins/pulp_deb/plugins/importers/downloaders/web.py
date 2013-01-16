@@ -64,11 +64,11 @@ class HttpDownloader(base.BaseDownloader):
             if in_memory:
                 content = InMemoryDownloadedContent()
                 self._download_file(resource['url'], content)
-                resource['content'] = content.content
+                resource['content'] = content.content.split('\n')
             else:
                 tmp_dir = _create_download_tmp_dir(self.repo.working_dir)
 
-                name = resource.get('path', resource['source'].split('/')[-1])
+                name = resource['url'].split('/')
                 tmp_filename = os.path.join(tmp_dir, name)
 
                 content = StoredDownloadedContent(tmp_filename)
