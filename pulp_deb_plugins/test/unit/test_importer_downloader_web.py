@@ -58,7 +58,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         self.assertEqual(self.mock_progress_report.update_progress.call_count, 4)
 
     @mock.patch('pycurl.Curl')
-    def test_download_resources_with_error(self, mock_curl_constructor):
+    def test_download_resources_404(self, mock_curl_constructor):
         # Setup
         indexes = self.dist.get_indexes()
         indexes[0]['url'] = indexes[0]['url'] + '_'
@@ -76,7 +76,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
             self.assertEqual('path' in indexes[0], False)
 
     @mock.patch('pycurl.Curl')
-    def test_retrieve_packages(self, mock_curl_constructor):
+    def test_download_packages(self, mock_curl_constructor):
         self.dist.add_package(self.dist.components[0]['name'], self.pkg)
 
         # Setup
@@ -93,7 +93,7 @@ class HttpDownloaderTests(base_downloader.BaseDownloaderTests):
         self._ensure_path_exists(pkg_resources)
 
     @mock.patch('pycurl.Curl')
-    def test_retrieve_packages_404(self, mock_curl_constructor):
+    def test_download_packages_404(self, mock_curl_constructor):
         self.dist.add_package(self.dist.components[0]['name'], self.pkg)
 
         # Setup
