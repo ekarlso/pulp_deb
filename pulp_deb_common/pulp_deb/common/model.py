@@ -190,6 +190,12 @@ class Distribution(Model):
             cmpt = self.get_component(cmpt_name)
             cmpt.update_from_index(resource['path'])
 
+    def get_package_resources(self):
+        data = []
+        for cmpt in self.components:
+            data.extend(cmpt.get_package_resources())
+        return data
+
     @property
     def components(self):
         return self.data['components']
@@ -264,7 +270,8 @@ class Component(Model):
         """
         Adds a package to this Component
         """
-        self.data['packages'].append(Package(**package))
+        obj = package if isinstance(package, Package) else Package(**package)
+        self.data['packages'].append(obj)
 
     def add_packages(self, packages):
         for p in packages:
@@ -324,6 +331,20 @@ class Component(Model):
         parsed = json.loads(json_string)
         self.add_packages(parsed.pop('packages', []))
         self.data(parsed)
+
+    def get_package_resources(self):
+        resources = []
+        for pkg in self.packages:
+            url = self.dist['url'] + '/' + pkg.filename()
+            data = {
+                'url': url,
+                'source': url[len('file://'):],
+                'component': self['name'],
+                'dist': self.dist['name'],
+                'type': 'package'
+            }
+            resources.append(data)
+        return resources
 
 
 class Package(Model):
