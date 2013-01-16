@@ -1,7 +1,7 @@
 import gzip
 
 
-def _read(f, empty_on_io=False):
+def _read(f, empty_on_io=False, as_list=True):
     """
     Read a file to a string or a list
 
@@ -33,4 +33,4 @@ def _read(f, empty_on_io=False):
             return []
         else:
             raise
-    return fh.readlines()
+    return fh.readlines() if as_list else fh.read()
