@@ -40,14 +40,14 @@ class LocalDownloaderTests(base_downloader.BaseDownloaderTests):
     def test_download_resource_not_found(self):
         # Setup
         indexes = self.dist.get_indexes()
-        indexes[1]['source'] = indexes[1]['source'] + '_'
+        indexes[1]['url'] = indexes[1]['url'] + '_'
 
         # Test & Verify
         try:
             self.downloader.download_resources(indexes, self.mock_progress_report)
             self.fail()
         except FileNotFoundException, e:
-            self.assertEqual(e.location in [r['source'] for r in indexes], True)
+            self.assertEqual(e.location in [r['url'] for r in indexes], True)
 
     def test_download_in_memory_as_list(self):
         resources = self.dist.get_indexes()

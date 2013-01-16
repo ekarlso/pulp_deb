@@ -31,17 +31,18 @@ class LocalDownloader(BaseDownloader):
         progress_report.update_progress()
 
         for resource in resources:
-            progress_report.current_query = resource['source']
+            progress_report.current_query = resource['url']
+            path = resource['url'][len('file://'):]
 
-            if not os.path.exists(resource['source']):
+            if not os.path.exists(path):
                 # The caller will take care of stuffing this error into the
                 # progress report
-                raise FileNotFoundException(resource['source'])
+                raise FileNotFoundException(resource['url'])
 
             if in_memory:
-                resource['content'] = utils._read(resource['source'], as_list=True)
+                resource['content'] = utils._read(path, as_list=True)
             else:
-                resource['path'] = resource['source']
+                resource['path'] = resource['url'][len('file://'):]
 
             progress_report.query_finished_count += 1
         progress_report.update_progress()
