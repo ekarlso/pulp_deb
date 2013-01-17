@@ -34,6 +34,11 @@ DISTRIBUTOR_ID = 'deb_distributor'
 # ID of the deb package type definition (must match what's in deb.json)
 TYPE_DEB = 'deb'
 
+TYPE_IDS = {
+    'source': 'deb_src',
+    'package': 'deb'
+}
+
 # Used as a note on a repository to indicate it is a deb repository
 REPO_NOTE_KEY = '_repo-type' # needs to be standard across extensions
 REPO_NOTE = 'deb-repo'
