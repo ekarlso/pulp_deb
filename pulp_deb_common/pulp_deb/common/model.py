@@ -280,7 +280,8 @@ class Component(Model):
         """
         Adds a package to this Component
         """
-        obj = package if isinstance(package, Package) else Package(**package)
+        obj = package if isinstance(package, Package) else Package(
+            component=self, **package)
         self.data['packages'].append(obj)
 
     def add_packages(self, packages):
@@ -366,7 +367,8 @@ class Package(Model):
     """
     A Pulp object sitting ontop of a deb822 object
     """
-    def __init__(self, deb822=None, **kw):
+    def __init__(self, component=None, deb822=None, **kw):
+        self.component = component
         if isinstance(deb822, (Packages, Sources)):
             self.data = deb822
         else:
@@ -486,7 +488,7 @@ class Package(Model):
         metadata = [(k, v) for k, v in data.items() if k not in UNIT_KEYS]
         return metadata
 
-    def get_resources(self, resource_data):
+    def get_resources(self, resource_data=None):
         """
         Get the resources for this package
 
@@ -496,28 +498,33 @@ class Package(Model):
         :return: Resource dict like:
             Example:
             {
-                'component': ..,
-                'dist': ..,
                 'md5sum': ..,
                 'sha1': ..,
                 'sha256': ..,
-                'relative_path': ..,
                 'size': ..,
-                'url': ..
+                'url': ..,
+                'relative_path': ..,
+                'storage_path': ..,
+                'component': ..,
+                'dist': ..
             }
         :rtype: dict
         """
+        if not resource_data and self.component:
+            resource_data = self.component.get_resource_data()
+
         resources = []
         for resource in self.files:
             resource.update(resource_data)
 
-            relative_path = self.relative_path(resource)
+            resource['storage_path'] = self.prefix + '/' + resource['name']
+            relative_path = self.relative_path(data=resource)
             resource['relative_path'] = relative_path
             resource['url'] = resource['url'] + '/' + relative_path
             resources.append(resource)
         return resources
 
-    def relative_path(self, data):
+    def relative_path(self, data=None):
         """
         Construct a relative path based on our own data.
 
