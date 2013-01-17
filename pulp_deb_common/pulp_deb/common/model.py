@@ -381,7 +381,7 @@ class Package(Model):
             return 'source'
 
     @property
-    def package_source_name(self):
+    def source_name(self):
         return self['source'] if self.package_type == 'package' else self.name
 
     @property
@@ -405,6 +405,12 @@ class Package(Model):
     def files(self):
         """
         Return all files associated with this package
+
+        :return: A list of dicts with file information
+        :rtype: list
+
+            Example:
+                {'name': .., 'size': .., 'sha1': .., 'sha256': .., 'md5sum': ..}
         """
         files = []
         if self.package_type == 'package':
@@ -487,26 +493,43 @@ class Package(Model):
         :param resource_data: Resource data to use
         :type resource_data: dict
 
-        :return: Resource dict.
+        :return: Resource dict like:
+            Example:
+            {
+                'component': ..,
+                'dist': ..,
+                'md5sum': ..,
+                'sha1': ..,
+                'sha256': ..,
+                'relative_path': ..,
+                'size': ..,
+                'url': ..
+            }
         :rtype: dict
         """
         resources = []
         for resource in self.files:
             resource.update(resource_data)
 
-            relative_path = self.relative_path(
-                resource, prefix=self.prefix, source_name=self.package_source_name)
-            resource['url'] = resource['url'] + relative_path
+            relative_path = self.relative_path(resource)
+            resource['relative_path'] = relative_path
+            resource['url'] = resource['url'] + '/' + relative_path
             resources.append(resource)
         return resources
 
-    def relative_path(self, data, **kw):
+    def relative_path(self, data):
         """
         Construct a relative path based on our own data.
 
+        :param data: A combination of resource and file data
+        :type data: dict
+
         :return: Relative path for this package object
+                 Example: pool/main/libd/libdaemon/libdaemon0_0.14-2_i386.deb
         :rtype: str
         """
         path_data = data.copy()
-        path_data.update(kw)
+        for i in ['prefix', 'source_name']:
+            if not i in path_data:
+                path_data[i] = getattr(self, i)
         return constants.DEB_FILENAME % path_data
