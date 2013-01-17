@@ -22,9 +22,9 @@ import sys
 from pulp.common.util import encode_unicode
 from pulp.plugins.conduits.mixins import UnitAssociationCriteria
 
-from pulp_deb.common import constants
+from pulp_deb.common import constants, model
 from pulp_deb.common.constants import (STATE_FAILED, STATE_RUNNING, STATE_SUCCESS)
-from pulp_deb.common.model import Repository, Package
+from pulp_deb.common.model import Distribution, Package
 from pulp_deb.common.sync_progress import SyncProgressReport
 from pulp_deb.plugins.importers.downloaders import factory as downloader_factory
 
@@ -47,6 +47,8 @@ class PackageSyncRun(object):
 
         self.progress_report = SyncProgressReport(sync_conduit)
 
+        self.dist = model.Distribution(**self.config.get(constants.CONFIG_DIST))
+
     def perform_sync(self):
         """
         Performs the sync operation according to the configured state of the
@@ -64,12 +66,12 @@ class PackageSyncRun(object):
         _LOG.info('Beginning sync for repository <%s>' % self.repo.id)
 
         try:
-            repo = self._get_repo_from_resources()
-            if not repo:
+            self._update_dist()
+            if len(self.dist.packages) == 0:
                 report = self.progress_report.build_final_report()
                 return report
 
-            self._import_packages_from_repo(repo)
+            self._import_packages()
         finally:
             # One final progress update before finishing
             self.progress_report.update_progress()
@@ -77,7 +79,7 @@ class PackageSyncRun(object):
             report = self.progress_report.build_final_report()
             return report
 
-    def _get_repo_from_resources(self):
+    def _update_dist(self):
         """
         Takes the necessary actions (according to the run configuration) to
         retrieve and parse the repository's resources. This call will return
@@ -100,7 +102,9 @@ class PackageSyncRun(object):
         # Retrieve the metadata from the source
         try:
             downloader = self._create_downloader()
-            resources = downloader.retrieve_resources(self.progress_report)
+            resources = downloader.download_resources(
+                self.dist.get_indexes(),
+                self.progress_report)
         except Exception, e:
             _LOG.exception('Exception while retrieving resources for repository <%s>' % self.repo.id)
             self.progress_report.state = STATE_FAILED
@@ -118,8 +122,7 @@ class PackageSyncRun(object):
 
         # Parse the retrieved resoruces documents
         try:
-            repo = Repository()
-            repo.update_from_resources(resources)
+            self.dist.update_from_resources(resources)
         except Exception, e:
             _LOG.exception('Exception parsing resources for repository <%s>' % self.repo.id)
             self.progress_report.state = STATE_FAILED
@@ -144,9 +147,7 @@ class PackageSyncRun(object):
 
         self.progress_report.update_progress()
 
-        return repo
-
-    def _import_packages_from_repo(self, repo):
+    def _import_packages(self):
         """
         Imports each package in the repository into Pulp.
 
@@ -171,7 +172,7 @@ class PackageSyncRun(object):
 
         # Perform the actual logic
         try:
-            self._do_import_packages_from_repo(repo)
+            self._do_import_packages()
         except Exception, e:
             _LOG.exception('Exception importing packages for repository <%s>' % self.repo.id)
             self.progress_report.packages_state = STATE_FAILED
@@ -196,23 +197,26 @@ class PackageSyncRun(object):
 
         self.progress_report.update_progress()
 
-    def _do_import_packages_from_repo(self, repo):
+    def _do_import_packages(self):
         """
         Actual logic of the import. This method will do a best effort per package;
         if an individual package fails it will be recorded and the import will
         continue. This method will only raise an exception in an extreme case
         where it cannot react and continue.
         """
+        def unit_key_str(unit_key_dict):
+            return u'%(package)s-%(version)s-%(maintainer)s' % unit_key_dict
+
         downloader = self._create_downloader()
 
         # Ease lookup of packages
-        packages_by_key = dict([(d.key(), d) for d in repo.packages])
+        packages_by_key = dict([(p.key, p) for p in self.dist.packages])
 
         # Collect information about the repository's packages before changing it
         package_criteria = UnitAssociationCriteria(type_ids=[constants.TYPE_DEB])
         existing_units = self.sync_conduit.get_units(criteria=package_criteria)
         existing_packages = [Package.from_unit(u) for u in existing_units]
-        existing_package_keys = [p.key() for p in existing_packages]
+        existing_package_keys = [p.key for p in existing_packages]
 
         new_unit_keys = self._resolve_new_units(existing_package_keys, packages_by_key.keys())
         remove_unit_keys = self._resolve_remove_units(existing_package_keys, packages_by_key.keys())
@@ -239,13 +243,42 @@ class PackageSyncRun(object):
         if self._should_remove_missing():
             existing_units_by_key = {}
             for u in existing_units:
-                unit_key = Package.generate_unit_key(u.unit_key['name'], u.unit_key['version'], u.unit_key['author'])
-                s = unit_key_str(unit_key)
+                s = unit_key_str(u.unit_key)
                 existing_units_by_key[s] = u
 
             for key in remove_unit_keys:
                 doomed = existing_units_by_key[key]
                 self.sync_conduit.remove_unit(doomed)
+
+    def _content_unit(self, resource, type_id, unit_key, unit_metadata):
+        unit = self.sync_conduit.init_unit(
+            type_id, unit_key, unit_metadata, resource['storage_path'])
+        try:
+            storage_dir = os.path.dirname(unit.storage_path)
+            if not os.path.exists(storage_dir):
+                os.makedirs(storage_dir)
+
+            # Copy them to the final location
+            shutil.copy(resource['path'], unit.storage_path)
+        except IOError:
+            _LOG.error("Error copying unit %s to %s" %
+                    (unit_key, unit.storage_path))
+            raise
+        return unit
+
+    def _content_units_from_package(self, downloader, package):
+        # Loop through each resource in the package creating units pr resource
+        pkg_resources = package.get_resources()
+
+        downloader.download_resources(pkg_resources, self.progress_report)
+
+        units = []
+        for resource in pkg_resources:
+            # TODO: Use seperate type here? if it's a Binary vs Source
+            unit = self._content_unit(resource, constants.TYPE_DEB,
+                                      package.unit_key(), package.unit_metadata())
+            units.append(unit)
+        return units
 
     def _add_new_package(self, downloader, package):
         """
@@ -255,40 +288,22 @@ class PackageSyncRun(object):
         :param package: package instance to download
         :type  package: Package
         """
+        units = self._content_units_from_package(downloader, package)
+
+        parent = None
         # Initialize the unit in Pulp
-        type_id = constants.TYPE_DEB
-        unit_key = package.unit_key()
-        unit_metadata = {} # populated later but needed for the init call
+        if package.package_type == 'source':
+            # TODO: Use seperate type here?
+            parent = self.sync_conduit.init_unit(constants.TYPE_DEB, package.unit_key(),
+                                                 package.unit_metadata(), '')
 
-        unit = self.sync_conduit.init_unit(type_id, unit_key, unit_metadata,
-                                           package.filename())
+        if parent:
+            self.sync_conduit.save_unit(parent)
 
-        print "PATH", unit.storage_path
-        if not self._package_exists(unit.storage_path):
-            # Download the bits
-            downloaded_filename = downloader.retrieve_deb(self.progress_report, package)
-
-            # Create the relative path if it's not there..
-            path = os.path.dirname(unit.storage_path)
-            if not os.path.exists(path):
-                os.makedirs(path)
-
-            # Copy them to the final location
-            try:
-                shutil.copy(downloaded_filename, unit.storage_path)
-            except Exception, e:
-                _LOG.error("Error copying package to %s" % unit.storage_path)
-                raise
-
-        # NOTE: Maybe we should do this if we import a single package?
-        # Extract the extra metadata into the package
-        # metadata.extract_metadata(package, unit.storage_path, self.repo.working_dir)
-
-        # Update the unit with the extracted metadata
-        unit.metadata = package.unit_metadata()
-
-        # Save the unit and associate it to the repository
-        self.sync_conduit.save_unit(unit)
+        for unit in units:
+            self.sync_conduit.save_unit(unit)
+            if parent:
+                self.sync_conduit.link_unit(parent, unit)
 
     def _package_exists(self, filename):
         """
@@ -328,7 +343,7 @@ class PackageSyncRun(object):
 
         :return: one of the *Downloader classes in the downloaders package
         """
-        url = self.config.get(constants.CONFIG_URL)
+        url = self.dist['url']
         downloader = downloader_factory.get_downloader(url, self.repo, self.sync_conduit,
                                                        self.config, self.is_cancelled_call)
         return downloader
